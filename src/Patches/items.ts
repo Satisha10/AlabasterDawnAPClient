@@ -1,6 +1,6 @@
 import {Injectable, terra} from "@project-selene/api";
 import {PlayerInventory, PlayerModel, PlayerCombat, PartyModel, Vars, PlayerLoadout, PartyMember} from "@project-selene/api/terra";
-import {addMessage} from "../doc";
+import {addMessage, addDebug} from "../doc";
 import {item_name_data} from "../item_name_gamedata";
 import {loc_game_name_id} from "../location_gamename_id";
 import {client} from "../client";
@@ -12,16 +12,16 @@ type LoadState = {
 
 export class ItemTracker extends Injectable(PlayerInventory) {
     addItem(key: string, quantity = 1, skipHUD = false, skipEvent = false, ...args: unknown[]) {
-        addMessage(`Received item ${key} times ${quantity}, skipHUD ${skipHUD}, skipEvent ${skipEvent}`);
+        addDebug(`Received item ${key} times ${quantity}, skipHUD ${skipHUD}, skipEvent ${skipEvent}`);
         return super.addItem(key, quantity, skipHUD, skipEvent, ...args);
     }
 }
 
 export class ElementTracker extends Injectable(PlayerModel) {
     setCore(type: any, state: any, ...args: unknown[]) {  // TODO Type
-        addMessage(`setCore ${type}, ${state}`)  // TODO filter for element ID
+        addDebug(`setCore ${type}, ${state}`);  // TODO filter for element ID
         if (loc_game_name_id.has(type)) {
-            client.check(<number>loc_game_name_id.get(type))
+            client.check(<number>loc_game_name_id.get(type));
         }
         return super.setCore(type, state, ...args);
     }
@@ -29,17 +29,21 @@ export class ElementTracker extends Injectable(PlayerModel) {
 
 export class WeaponTracker extends Injectable(PlayerCombat) {
     setWeaponUnlock(key: string, unlock: boolean, ...args: unknown[]) {
-        addMessage(`Get weapon ${key} unlock ${unlock}`);
+        addDebug(`Get weapon ${key} unlock ${unlock}`);
         if (loc_game_name_id.has(key)) {
-            client.check(<number>loc_game_name_id.get(key))
+            client.check(<number>loc_game_name_id.get(key));
         }
         return super.setWeaponUnlock(key, unlock, ...args);
+    }
+    increaseSyncLevel(...args: unknown[]) {
+        addDebug("Increased sync level");
+        return super.increaseSyncLevel(...args);
     }
 }
 
 export class PartyTracker extends Injectable(PartyModel) {
     addPartyMember(member: string, ...args: unknown[]) {
-        addMessage(`New member ${member}`);  // TODO typing
+        addDebug(`New member ${member}`);  // TODO typing
         if (loc_game_name_id.has(member)) {
             client.check(<number>loc_game_name_id.get(member))
         }
@@ -50,19 +54,22 @@ export class PartyTracker extends Injectable(PartyModel) {
 export function handle_item(name: string) {
     let item_data = item_name_data.get(name);
     if (!item_data) {
-        addMessage("Unknown item name received: " + name);
+        addMessage("Warning: Unknown item name received: " + name);
         return;
     }
     if (item_data.name.startsWith("WEAPON:")) {
         let weapon = item_data.name.substring("WEAPON:".length);
-        addMessage("Unlock" + weapon)
+        addDebug("Unlock " + weapon);
         terra.g_player.combat.setWeaponUnlock(weapon, true);
     }
-    else if (item_data.name.startsWith("ELEMENT_")) {  // PLAYER_CORE
-        addMessage("Unlock" + item_data.name)
+    else if (item_data.name.startsWith("ELEMENT:")) {
+        addDebug("Unlock " + item_data.name)
+        let elemID = Number(item_data.name.substring("ELEMENT:".length));
+        // TODO remove once init file is called
         terra.g_player.setCore(18, true);  // Element change
         terra.g_player.setCore(24, true);  // Loadouts
-        terra.g_player.setCore(15, true);  // TODO don't hardcode
+        terra.g_player.setCore(elemID, true);
+
         let melee: string[] = terra.g_player.combat.getMeleeWeaponList();
         let range: string[] = terra.g_player.combat.getRangedWeaponList();
         let elem: number = terra.g_player.combat.getTotalElementsUnlocked();
@@ -75,7 +82,7 @@ export function handle_item(name: string) {
             let state: LoadState = {  // Force duplicates on the loadout
                 melee: [melee[0], melee[0], melee[0], melee[0]],
                 ranged: [range[0], range[0], range[0], range[0]]
-            }
+            };
             for (let i = 0; i < terra.g_player.combat.loadouts.length; i++) {
                 terra.g_player.combat.loadouts[i].setState(state);
             }
@@ -88,17 +95,33 @@ export function handle_item(name: string) {
     }
     else if (item_data.name.startsWith("PARTY:")) {
         let member = item_data.name.substring("PARTY:".length);
-        addMessage("Unlock" + member);
+        addDebug("Unlock " + member);
         terra.g_party.addPartyMember("filia");  // TODO fix
+    }
+    else if (item_data.name == "Divine Connection") {
+        terra.g_player.combat.increaseSyncLevel();
+    }
+    else if (item_data.name.startsWith("PLOT:")) {
+        let plot_data = item_data.name.substring("PLOT:".length).split(".");
+        if (plot_data.length != 2) {
+            addMessage(`Failed to parse ${item_data.name}: expected it to split into two parts.`);
+        }
+        else {
+            addDebug(`Progress ${plot_data[0]} to ${plot_data[1]}`);
+            terra.g_plot.progressPlotToStateC(plot_data[0], plot_data[1]);
+        }
     }
     // TODO Divine connection
     else if (item_data.name == "test") {
-        //terra.g_plot.progressPlotToStateC("ch1c", "goToRemisRock")
+        //terra.g_plot.progressPlotToStateC("ch1c", "goToRemisRock");
         //let party_data = new PartyMember();
         //let member_data = party_data.get("filia");
         //terra.g_party.addPartyMember(member_data);
 
         //terra.g_plot.progressPlotToStateC("ch2b", "traineeFlashback");
         //terra.g_scene.teleport("start.north.north-03-dungeon", "");
+    }
+    else {
+        terra.g_player.inventory.addItem(item_data.name);
     }
 }

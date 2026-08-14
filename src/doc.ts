@@ -10,6 +10,21 @@ container.style.userSelect = 'all';
 container.style.fontSize = '14pt';
 document.body.appendChild(container);
 
+let debug = true;
+
+export function addDebug(message: string) {
+    if (!debug) {
+        return;
+    }
+    const msg = document.createElement('div');
+    msg.textContent = message;
+    container.appendChild(msg);
+
+    setTimeout(() => {
+        container.removeChild(msg);
+    }, 20000);
+}
+
 export function addMessage(message: string) {
     const msg = document.createElement('div');
     msg.textContent = message;

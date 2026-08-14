@@ -1,0 +1,20 @@
+[
+  {
+    "op": "add",
+    "path": "/plots/ap_tide",
+    "value": {
+      "states": {
+        "not_received": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "received": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        }
+      }
+    }
+  }
+]

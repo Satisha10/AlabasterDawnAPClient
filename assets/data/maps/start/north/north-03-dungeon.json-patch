@@ -1,0 +1,16 @@
+[
+  {
+    "op": "replace",
+    "path": "/planes/1/alts/0/tags",
+    "value": [
+      "APTIDE"
+    ]
+  },
+  {
+    "op": "add",
+    "path": "/tags/APTIDE",
+    "value": {
+      "cond": "$p.has.ap_tide.received"
+    }
+  }
+]
