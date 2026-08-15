@@ -1,5 +1,5 @@
 import {Injectable, terra} from "@project-selene/api";
-import {PlayerInventory, PlayerModel, PlayerCombat, PartyModel, Vars, PlayerLoadout, PartyMember} from "@project-selene/api/terra";
+import {PlayerInventory, PlayerModel, PlayerCombat, PartyModel} from "@project-selene/api/terra";
 import {addMessage, addDebug} from "../doc";
 import {item_name_data} from "../item_name_gamedata";
 import {loc_game_name_id} from "../location_gamename_id";
@@ -18,11 +18,16 @@ export class ItemTracker extends Injectable(PlayerInventory) {
 }
 
 export class ElementTracker extends Injectable(PlayerModel) {
-    setCore(type: any, state: any, ...args: unknown[]) {  // TODO Type
-        addDebug(`setCore ${type}, ${state}`);  // TODO filter for element ID
-        if (loc_game_name_id.has(type)) {
-            client.check(<number>loc_game_name_id.get(type));
+    setCore(type: number, state: boolean, ...args: unknown[]) {
+        addDebug(`setCore ${type}, ${state}`);
+        let elemMap = new Map([[14, "Physis"], [15, "Aether"], [16, "Cryo"], [17, "Ignis"]]);
+        let elemName = elemMap.get(type);
+        if (elemName && state){
+            if (loc_game_name_id.has(elemName)) {
+                client.check(<number>loc_game_name_id.get(elemName));
+            }
         }
+        // TODO skip initial method if the state is not set by the client (and state from an element)
         return super.setCore(type, state, ...args);
     }
 }
@@ -51,6 +56,7 @@ export class PartyTracker extends Injectable(PartyModel) {
     }
 }
 
+// TODO move this function
 export function handle_item(name: string) {
     let item_data = item_name_data.get(name);
     if (!item_data) {
@@ -93,11 +99,12 @@ export function handle_item(name: string) {
             terra.g_player.autoEquipWeapons();  // This is what the game usually does
         }
     }
-    else if (item_data.name.startsWith("PARTY:")) {
-        let member = item_data.name.substring("PARTY:".length);
-        addDebug("Unlock " + member);
-        terra.g_party.addPartyMember("filia");  // TODO fix
-    }
+    // TODO Items for party members
+    //else if (item_data.name.startsWith("PARTY:")) {
+    //    let member = item_data.name.substring("PARTY:".length);
+    //    addDebug("Unlock " + member);
+    //    terra.g_party.addPartyMember("filia");
+    //}
     else if (item_data.name == "Divine Connection") {
         terra.g_player.combat.increaseSyncLevel();
     }
@@ -111,7 +118,11 @@ export function handle_item(name: string) {
             terra.g_plot.progressPlotToStateC(plot_data[0], plot_data[1]);
         }
     }
-    // TODO Divine connection
+    else if (item_data.name.startsWith("CL:")) {
+        let area = item_data.name.substring("CL:".length);
+        addDebug(`Progress  community level for ${area}`);
+        terra.g_plot.progressPlotToNextState("ap_" + area);
+    }
     else if (item_data.name == "test") {
         //terra.g_plot.progressPlotToStateC("ch1c", "goToRemisRock");
         //let party_data = new PartyMember();
@@ -122,6 +133,6 @@ export function handle_item(name: string) {
         //terra.g_scene.teleport("start.north.north-03-dungeon", "");
     }
     else {
-        terra.g_player.inventory.addItem(item_data.name);
+        terra.g_player.inventory.addItem(item_data.name, item_data.qty);
     }
 }

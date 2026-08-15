@@ -1,37 +1,35 @@
-import {Injectable, terra} from "@project-selene/api";
+import {Injectable} from "@project-selene/api";
 import {ChestDatabase, Chest} from "@project-selene/api/terra";
-import {addMessage} from "../doc";
+import {addMessage, addDebug} from "../doc";
 import {client} from "../client";
 import {loc_game_name_id} from "../location_gamename_id"
 
-export class ChestTracker extends Injectable(ChestDatabase) {
-    open(key: string, ...args: unknown[]) {
-        //addMessage(`Opened chest ${key}`);
-
-        return super.open(key, ...args);
+export class SkipItemDialogs extends Injectable(ChestDatabase) {
+    runItemGetDialog(...args: unknown[]) {  // Don't show the item message
+        addDebug("Skipped ChestDatabase.runItemGetDialog");
     }
-
-    runItemGetDialog(...args: unknown[]) {
-        // addMessage("Skipped ChestDatabase.runItemGetDialog");
-        return super.runItemGetDialog(...args);
+    runWeaponGetDialog(...args: unknown[]) {  // Don't show the weapon message
+        addDebug("Skipped ChestDatabase.runWeaponGetDialog");
+    }
+    runElementGetDialog(...args: unknown[]) {  // Don't show the weapon message
+        addDebug("Skipped ChestDatabase.runWeaponGetDialog");
+    }
+    runSyncLevelUp(...args: unknown[]) {  // Don't show the weapon message
+        addDebug("Skipped ChestDatabase.runSyncLevelUp");
     }
 }
 
 
-export class ChestTest extends Injectable(Chest) {
+export class ChestPatch extends Injectable(Chest) {
     open(...args: unknown[]) {
         addMessage(`Opened Chest ${this.key}`);
         if (loc_game_name_id.has(this.key)) {
             client.check(<number>loc_game_name_id.get(this.key))
         }
-
-        //terra.g_player.inventory.addItem("ess-evil-garrot")
-
         return super.open(...args);
     }
 
-    addItemContent(...args: unknown[]) {  // Don't give the items
-        //addMessage(`Skip giving ${this.items[0].key} (Chest.addItemContent)`);
-        return super.addItemContent(...args);
+    addItemContent(...args: unknown[]) {  // Don't give the chest items
+        addDebug(`Skip giving ${this.items[0].key}`);
     }
 }

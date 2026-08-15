@@ -3,6 +3,7 @@
     "op": "add",
     "path": "/plots/ap_tide",
     "value": {
+      "category": "OTHER",
       "states": {
         "not_received": {
           "condition": [],
@@ -14,7 +15,88 @@
           "offFlags": [],
           "onFlags": []
         }
-      }
+      },
+      "flags": {}
     }
+  },
+  {
+    "op": "add",
+    "path": "/plots/ap_boat",
+    "value": {
+      "category": "OTHER",
+      "states": {
+        "not_received": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "received": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        }
+      },
+      "flags": {}
+    }
+  },
+  {
+    "op": "add",
+    "path": "/plots/ap_bridges",
+    "value": {
+      "category": "OTHER",
+      "states": {
+        "not_received": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "received": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        }
+      },
+      "flags": {}
+    }
+  },
+  {
+    "op": "add",
+    "path": "/plots/ap_lyhamn",
+    "value": {
+      "category": "OTHER",
+      "states": {
+        "cl0": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "cl1": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        }
+      },
+      "flags": {}
+    }
+  },
+  {
+    "op": "replace",
+    "path": "/plots/silverPeak/states/ready/condition",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/plots/southDngSub1/states/ready/condition",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/plots/southDngSub2/states/ready/condition",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/plots/southDngSub2/states/room2openChest/condition",
+    "value": []
   }
 ]
