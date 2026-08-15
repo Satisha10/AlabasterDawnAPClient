@@ -12,5 +12,18 @@
     "value": {
       "cond": "$p.has.ap_tide.received"
     }
+  },
+  {
+    "op": "remove",
+    "path": "/entities/1395/setPlot"
+  },
+  {
+    "op": "remove",
+    "path": "/entities/1395/startOnPrePlot"
+  },
+  {
+    "op": "replace",
+    "path": "/entities/1395/triggerType",
+    "value": "ONCE"
   }
 ]

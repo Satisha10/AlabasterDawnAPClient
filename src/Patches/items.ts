@@ -22,12 +22,15 @@ export class ElementTracker extends Injectable(PlayerModel) {
         addDebug(`setCore ${type}, ${state}`);
         let elemMap = new Map([[14, "Physis"], [15, "Aether"], [16, "Cryo"], [17, "Ignis"]]);
         let elemName = elemMap.get(type);
-        if (elemName && state){
+        if (elemName && state && item_flags.checkedElem(type)){
             if (loc_game_name_id.has(elemName)) {
                 client.check(<number>loc_game_name_id.get(elemName));
             }
+            else {
+                addMessage(`Unknown element checked ${elemName}`)
+            }
+            return;
         }
-        // TODO skip initial method if the state is not set by the client (and state from an element)
         return super.setCore(type, state, ...args);
     }
 }
@@ -35,8 +38,14 @@ export class ElementTracker extends Injectable(PlayerModel) {
 export class WeaponTracker extends Injectable(PlayerCombat) {
     setWeaponUnlock(key: string, unlock: boolean, ...args: unknown[]) {
         addDebug(`Get weapon ${key} unlock ${unlock}`);
-        if (loc_game_name_id.has(key)) {
-            client.check(<number>loc_game_name_id.get(key));
+        if (unlock && item_flags.checkedWeapon(key)) {
+            if (loc_game_name_id.has(key)) {
+                client.check(<number>loc_game_name_id.get(key));
+            }
+            else {
+                addMessage(`Unknown weapon checked ${key}`)
+            }
+            return;
         }
         return super.setWeaponUnlock(key, unlock, ...args);
     }
@@ -56,6 +65,44 @@ export class PartyTracker extends Injectable(PartyModel) {
     }
 }
 
+// Class to track if a location check is due to receiving an AP item
+class ItemFlags {
+    elemID: number;
+    weaponKey: string;
+    constructor() {
+        this.elemID = 0;
+        this.weaponKey = "";
+    }
+    gaveElem(value: number) {
+        // Received an element (with value its ID) through an AP item
+        this.elemID = value;
+    }
+    checkedElem(value: number): boolean {
+        // Called in the ElementTracker hook when detecting a new element,
+        // return false if the change is caused by receiving an item.
+        if (value == this.elemID) {
+            this.elemID = 0;
+            return false;
+        }
+        return true;
+    }
+    gaveWeapon(value: string) {
+        // Received a weapon (with value its key) through an AP item
+        this.weaponKey = value;
+    }
+    checkedWeapon(value: string): boolean {
+        // Called in the WeaponTracker hook when detecting a new weapon,
+        // return false if the change is caused by receiving an item.
+        if (value == this.weaponKey) {
+            this.weaponKey = "";
+            return true;
+        }
+        return false;
+    }
+}
+
+export const item_flags = new ItemFlags()
+
 // TODO move this function
 export function handle_item(name: string) {
     let item_data = item_name_data.get(name);
@@ -67,6 +114,7 @@ export function handle_item(name: string) {
         let weapon = item_data.name.substring("WEAPON:".length);
         addDebug("Unlock " + weapon);
         terra.g_player.combat.setWeaponUnlock(weapon, true);
+        item_flags.gaveWeapon(weapon);
     }
     else if (item_data.name.startsWith("ELEMENT:")) {
         addDebug("Unlock " + item_data.name)
@@ -75,6 +123,7 @@ export function handle_item(name: string) {
         terra.g_player.setCore(18, true);  // Element change
         terra.g_player.setCore(24, true);  // Loadouts
         terra.g_player.setCore(elemID, true);
+        item_flags.gaveElem(elemID);
 
         let melee: string[] = terra.g_player.combat.getMeleeWeaponList();
         let range: string[] = terra.g_player.combat.getRangedWeaponList();

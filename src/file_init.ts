@@ -1,4 +1,4 @@
-import {Injectable, terra} from "@project-selene/api";
+import {terra} from "@project-selene/api";
 
 type LoadState = {
     melee: string[];
@@ -29,7 +29,6 @@ export function initialize_file() {
     terra.g_player.setCore(21, true);
     terra.g_player.setCore(22, true);
 
-    //terra.g_player.inventory.addItem(item.name)
     terra.g_player.inventory.addItem("speed-run")
 
     let melee: string[] = terra.g_player.combat.getMeleeWeaponList();
@@ -51,8 +50,5 @@ export function initialize_file() {
 
     terra.g_scene.teleport("start.village.village-garden-03", "");
 
-    // Skip intro
-    terra.g_plot.progressPlotToStateC("plg", "end");
-    terra.g_plot.progressPlotToStateC("ch1", "natureRetrun");
-    // TODO Alter plot ? At least finish intro up to regrowth
+    terra.g_plot.progressPlotToStateC("ch2b", "traineeFlashback");
 }

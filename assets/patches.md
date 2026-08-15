@@ -3,6 +3,7 @@
 ## Maps
 
 - `start.north.north-03-dungeon`: Modify the trigger for lowering the water level to an AP item. This is triggered through the `ap_tide` plot.
+- `start.north.north-03-dungeon`: Remove the condition for Filia to join.
 - `start.north.north-02-bridge` and `hub.south.south-06-bridge`: Modify the trigger for enabling the boat to an AP item, triggered through the `ap_boat` plot.
 
 ## Plots
