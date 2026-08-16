@@ -1,0 +1,12 @@
+[
+  {
+    "op": "replace",
+    "path": "/entities/416/event",
+    "value": [
+      {
+        "type": "TELEPORT",
+        "map": "start.village.village-03-garden"
+      }
+    ]
+  }
+]
