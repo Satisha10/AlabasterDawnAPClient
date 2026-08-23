@@ -76,7 +76,7 @@ export function handle_item(item: Item) {
     }
     else if (item_data.name.startsWith("CL:")) {
         let area = item_data.name.substring("CL:".length);
-        addDebug(`Progress  community level for ${area}`);
+        addDebug(`Progress community level for ${area}`);
         terra.g_plot.progressPlotToNextState("ap_" + area);
     }
     else if (item_data.name == "test") {
@@ -85,13 +85,12 @@ export function handle_item(item: Item) {
         //let member_data = party_data.get("filia");
         //terra.g_party.addPartyMember(member_data);
 
-        //terra.g_plot.progressPlotToStateC("ch2b", "traineeFlashback");
+        terra.g_plot.progressPlotToStateC("ch2b", "traineeFlashback");
         //terra.g_scene.teleport("start.north.north-03-dungeon", "");
     }
     else {
         terra.g_player.inventory.addItem(item_data.name, item_data.qty);
     }
-
     display_item_message(item.name, item.sender.alias)
 }
 

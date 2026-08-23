@@ -6,16 +6,7 @@
   },
   {
     "op": "replace",
-    "path": "/entities/2735/tags",
-    "value": [
-      "APBOAT"
-    ]
-  },
-  {
-    "op": "add",
-    "path": "/tags/APBOAT",
-    "value": {
-      "cond": "$p.has.ap_boat.received"
-    }
+    "path": "/entities/2735/states/1/condition",
+    "value": "$p.has.ap_boat.received"
   }
 ]

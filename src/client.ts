@@ -41,7 +41,7 @@ class ClientData {
     last_item_index: number;
 
     constructor() {
-        this.url = "http://localhost:38281";  // TODO
+        this.url = "ws://localhost:38281";  // TODO
         this.slot_name = "Player1";
         this.password = null;
 
@@ -61,7 +61,7 @@ class ClientData {
             last_item_index: this.last_item_index,
         }
     }
-    
+
     // Import the client state from the save file data
     import_state(data: any) {
         this.url = data.url;
