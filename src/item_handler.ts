@@ -77,7 +77,7 @@ export function handle_item(item: Item) {
     else if (item_data.name.startsWith("CL:")) {
         let area = item_data.name.substring("CL:".length);
         addDebug(`Progress community level for ${area}`);
-        terra.g_plot.progressPlotToNextState("ap_" + area);
+        terra.g_plot.progressPlotToStateC("ap_lyhamn", "cl1");  // TODO Progress "ap_" + area
     }
     else if (item_data.name == "test") {
         //terra.g_plot.progressPlotToStateC("ch1c", "goToRemisRock");

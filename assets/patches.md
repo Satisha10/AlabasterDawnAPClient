@@ -2,6 +2,7 @@
 
 ## Maps
 
+- `start.village.village-02-beach` and `start.village.village-01-center`: Remove the cutscene of CL1 (which is set to always trigger and TP you out, so it locks you from entering the maps).
 - `capital.north.north-01`: Intro map, skip the first trigger and instead teleport to Lyhamn.
 - `start.north.north-03-dungeon`: Modify the trigger for lowering the water level to an AP item. This is triggered through the `ap_tide` plot.
 - `start.north.north-03-dungeon`: Remove the condition for Filia to join.
