@@ -4,16 +4,27 @@ import {addDebug} from "../doc";
 
 export class PlotCheck extends Injectable(PlotManager) {
     checkPlotStateC(plotKey: string, stateKey: string, ...args: unknown[]) {
-        modify_plot_keys(plotKey, stateKey)
-        return super.checkPlotStateC(plotKey, stateKey, ...args);
+        let out = modify_plot_keys(plotKey, stateKey)
+        let newPlot = out[0]
+        let newState = out[1]
+        return super.checkPlotStateC(newPlot, newState, ...args);
     }
 }
 
+let plot_flag = false;  // TODO rename or better structure
+
 export class PlotProgress extends Injectable(Plot) {
     progressToState(stateKey: string, ...args: unknown[]) {
+        if (plot_flag) {
+            plot_flag = false;
+            return super.progressToState(stateKey, ...args)
+        }
         let plotKey: string = this.key
-        modify_plot_keys(plotKey, stateKey)
-        return terra.g_plot[plotKey].progressToState(stateKey, ...args);
+        let out = modify_plot_keys(plotKey, stateKey)
+        plotKey = out[0]
+        let newState = out[1]
+        plot_flag = true;
+        return terra.g_plot.plots[plotKey].progressToState(newState, ...args);
     }
 }
 
