@@ -86,17 +86,22 @@
   },
   {
     "op": "replace",
-    "path": "/plots/southDngSub1/states/ready/condition",
+    "path": "/plots/ch1c/states/aetherGot/condition",
     "value": []
   },
   {
     "op": "replace",
-    "path": "/plots/southDngSub2/states/ready/condition",
+    "path": "/plots/ch1c/states/dngPart2Done/condition",
     "value": []
   },
   {
     "op": "replace",
-    "path": "/plots/southDngSub2/states/room2openChest/condition",
+    "path": "/plots/ch2b/states/freeFarm/condition",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/plots/ch2b/states/freeBridge/condition",
     "value": []
   }
 ]

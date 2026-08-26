@@ -13,5 +13,6 @@
 The main plot progress is set to the end by the client on initialization.
 
 - Implement the plots for the AP items: `ap_tide`, `ap_bridges`, `ap_lyhamn`, `ap_boat`.
-- Remove conditions for starting main chapters on quests, to prevent a these quests to be done immediately.
+- Remove conditions for starting and progressing main chapters on quests, to prevent a these quests to be done immediately.
 - Remove conditions on some main quest progress, to prevent auto opening chests.
+- Separated the Aether Dungeon from the main plot.
