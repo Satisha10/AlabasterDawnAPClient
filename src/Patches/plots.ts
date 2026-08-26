@@ -1,18 +1,66 @@
-import {Injectable} from "@project-selene/api";
-import {PlotManager} from "@project-selene/api/terra";
+import {Injectable, terra} from "@project-selene/api";
+import {PlotManager, Plot} from "@project-selene/api/terra";
 import {addDebug} from "../doc";
 
-export class InterceptConditions extends Injectable(PlotManager) {
+export class PlotCheck extends Injectable(PlotManager) {
     checkPlotStateC(plotKey: string, stateKey: string, ...args: unknown[]) {
-        if (plotKey == "ch1b" && stateKey == "village-built") {
-            return super.checkPlotStateC("ap_lyhamn", "cl1");
-        }
-        // TODO make sure these apply to the map only, otherwise it messes up with the quest progression
-        // Or patch the quest.
-        // TODO 2: North bridges are built from CL1, change it ?
-        else if (plotKey == "quickwood" && (stateKey == "bridgeBuilt" || stateKey == "end")) {
-            return super.checkPlotStateC("ap_bridges", "received");
-        }
+        modify_plot_keys(plotKey, stateKey)
         return super.checkPlotStateC(plotKey, stateKey, ...args);
     }
+}
+
+export class PlotProgress extends Injectable(Plot) {
+    progressToState(stateKey: string, ...args: unknown[]) {
+        let plotKey: string = this.key
+        modify_plot_keys(plotKey, stateKey)
+        return terra.g_plot[plotKey].progressToState(stateKey, ...args);
+    }
+}
+
+function modify_plot_keys(plotKey: string, stateKey: string): [string, string] {
+    // Check if a different pair of plot/state keys must be used
+    if (plotKey == "ch1b" && stateKey == "village-built") {
+        return ["ap_lyhamn", "cl1"];
+    }
+    // TODO see if it messes up with quest completion, otherwise add an extra step in the quest with a patch
+    // TODO Also remove the !CL1 tags on quickwood (and probably other quests)
+    if (plotKey == "quickwood" && (stateKey == "bridgeBuilt" || stateKey == "end")) {
+        return ["ap_bridges", "received"];
+    }
+    // Second part of Aether dungeon
+    if (plotKey == "southDng" && stateKey in [
+        "outerFishBattle",
+        "part2Intro",
+        "f2room2check1",
+        "f2room2check2",
+        "f2room2check3",
+        "f2room3check1",
+        "f2room4battle1",
+        "f2room4check1",
+        "f2room4check2",
+        "f2room4check3",
+        "f2room4bBattle",
+        "f2room3check2",
+        "f2room3check3",
+        "f2room3GotKey",
+        "f2room2bLock",
+        "f2room2bBattle1",
+        "f2room2shortcut",
+        "f2room2check4",
+        "f2room2check5",
+        "f2room2check6",
+        "learnedOrbHack",
+        "f2room5battle1",
+        "f2room6check1",
+        "f2room6check2",
+        "f2room6check3",
+        "f2room6check4",
+        "f2room6check5",
+        "f2room7check1",
+        "f2room7check2",
+        "finalElevator"
+    ]) {
+        return ["southDngB", stateKey];
+    }
+    return [plotKey, stateKey]
 }

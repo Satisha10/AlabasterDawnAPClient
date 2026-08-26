@@ -24,7 +24,7 @@ function loadPackage(game: string): GamePackage {
     catch (err: any) {
         addMessage(`Failed to load data package for ${game}`);
         addMessage(err.message());
-        throw err;
+        throw err;  // TODO don't crash and return a flag to be handled somewhere
     }
 }
 

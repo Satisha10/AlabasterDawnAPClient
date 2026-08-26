@@ -2,7 +2,7 @@ import {Mod} from "@project-selene/api";
 import {ChestPatch, SkipItemDialogs} from "./Patches/chest";
 import {DishTracker} from "./Patches/dish";
 import {ItemTracker, ElementTracker, WeaponTracker, PartyTracker} from "./Patches/items";
-import {InterceptConditions} from "./Patches/plots";
+import {PlotCheck, PlotProgress} from "./Patches/plots";
 
 export class Hooks {
     static init(mod: Mod) {
@@ -13,6 +13,7 @@ export class Hooks {
         mod.inject(ElementTracker);
         mod.inject(WeaponTracker);
         mod.inject(PartyTracker);
-        mod.inject(InterceptConditions);
+        mod.inject(PlotCheck);
+        mod.inject(PlotProgress);
     }
 }

@@ -1,0 +1,107 @@
+[
+  {
+    "op": "replace",
+    "path": "/entities/1830",
+    "value": {
+      "type": "CharSpot",
+      "pos": [
+        104,
+        36.5,
+        0
+      ],
+      "char": "CHA:south#Penterson",
+      "scene": "penterson2",
+      "speed": "WALKING",
+      "states": [
+        {
+          "camera": "NO_CAMERA",
+          "event": [
+            {
+              "type": "ITEM_GET_CENTER",
+              "_skip": true,
+              "items": [
+                {
+                  "count": 1,
+                  "item": "reward-carpenter-1"
+                }
+              ]
+            },
+            {
+              "type": "PROGRESS_PLOT",
+              "plotState": "quickwood.end"
+            },
+            {
+              "type": "SHOW_QUEST_COMPLETE",
+              "plot": "quickwood",
+              "submit": true
+            }
+          ],
+          "face": "NORTH",
+          "facing": "NONE",
+          "interact": "QUEST"
+        },
+        {
+          "condition": "$p.has.quickwood.end",
+          "event": [
+            {
+              "type": "TALK",
+              "char": "CHA:main#Juno>normal",
+              "pos": null
+            },
+            {
+              "type": "TALK",
+              "char": "CHA:south#Penterson>default",
+              "message": {
+                "en_US": "Lots of work to do, Juno.",
+                "langID": 50
+              },
+              "pos": null
+            },
+            {
+              "type": "TALK",
+              "char": "CHA:south#Penterson>default",
+              "message": {
+                "en_US": "I'm sure you're needed elsewhere.",
+                "langID": 94
+              },
+              "pos": null
+            },
+            {
+              "type": "TALK",
+              "char": "CHA:main#Juno>crossed",
+              "message": {
+                "en_US": "Right. But it's nice to watch some quality woodwork happening from time to time.",
+                "langID": 95
+              },
+              "pos": null
+            },
+            {
+              "type": "TALK",
+              "char": "CHA:south#Penterson>default",
+              "message": {
+                "en_US": "Heh.{.} Be my guest.",
+                "langID": 96
+              },
+              "pos": null
+            }
+          ],
+          "face": "NORTH",
+          "interact": "TALK"
+        }
+      ],
+      "tags": [
+        "Nat"
+      ]
+    }
+  },
+  {
+    "op": "replace",
+    "path": "/entities/1832/event",
+    "value": [
+      {
+        "type": "PROGRESS_PLOT",
+        "plotState": "quickwood.platformsCrumbling"
+      }
+    ]
+  }
+]

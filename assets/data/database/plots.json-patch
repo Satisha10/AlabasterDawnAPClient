@@ -103,5 +103,343 @@
     "op": "replace",
     "path": "/plots/ch2b/states/freeBridge/condition",
     "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/combat/3",
+    "value": {
+      "areas": [
+        {
+          "area": "start-dng",
+          "level": 9
+        }
+      ],
+      "condition": "$p.has.ch2.natureReturn",
+      "level": 13,
+      "regions": [
+        {
+          "level": 5,
+          "region": "start"
+        },
+        {
+          "level": 14,
+          "region": "hub"
+        },
+        {
+          "level": 17,
+          "region": "swamp"
+        }
+      ]
+    }
+  },
+  {
+    "op": "replace",
+    "path": "/plots/southDng",
+    "value": {
+      "category": "MAIN",
+      "states": {
+        "ready": {
+          "condition": [
+            {
+              "type": "PLOT_STATE",
+              "plotState": "ch1c.enterDungeon"
+            }
+          ],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "room1check1": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "room1check2": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "room1check3": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "room2wiseSwitch": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "room2wiseSwitchTried": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "room2Done": {
+          "condition": [
+            {
+              "type": "PLOT_STATE",
+              "plotState": "southDngSub1.room2check2A"
+            },
+            {
+              "type": "PLOT_STATE",
+              "plotState": "southDngSub2.room2check2B"
+            }
+          ],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "room5check1": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "room5aetherPanel": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "room5check2": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "room5check3": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "room5check4": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "room5check5": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room1check1": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room1battle1": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "aetherGet": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "finishedPart1": {
+          "condition": [
+            {
+              "type": "PLOT_STATE",
+              "plotState": "ch1c.finishPart1"
+            }
+          ],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "outerShockEye1": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "outerBattle1": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "outerVein1": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "outerBattle2": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "outerBridge": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        }
+      },
+      "flags": {
+        "chestBarrier1": {},
+        "chestBarrier2": {}
+      }
+    }
+  },
+  {
+    "op": "add",
+    "path": "/plots/southDngB",
+    "value": {
+      "category": "MAIN",
+      "states": {
+        "outerFishBattle": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "part2Intro": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room2check1": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room2check2": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room2check3": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room3check1": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room4battle1": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room4check1": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room4check2": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room4check3": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room4bBattle": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room3check2": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room3check3": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room3GotKey": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room2bLock": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room2bBattle1": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room2shortcut": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room2check4": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room2check5": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room2check6": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "learnedOrbHack": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room5battle1": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room6check1": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room6check2": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room6check3": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room6check4": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room6check5": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room7check1": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "f2room7check2": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "finalElevator": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": [
+            "shortcut1"
+          ]
+        }
+      },
+      "flags": {
+        "shortcut1": {},
+        "chestBarrier3": {},
+        "bonusBattle1": {
+          "info": "room-02b bonus battle with chest reward"
+        }
+      }
+    }
   }
 ]
