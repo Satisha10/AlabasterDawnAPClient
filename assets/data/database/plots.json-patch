@@ -105,6 +105,10 @@
     "value": []
   },
   {
+    "op": "remove",
+    "path": "/plots/states/platformsCrumbling/mobilityBlock"
+  },
+  {
     "op": "replace",
     "path": "/combat/3",
     "value": {

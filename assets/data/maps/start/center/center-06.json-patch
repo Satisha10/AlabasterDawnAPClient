@@ -18,7 +18,6 @@
           "event": [
             {
               "type": "ITEM_GET_CENTER",
-              "_skip": true,
               "items": [
                 {
                   "count": 1,
@@ -103,5 +102,15 @@
         "plotState": "quickwood.platformsCrumbling"
       }
     ]
+  },
+  {
+    "op": "replace",
+    "path": "/entities/2379/states/1/condition",
+    "value": "$tmp.quickWoodPlatformsGone >= 1"
+  },
+  {
+    "op": "replace",
+    "path": "/entities/2380/states/1/condition",
+    "value": "$tmp.quickWoodPlatformsGone >= 1"
   }
 ]
