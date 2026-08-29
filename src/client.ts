@@ -6,14 +6,24 @@ import {handle_item} from "./item_handler";
 export const client = new Client();
 export const items_manager = new ItemsManager(client);
 
-export function init_client() {
+export function init_client(url: string | null = null, name: string | null = null, password : string | null = null) {
     // TODO Connect when save loaded
     // TODO Datapackage
     // TODO last item index: save and load it on the save file
-    // TODO connection page
-    client.login(client_data.url, client_data.slot_name, "Alabaster Dawn")
-        .then(() => addMessage(`Connected to Archipelago as Player1`))
-        .catch(console.error);
+    // TODO Slot data
+
+    let connUrl = url == null ? client_data.url : url;
+    let connName = name == null ? client_data.slot_name : name;
+    let connPassword = password == null ? client_data.password : password;
+
+    client.login(connUrl, connName, "Alabaster Dawn", {password: connPassword})
+        .then(() => {
+            addMessage(`Connected to Archipelago as ${connName}`);
+            client_data.url = connUrl;
+            client_data.slot_name = connName;
+            client_data.password  = connPassword;
+        })
+        .catch(() => addMessage(`Connection failed (url: ${connUrl}, Slot name: ${connName})`));
 
     items_manager.on("itemsReceived", (items, starting_index) => {
         let item: Item;
@@ -34,7 +44,7 @@ export function init_client() {
 class ClientData {
     url: string;
     slot_name: string;
-    password: string | null;
+    password: string;
 
     alias: string;
 
@@ -43,7 +53,7 @@ class ClientData {
     constructor() {
         this.url = "ws://localhost:38281";  // TODO
         this.slot_name = "Player1";
-        this.password = null;
+        this.password = "";
 
         this.alias = "Player1";
 

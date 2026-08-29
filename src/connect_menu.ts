@@ -5,12 +5,14 @@ class ConnectionMenu {
     container: HTMLDivElement;
     inputIP: HTMLInputElement;
     inputName: HTMLInputElement;
+    inputPword: HTMLInputElement;
     confirmButton: HTMLButtonElement;
 
-    constructor() {  // TODO Password
+    constructor() {
         this.container = document.createElement("div");
         this.inputIP = document.createElement("input");
         this.inputName = document.createElement("input");
+        this.inputPword = document.createElement("input");
         this.confirmButton = document.createElement("button");
 
         this.container.id = "connect_box";
@@ -24,6 +26,7 @@ class ConnectionMenu {
 
         this.inputIP.id = "input_ip";
         this.inputName.id = "input_name";
+        this.inputPword.id = "input_pword";
 
         this.confirmButton.id = "button";
         this.confirmButton.textContent = "Connect";
@@ -31,13 +34,18 @@ class ConnectionMenu {
 
         const textIP = document.createElement("div");
         const textName = document.createElement("div");
+        const textPword = document.createElement("div");
 
-        textIP.id = "text_ip"
-        textIP.textContent = "Connection address\n(ex: 'archipelago.gg:12345', 'localhost:38281')"
+        textIP.id = "text_ip";
+        textIP.textContent = "Connection address\n(ex: 'archipelago.gg:12345', 'localhost:38281')";
         textIP.style.color = "#000000";
         textIP.style.fontSize = "20px";
-        textName.id = "text_name"
-        textName.textContent = "Slot Name (ex: 'Player1')"
+        textName.id = "text_name";
+        textName.textContent = "Slot Name (ex: 'Player1')";
+        textName.style.color = "#000000";
+        textName.style.fontSize = "20px";
+        textName.id = "text_password";
+        textName.textContent = "Password (optional)";
         textName.style.color = "#000000";
         textName.style.fontSize = "20px";
 
@@ -45,6 +53,8 @@ class ConnectionMenu {
         this.container.appendChild(this.inputIP);
         this.container.appendChild(textName);
         this.container.appendChild(this.inputName);
+        this.container.appendChild(textPword);
+        this.container.appendChild(this.inputPword);
         this.container.appendChild(this.confirmButton);
     }
 
@@ -56,13 +66,12 @@ class ConnectionMenu {
         document.body.removeChild(this.container);
     }
 
-    getInput(): [string, string] {
-        addMessage(`Address: ${this.inputIP.value}, Name: ${this.inputName.value}`);
-        return [this.inputIP.value, this.inputName.value];
+    getInput(): [string, string, string] {
+        return [this.inputIP.value, this.inputName.value, this.inputPword.value];
     }
 
     printInput() {
-        addMessage(`Address: ${this.inputIP.value}, Name: ${this.inputName.value}`);
+        addMessage(`Address: ${this.inputIP.value}, Name: ${this.inputName.value}, Password: ${this.inputPword.value}`);
     }
 }
 
