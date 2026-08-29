@@ -17,15 +17,6 @@
           "camera": "NO_CAMERA",
           "event": [
             {
-              "type": "ITEM_GET_CENTER",
-              "items": [
-                {
-                  "count": 1,
-                  "item": "reward-carpenter-1"
-                }
-              ]
-            },
-            {
               "type": "PROGRESS_PLOT",
               "plotState": "quickwood.end"
             },

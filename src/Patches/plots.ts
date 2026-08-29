@@ -39,7 +39,7 @@ function modify_plot_keys(plotKey: string, stateKey: string): [string, string] {
         return ["ap_bridges", "received"];
     }*/
     // Second part of Aether dungeon
-    if (plotKey == "southDng" && stateKey in [
+    if (plotKey == "southDng" && [
         "outerFishBattle",
         "part2Intro",
         "f2room2check1",
@@ -70,7 +70,7 @@ function modify_plot_keys(plotKey: string, stateKey: string): [string, string] {
         "f2room7check1",
         "f2room7check2",
         "finalElevator"
-    ]) {
+    ].includes(stateKey)) {
         return ["southDngB", stateKey];
     }
     return [plotKey, stateKey]
