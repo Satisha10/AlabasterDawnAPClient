@@ -5,6 +5,8 @@ import {addMessage, addDebug} from "./doc";
 import {item_name_data} from "./item_name_gamedata";
 import {item_flags, client_data} from "./client";
 
+import {connect_menu} from "./connect_menu";
+
 type LoadState = {
     melee: string[];
     ranged: string[];
@@ -87,6 +89,7 @@ export function handle_item(item: Item) {
 
         terra.g_plot.progressPlotToStateC("ch2b", "traineeFlashback");
         //terra.g_scene.teleport("start.north.north-03-dungeon", "");
+        connect_menu.getInput();
     }
     else {
         terra.g_player.inventory.addItem(item_data.name, item_data.qty);
