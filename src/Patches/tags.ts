@@ -34,9 +34,7 @@ function getActiveTagsPatched(dest: string[], tags: any) {  // tags: map[string,
 // First value: if the value is altered (i.e. result set by the function). Second: the result of the new condition (only used if first is true).
 function modifyTag(tagKey: string): [boolean, boolean] {
     if (tagKey == "CL1") {
-        let map: string = terra.g_game.map.active?.path;  // TODO log the value
-        // TODO catch center-06, maybe test first (it only removes barriers ?)
-        addMessage(`Current map: ${map}`);
+        let map: string = terra.g_game.map.active?.path;
         if (map == undefined) {
             return [false, false]
         }
@@ -45,16 +43,20 @@ function modifyTag(tagKey: string): [boolean, boolean] {
         }
         return [false, false]
     }
+    // Valley bridges
     if (["BR1", "BRG"].includes(tagKey)) {
         return [true, terra.g_plot.checkPlotStateC("ap_bridge", "received")]
     }
+    // Quickwood quest
     if (tagKey == "BRD") {
         return [true, terra.g_plot.checkPlotStateC("quickwood", "end")]
     }
+    // Flower boss
     if (tagKey == "PHB") {
         return [true, terra.g_plot.checkPlotStateC("flowerBoss1", "end")]
     }
-    if (["RHB", "Rff", "Rf0"].includes(tagKey)) {  // TODO see for Rff, Rf0
+    // Rice fields
+    if (["RHB", "Rff", "Rf0"].includes(tagKey)) {
         return [true, terra.g_plot.checkPlotStateC("ricefarm", "end")]
     }
     return [false, false]

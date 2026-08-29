@@ -1,0 +1,9 @@
+[
+  {
+    "op": "replace",
+    "path": "/entities/1953/tags",
+    "value": [
+      "Nat"
+    ]
+  }
+]
