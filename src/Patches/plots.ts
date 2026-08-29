@@ -1,6 +1,5 @@
 import {Injectable, terra} from "@project-selene/api";
 import {PlotManager, Plot} from "@project-selene/api/terra";
-import {addDebug} from "../doc";
 
 export class PlotCheck extends Injectable(PlotManager) {
     checkPlotStateC(plotKey: string, stateKey: string, ...args: unknown[]) {
@@ -30,6 +29,7 @@ export class PlotProgress extends Injectable(Plot) {
 
 function modify_plot_keys(plotKey: string, stateKey: string): [string, string] {
     // Check if a different pair of plot/state keys must be used
+    /*
     if (plotKey == "ch1b" && stateKey == "village-built") {
         return ["ap_lyhamn", "cl1"];
     }
@@ -37,7 +37,7 @@ function modify_plot_keys(plotKey: string, stateKey: string): [string, string] {
     // TODO Also remove the !CL1 tags on quickwood (and probably other quests)
     if (plotKey == "quickwood" && (stateKey == "bridgeBuilt" || stateKey == "end")) {
         return ["ap_bridges", "received"];
-    }
+    }*/
     // Second part of Aether dungeon
     if (plotKey == "southDng" && stateKey in [
         "outerFishBattle",

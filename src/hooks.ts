@@ -3,6 +3,7 @@ import {ChestPatch, SkipItemDialogs} from "./Patches/chest";
 import {DishTracker} from "./Patches/dish";
 import {ItemTracker, ElementTracker, WeaponTracker, PartyTracker} from "./Patches/items";
 import {PlotCheck, PlotProgress} from "./Patches/plots";
+import {MapTags} from "./Patches/tags";
 
 export class Hooks {
     static init(mod: Mod) {
@@ -15,5 +16,6 @@ export class Hooks {
         mod.inject(PartyTracker);
         mod.inject(PlotCheck);
         mod.inject(PlotProgress);
+        mod.inject(MapTags);
     }
 }
