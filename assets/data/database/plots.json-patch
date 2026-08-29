@@ -106,7 +106,7 @@
   },
   {
     "op": "remove",
-    "path": "/plots/states/platformsCrumbling/mobilityBlock"
+    "path": "/plots/quickwood/states/platformsCrumbling/mobilityBlock"
   },
   {
     "op": "replace",
