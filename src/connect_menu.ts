@@ -1,4 +1,5 @@
 import {addMessage} from "./doc";
+import {init_client} from "./client";
 
 
 class ConnectionMenu {
@@ -30,7 +31,7 @@ class ConnectionMenu {
 
         this.confirmButton.id = "button";
         this.confirmButton.textContent = "Connect";
-        this.confirmButton.addEventListener("click", () => {this.printInput()});  // TODO
+        this.confirmButton.addEventListener("click", () => {init_client()});
 
         const textIP = document.createElement("div");
         const textName = document.createElement("div");
@@ -44,10 +45,10 @@ class ConnectionMenu {
         textName.textContent = "Slot Name (ex: 'Player1')";
         textName.style.color = "#000000";
         textName.style.fontSize = "20px";
-        textName.id = "text_password";
-        textName.textContent = "Password (optional)";
-        textName.style.color = "#000000";
-        textName.style.fontSize = "20px";
+        textPword.id = "text_password";
+        textPword.textContent = "Password (optional)";
+        textPword.style.color = "#000000";
+        textPword.style.fontSize = "20px";
 
         this.container.appendChild(textIP);
         this.container.appendChild(this.inputIP);

@@ -4,7 +4,7 @@ import {DishTracker} from "./Patches/dish";
 import {ItemTracker, ElementTracker, WeaponTracker, PartyTracker} from "./Patches/items";
 import {PlotCheck, PlotProgress} from "./Patches/plots";
 import {MapTags} from "./Patches/tags";
-import {SaveAPData} from "./Patches/save";
+import {SaveAPData, NewGameHook, NewGameButton, LoadTracker} from "./Patches/save";
 
 export class Hooks {
     static init(mod: Mod) {
@@ -19,5 +19,8 @@ export class Hooks {
         mod.inject(PlotProgress);
         mod.inject(MapTags);
         mod.inject(SaveAPData);
+        mod.inject(NewGameHook);
+        mod.inject(NewGameButton);
+        mod.inject(LoadTracker);
     }
 }
