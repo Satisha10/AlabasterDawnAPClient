@@ -1,7 +1,7 @@
 import {Injectable} from "@project-selene/api";
 import {ChestDatabase, Chest} from "@project-selene/api/terra";
 import {addMessage, addDebug} from "../doc";
-import {client} from "../client";
+import {client_data} from "../client";
 import {loc_game_name_id} from "../location_gamename_id"
 
 export class SkipItemDialogs extends Injectable(ChestDatabase) {
@@ -24,7 +24,7 @@ export class ChestPatch extends Injectable(Chest) {
     open(...args: unknown[]) {
         addMessage(`Opened Chest ${this.key}`);
         if (loc_game_name_id.has(this.key)) {
-            client.check(<number>loc_game_name_id.get(this.key))
+            client_data.checkLocation(<number>loc_game_name_id.get(this.key))
         }
         return super.open(...args);
     }

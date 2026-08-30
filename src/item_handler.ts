@@ -12,7 +12,7 @@ type LoadState = {
     ranged: string[];
 }
 
-export function handle_item(item: Item) {
+export function giveGameItem(item: Item) {
     let item_data = item_name_data.get(item.name);
     if (!item_data) {
         addMessage("Warning: Unknown item name received: " + item.name);

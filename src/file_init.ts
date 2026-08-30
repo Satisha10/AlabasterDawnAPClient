@@ -6,7 +6,7 @@ type LoadState = {
 }
 
 // TODO Call this somewhere
-export function initialize_file() {
+export function initializeFile() {
     terra.g_player.setCore(0, true);
     terra.g_player.setCore(1, true);
     terra.g_player.setCore(2, true);
@@ -31,21 +31,22 @@ export function initialize_file() {
 
     terra.g_player.inventory.addItem("speed-run")
 
-    let melee: string[] = terra.g_player.combat.getMeleeWeaponList();
-    let range: string[] = terra.g_player.combat.getRangedWeaponList();
+    //let melee: string[] = terra.g_player.combat.getMeleeWeaponList();
+    //let range: string[] = terra.g_player.combat.getRangedWeaponList();
 
     // Create the loadouts with duplicates, so there are weapons equipped for every element even if there are not
     // enough different weapons to fill all slots.
     terra.g_player.combat.setLoadout(0);
 
+    // TODO random spawn weapons
     let state: LoadState = {  // Force duplicates on the loadout
-        melee: [melee[0], melee[0], melee[0], melee[0]],
-        ranged: [range[0], range[0], range[0], range[0]]
+        melee: ["sword", "sword", "sword", "sword"],
+        ranged: ["crossbow", "crossbow", "crossbow", "crossbow"],
     }
     for (let i = 0; i < terra.g_player.combat.loadouts.length; i++) {
         terra.g_player.combat.loadouts[i].setState(state);
     }
-    terra.g_player.combat.setLoadout(1);  // Reload loadout 0 so the weapons get equipped on the new element
+    terra.g_player.combat.setLoadout(1);  // Reload loadout 0 so the weapons get equipped
     terra.g_player.combat.setLoadout(0);
 
     terra.g_scene.teleport("start.village.village-garden-03", "");

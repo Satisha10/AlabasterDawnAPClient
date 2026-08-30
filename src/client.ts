@@ -1,6 +1,6 @@
 import {Client, Item, ItemsManager} from "archipelago.js";
-import {addMessage} from "./doc";
-import {handle_item} from "./item_handler";
+import {addDebug, addMessage} from "./doc";
+import {giveGameItem} from "./item_handler";
 
 // Create a new instance of the Client class.
 export const client = new Client();
@@ -25,21 +25,11 @@ export function init_client(url: string | null = null, name: string | null = nul
         })
         .catch(() => addMessage(`Connection failed (url: ${connUrl}, Slot name: ${connName})`));
 
-    items_manager.on("itemsReceived", (items, starting_index) => {
-        let item: Item;
-        if (starting_index == 0) {
-            items = items.slice(client_data.last_item_index);  // TODO verify
-        }
-        else if (starting_index != client_data.last_item_index + 1) {
-            // TODO Ask for item sync
-        }
-
-        for (item of items) {
-            handle_item(item);
-            client_data.last_item_index += 1;
-        }
+    items_manager.on("itemsReceived", (items) => {
+        client_data.handleItems(items);
     });
 }
+
 
 class ClientData {
     url: string;
@@ -47,8 +37,10 @@ class ClientData {
     password: string;
 
     alias: string;
-
     last_item_index: number;
+    is_loaded: boolean;
+
+    checked_locations: Set<number>;
 
     constructor() {
         this.url = "ws://localhost:38281";  // TODO
@@ -58,27 +50,62 @@ class ClientData {
         this.alias = "Player1";
 
         this.last_item_index = 0;
+        this.is_loaded = false;
+        this.checked_locations = new Set();  // TODO
     }
 
-    // TODO use JSON instead ?
+    handleItems(items: Item[]) {
+        addDebug("Give items");
+        if (!client.authenticated || !this.is_loaded) {
+            return;
+        }
+        let item: Item;
+        items = items.slice(this.last_item_index);  // TODO verify
+
+        for (item of items) {
+            giveGameItem(item);
+            this.last_item_index += 1;
+        }
+    }
+
+    giveStashedItems() {
+        this.handleItems(items_manager.received);
+    }
+
+    checkLocation(id: number) {
+        this.checked_locations.add(id);
+        if (!client.authenticated || !this.is_loaded) {
+            return;
+        }
+        for (const location of this.checked_locations) {
+            if (client.room.missingLocations.includes(location)) {
+                client.check(location);
+            }
+        }
+    }
+
     // Export data as an Object, to store it in the save file
-    export_state(): Object {
+    exportState(): Object {
         return {
             url: this.url,
             slot_name: this.slot_name,
             password: this.password,
-            alias: this.alias,
             last_item_index: this.last_item_index,
+            checked_locations: this.checked_locations,
         }
     }
 
+    // TODO
     // Import the client state from the save file data
-    import_state(data: any) {
+    importState(data: any) {
         this.url = data.url;
         this.slot_name = data.slot_name;
         this.password = data.password;
         this.alias = data.alias;
         this.last_item_index = data.last_item_index;
+        if (!client.authenticated) {
+            init_client();
+        }
     }
 }
 
