@@ -1,14 +1,8 @@
-import {Injectable, terra} from "@project-selene/api";
+import {Injectable} from "@project-selene/api";
 import {PlayerInventory, PlayerModel, PlayerCombat, PartyModel} from "@project-selene/api/terra";
 import {addMessage, addDebug} from "../doc";
-import {item_name_data} from "../item_name_gamedata";
 import {loc_game_name_id} from "../location_gamename_id";
 import {client, item_flags} from "../client";
-
-type LoadState = {
-    melee: string[];
-    ranged: string[];
-}
 
 export class ItemTracker extends Injectable(PlayerInventory) {
     addItem(key: string, quantity = 1, skipHUD = false, skipEvent = false, ...args: unknown[]) {
@@ -19,6 +13,9 @@ export class ItemTracker extends Injectable(PlayerInventory) {
 
 export class ElementTracker extends Injectable(PlayerModel) {
     setCore(type: number, state: boolean, ...args: unknown[]) {
+        if (item_flags.is_init) {
+            return super.setCore(type, state, ...args);
+        }
         addDebug(`setCore ${type}, ${state}`);
         let elemMap = new Map([[14, "Physis"], [15, "Aether"], [16, "Cryo"], [17, "Ignis"]]);
         let elemName = elemMap.get(type);
@@ -37,6 +34,9 @@ export class ElementTracker extends Injectable(PlayerModel) {
 
 export class WeaponTracker extends Injectable(PlayerCombat) {
     setWeaponUnlock(key: string, unlock: boolean, ...args: unknown[]) {
+        if (item_flags.is_init) {
+            return super.setWeaponUnlock(key, unlock, ...args);
+        }
         addDebug(`Get weapon ${key} unlock ${unlock}`);
         if (unlock && item_flags.checkedWeapon(key)) {
             if (loc_game_name_id.has(key)) {
@@ -55,6 +55,7 @@ export class WeaponTracker extends Injectable(PlayerCombat) {
     }
 }
 
+/*
 export class PartyTracker extends Injectable(PartyModel) {
     addPartyMember(member: string, ...args: unknown[]) {
         addDebug(`New member ${member}`);  // TODO typing
@@ -64,5 +65,4 @@ export class PartyTracker extends Injectable(PartyModel) {
         return super.addPartyMember(member, ...args);
     }
 }
-
-
+*/

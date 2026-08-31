@@ -8,8 +8,11 @@ class ConnectionMenu {
     inputName: HTMLInputElement;
     inputPword: HTMLInputElement;
     confirmButton: HTMLButtonElement;
+    is_shown: boolean;
 
     constructor() {
+        this.is_shown = false;
+
         this.container = document.createElement("div");
         this.inputIP = document.createElement("input");
         this.inputName = document.createElement("input");
@@ -60,10 +63,18 @@ class ConnectionMenu {
     }
 
     show() {
+        if (this.is_shown) {
+            return;
+        }
+        this.is_shown = true;
         document.body.appendChild(this.container);
     }
 
     hide() {
+        if (!this.is_shown) {
+            return;
+        }
+        this.is_shown = false;
         document.body.removeChild(this.container);
     }
 

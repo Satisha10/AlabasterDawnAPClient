@@ -1,0 +1,51 @@
+[
+  {
+    "op": "replace",
+    "path": "/entities/1/event",
+    "value": [
+      {
+        "type": "SET_OVERLAY",
+        "alpha": 1,
+        "time": 0
+      },
+      {
+        "type": "CALL_MAP_EVENT",
+        "entity": {
+          "named": "initPlayer"
+        }
+      },
+      {
+        "type": "CALL_MAP_EVENT",
+        "entity": {
+          "named": "optionSetups"
+        }
+      },
+      {
+        "type": "PROGRESS_PLOT",
+        "plotState": "ch2b.traineeFlashback"
+      },
+      {
+        "type": "CALL_MAP_EVENT",
+        "entity": {
+          "named": "prologue"
+        }
+      },
+      {
+        "type": "WAIT",
+        "time": 0.3
+      },
+      {
+        "type": "CLEAR_STACKED_TOP_MSG"
+      },
+      {
+        "type": "TELEPORT",
+        "map": "start.village.rooms.garden-01-olira",
+        "marker": "start"
+      }
+    ]
+  },
+  {
+    "op": "remove",
+    "path": "/entities/5"
+  }
+]

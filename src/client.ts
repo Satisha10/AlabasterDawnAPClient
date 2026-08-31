@@ -115,9 +115,11 @@ export const client_data = new ClientData();
 class ItemFlags {
     elemID: number;
     weaponKey: string;
+    is_init: boolean;  // Used when initializing, to skip the item/location patches
     constructor() {
         this.elemID = 0;
         this.weaponKey = "";
+        this.is_init = false;
     }
     gaveElem(value: number) {
         // Received an element (with value its ID) through an AP item
