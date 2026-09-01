@@ -86,6 +86,26 @@
   },
   {
     "op": "replace",
+    "path": "/plots/ch1b/states/prepare-built/condition",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/plots/ch1b/states/check-silver-peak/condition",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/plots/ch1b/states/alsoGotSpecials/condition",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/plots/ch1b/states/village-built/condition",
+    "value": []
+  },
+  {
+    "op": "replace",
     "path": "/plots/ch1c/states/aetherGot/condition",
     "value": []
   },

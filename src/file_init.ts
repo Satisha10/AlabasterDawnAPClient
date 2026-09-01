@@ -54,7 +54,5 @@ export function initializeFile() {
     terra.g_player.combat.setLoadout(1);  // Reload loadout 0 so the weapons get equipped
     terra.g_player.combat.setLoadout(0);
 
-    //terra.g_plot.progressPlotToStateC("ch2b", "traineeFlashback");
-
     item_flags.is_init = false;
 }
