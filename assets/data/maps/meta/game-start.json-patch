@@ -25,19 +25,6 @@
         "plotState": "ch2b.traineeFlashback"
       },
       {
-        "type": "CALL_MAP_EVENT",
-        "entity": {
-          "named": "prologue"
-        }
-      },
-      {
-        "type": "WAIT",
-        "time": 0.3
-      },
-      {
-        "type": "CLEAR_STACKED_TOP_MSG"
-      },
-      {
         "type": "TELEPORT",
         "map": "start.village.village-01-center",
         "marker": "start"
