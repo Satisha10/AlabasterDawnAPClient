@@ -39,7 +39,7 @@
       },
       {
         "type": "TELEPORT",
-        "map": "start.village.rooms.garden-01-olira",
+        "map": "start.village.village-01-center",
         "marker": "start"
       }
     ]

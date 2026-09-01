@@ -45,7 +45,7 @@ function modifyTag(tagKey: string): [boolean, boolean] {
     }
     // Valley bridges
     if (["BR1", "BRG"].includes(tagKey)) {
-        return [true, terra.g_plot.checkPlotStateC("ap_bridge", "received")]
+        return [true, terra.g_plot.checkPlotStateC("ap_bridges", "received")]
     }
     // Quickwood quest
     if (tagKey == "BRD") {
