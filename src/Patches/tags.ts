@@ -52,7 +52,7 @@ function modifyTag(tagKey: string): [boolean, boolean] {
         return [true, terra.g_plot.checkPlotStateC("quickwood", "end")]
     }
     // Flower boss
-    if (tagKey == "PHB") {
+    if (tagKey == "P1C") {
         return [true, terra.g_plot.checkPlotStateC("flowerBoss1", "end")]
     }
     // Rice fields
