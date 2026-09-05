@@ -39,7 +39,9 @@
               },
               "pos": null
             }
-          ]
+          ],
+          "face": "NORTH",
+          "interact": "TALK"
         },
         {
           "camera": "NO_CAMERA",
@@ -126,7 +128,7 @@
   {
     "op": "replace",
     "path": "/entities/1842/condition",
-    "value": "$p.has.quickwood.afterHammerStuck"
+    "value": "$p.has.quickwood.hammerBarrierSwitchPost"
   },
   {
     "op": "replace",

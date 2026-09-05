@@ -1,5 +1,5 @@
 import {Injectable} from "@project-selene/api"
-import {SaveFile, Game, TitleMenu, BUT_DATA_KEYS, Dialogs, Analytics, SceneManager} from "@project-selene/api/terra"
+import {SaveFile, Game, TitleMenu, BUT_DATA_KEYS, Dialogs, Analytics, SceneManager, GAME_STATE} from "@project-selene/api/terra"
 import {client, client_data} from "../client";
 import {addMessage, addDebug} from "../doc";
 import {initializeFile} from "../file_init";
@@ -40,9 +40,16 @@ export class LoadTracker extends Injectable(Game) {
             is_new_game += 1;
         }
         // TODO check seed and slot_name
-        client_data.is_loaded = true;
-        client_data.giveStashedItems();
-        connect_menu.hide();
+        if (this.state == GAME_STATE.RUNNING) {
+            client_data.is_loaded = true;
+            client_data.giveStashedItems();
+            addDebug("Loading completed");
+        }
+        else {
+            client_data.is_loaded = false;
+        }
+
+        connect_menu.hide();  // Hide the connect menu immediately, don't wait until the game is fully loaded
         return result;
     }
 }
