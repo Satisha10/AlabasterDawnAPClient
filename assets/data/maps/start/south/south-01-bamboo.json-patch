@@ -63,5 +63,268 @@
         "!BRD"
       ]
     }
+  },
+  {
+    "op": "replace",
+    "path": "/entities/991/states",
+    "value": [
+      {
+        "interactType": "NONE"
+      },
+      {
+        "condition": "$p.is.quickwood.hammerShow",
+        "collType": "FENCE",
+        "permaFx": "FX:interact.altar#on",
+        "event": [
+          {
+            "type": "DO_ACTION",
+            "action": [
+              {
+                "type": "NAV_TO",
+                "maxTime": 10,
+                "precise": true,
+                "slowDist": 3,
+                "target": [
+                  124,
+                  91.5,
+                  0
+                ]
+              },
+              {
+                "type": "FACE_TO_DIR",
+                "direction": "NORTH"
+              },
+              {
+                "type": "SHOW_ANIMATION",
+                "animation": "chestSign"
+              },
+              {
+                "type": "WAIT_UNTIL_HOOK_READY",
+                "hook": "HOOK_1"
+              }
+            ],
+            "entity": {
+              "player": 1
+            },
+            "keepStateAfter": true
+          },
+          {
+            "type": "SET_CAMERA_TARGET",
+            "speed": 3,
+            "target": [
+              123.75,
+              88.75,
+              1.75
+            ],
+            "zoom": 1.5
+          },
+          {
+            "type": "WAIT",
+            "time": 0.5
+          },
+          {
+            "type": "WAIT_UNTIL_ACTION_DONE",
+            "entity": {
+              "player": 1
+            }
+          },
+          {
+            "type": "SPAWN_FX",
+            "duration": -1,
+            "effect": "FX:interact.altar#weaponAbsorb",
+            "target": {
+              "ent": "named",
+              "key": "hammer",
+              "align": "CENTER"
+            },
+            "target2": {
+              "ent": "player",
+              "align": "CENTER"
+            }
+          },
+          {
+            "type": "WAIT",
+            "time": 1.2
+          },
+          {
+            "type": "DO_ACTION",
+            "action": [
+              {
+                "type": "SHOW_ANIMATION",
+                "animation": "chestSign2"
+              }
+            ],
+            "entity": {
+              "player": 1
+            },
+            "keepStateAfter": true,
+            "keepStateBefore": true
+          },
+          {
+            "type": "WAIT",
+            "time": 0.3
+          },
+          {
+            "type": "PROGRESS_PLOT",
+            "plotState": "quickwood.hammerGet"
+          },
+          {
+            "type": "SPAWN_FX",
+            "effect": "FX:interact.altar#weaponGet",
+            "target": {
+              "ent": "player",
+              "align": "CENTER"
+            }
+          },
+          {
+            "type": "WAIT",
+            "time": 1
+          },
+          {
+            "type": "SET_CAMERA_TARGET",
+            "speed": 3,
+            "target": [
+              123.75,
+              92,
+              1.75
+            ],
+            "zoom": 1.5
+          },
+          {
+            "type": "DO_ACTION",
+            "action": [
+              {
+                "type": "CLEAR_ANIMATION"
+              },
+              {
+                "type": "WAIT",
+                "time": 0.2
+              },
+              {
+                "type": "FACE_TO_DIR",
+                "direction": "WEST"
+              },
+              {
+                "type": "SHOW_ANIMATION",
+                "animation": "hammerReadyPre"
+              },
+              {
+                "type": "WAIT",
+                "time": 0.3
+              },
+              {
+                "type": "SPAWN_FX",
+                "detached": true,
+                "effect": "FX:interact.altar#weaponShowFast",
+                "part": "PART_7",
+                "target": {
+                  "ent": "player",
+                  "align": "HOOK_1"
+                }
+              },
+              {
+                "type": "ATTACH_FIGURE",
+                "figure": "FIG:weapon.player-weapon#hammer",
+                "name": "sword"
+              },
+              {
+                "type": "WAIT",
+                "time": 2.5
+              },
+              {
+                "type": "SHOW_ANIMATION",
+                "animation": "hammerReady"
+              },
+              {
+                "type": "WAIT",
+                "time": 0.5
+              }
+            ],
+            "entity": {
+              "player": 1
+            },
+            "keepStateAfter": true
+          },
+          {
+            "type": "SET_CAMERA_TARGET",
+            "speed": 1.8,
+            "target": {
+              "ent": "player",
+              "align": "CENTER"
+            },
+            "wait": true,
+            "zoom": 2
+          },
+          {
+            "type": "SET_CAMERA_TARGET",
+            "speed": 1,
+            "spline": "EASE_OUT",
+            "target": {
+              "ent": "player",
+              "align": "CENTER"
+            },
+            "zoom": 1.5
+          },
+          {
+            "type": "WAIT",
+            "ignoreSlowDown": true,
+            "time": 0.5
+          },
+          {
+            "type": "ADD_SLOW_MOTION",
+            "fadeIn": 1,
+            "fadeOut": 1,
+            "timeFactor": 0
+          },
+          {
+            "type": "WAIT",
+            "ignoreSlowDown": true,
+            "time": 1
+          },
+          {
+            "type": "PLAY_SOUND",
+            "settings": {
+              "playback": {},
+              "speed": 0.62,
+              "type": "GAMEPLAY",
+              "volume": 0.76
+            },
+            "sound": "media/audio/sfx/menu/gem-equip-minor.wav",
+            "pos": "global"
+          },
+          {
+            "type": "SHOW_WEAPON_GET",
+            "description": {
+              "en_US": "- Divine Hammer of Basil -\n\n\"A hammer to smite evil and pave the way to progress\"\n\n",
+              "langID": 51
+            },
+            "weapon": "hammer"
+          },
+          {
+            "type": "CLEAR_SLOW_MOTION"
+          },
+          {
+            "type": "WAIT",
+            "ignoreSlowDown": true,
+            "time": 1.5
+          },
+          {
+            "type": "SET_PLAYER_WEAPON_UNLOCK",
+            "unlock": true,
+            "weapon": "hammer"
+          },
+          {
+            "type": "SET_PLAYER_CORE",
+            "core": "LOADOUT",
+            "state": true
+          },
+          {
+            "type": "RESUME_DEFAULT_MUSIC",
+            "fadeIn": 2
+          }
+        ],
+        "interactType": "GRAB"
+      }
+    ]
   }
 ]

@@ -163,9 +163,9 @@ class ItemFlags {
         // return false if the change is caused by receiving an item.
         if (value == this.weaponKey) {
             this.weaponKey = "";
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 }
 
