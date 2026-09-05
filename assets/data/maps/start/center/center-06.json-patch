@@ -14,7 +14,36 @@
       "speed": "WALKING",
       "states": [
         {
+          "condition": "$p.has.quickwood.afterHammerStuck && !$p.has.quickwood.pathBackFightFinal",
+          "event": [
+            {
+              "type": "TALK",
+              "char": "CHA:main#Juno>normal",
+              "pos": null
+            },
+            {
+              "type": "TALK",
+              "char": "CHA:south#Penterson>default",
+              "message": {
+                "en_US": "I saw some Nuemera to the {c:3}south-west{c}.",
+                "langID": 50465
+              },
+              "pos": null
+            },
+            {
+              "type": "TALK",
+              "char": "CHA:main#Juno>serious",
+              "message": {
+                "en_US": "Right, I will take care of them.",
+                "langID": 95
+              },
+              "pos": null
+            }
+          ]
+        },
+        {
           "camera": "NO_CAMERA",
+          "condition": "$p.has.quickwood.pathBackFightFinal && !$p.has.quickwood.end",
           "event": [
             {
               "type": "PROGRESS_PLOT",
@@ -93,6 +122,11 @@
         "plotState": "quickwood.platformsCrumbling"
       }
     ]
+  },
+  {
+    "op": "replace",
+    "path": "/entities/1842/condition",
+    "value": "$p.has.quickwood.afterHammerStuck"
   },
   {
     "op": "replace",

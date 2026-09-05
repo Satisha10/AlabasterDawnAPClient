@@ -34,9 +34,22 @@ function getActiveTagsPatched(dest: string[], tags: any) {  // tags: map[string,
 // First value: if the value is altered (i.e. result set by the function). Second: the result of the new condition (only used if first is true).
 function modifyTag(tagKey: string): [boolean, boolean] {
     if (tagKey == "CL1") {
-        let map: string = terra.g_game.map.active?.path;
+        let map: string
+        if (terra.g_game.map.loading?.path) {  // Loaded map takes priority when it exists
+            map = terra.g_game.map.loading?.path
+        }
+        else {
+            map = terra.g_game.map.active?.path;
+        }
+        addMessage(`Map; ${map} load: ${terra.g_game.map.loading?.path}`)
         if (map == undefined) {
             return [false, false]
+        }
+        if (map == "start.north.north-01") {  // Bridges that go to the dungeon/plains access
+            return [true, terra.g_plot.checkPlotStateC("ap_bridges", "received")]
+        }
+        if (map == "start.center.center-06") {  // Quickwood quest, CL1 messes up the combat section
+            return [true, terra.g_plot.checkPlotStateC("quickwood", "end")]
         }
         if (map.startsWith("start")) {
             return [true, terra.g_plot.checkPlotStateC("ap_lyhamn", "cl1")]
@@ -49,7 +62,12 @@ function modifyTag(tagKey: string): [boolean, boolean] {
     }
     // Quickwood quest
     if (tagKey == "BRD") {
-        return [true, terra.g_plot.checkPlotStateC("quickwood", "end")]
+        return [
+            true,
+            terra.g_plot.checkPlotStateC("quickwood", "end")
+                && terra.g_plot.checkPlotStateC("ap_bridges", "received")
+                && terra.g_plot.checkPlotStateC("ap_lyhamn", "cl1")
+        ]
     }
     // Flower boss
     if (tagKey == "P1C") {

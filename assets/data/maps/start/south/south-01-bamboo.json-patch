@@ -1,6 +1,67 @@
 [
   {
     "op": "remove",
-    "path": "/entities/96"
+    "path": "/entities/1646"
+  },
+  {
+    "op": "remove",
+    "path": "/entities/1647"
+  },
+  {
+    "op": "add",
+    "path": "/entities/2866",
+    "value": {
+      "type": "Interactible",
+      "pos": [
+        109,
+        85.625,
+        0
+      ],
+      "figure": "FIG:props.built.south-village#sign5",
+      "interAlign": {
+        "align": "TOP",
+        "off": [
+          0,
+          0,
+          1.5
+        ]
+      },
+      "interZCond": "SAME",
+      "states": [
+        {
+          "event": [
+            {
+              "type": "DO_ACTION",
+              "action": [
+                {
+                  "type": "TURN_TO",
+                  "target": [
+                    109,
+                    85.625,
+                    0
+                  ]
+                }
+              ],
+              "entity": {
+                "player": 1
+              }
+            },
+            {
+              "type": "SIGNPOST",
+              "message": {
+                "en_US": "Hi Juno ! I need to help rebuilding the village before fixing this bridge.\n\n{c:3}AP{c}enterson",
+                "langID": 4456489
+              },
+              "style": "DEFAULT",
+              "textAlign": "LEFT"
+            }
+          ],
+          "interactType": "GRAB"
+        }
+      ],
+      "tags": [
+        "!BRD"
+      ]
+    }
   }
 ]

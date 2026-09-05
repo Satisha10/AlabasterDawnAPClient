@@ -7,8 +7,8 @@
 - `start.north.north-03-dungeon`: Modify the trigger for lowering the water level to an AP item. This is triggered through the `ap_tide` plot.
 - `start.north.north-03-dungeon`: Remove the condition for Filia to join.
 - `start.north.north-02-bridge` and `hub.south.south-06-bridge`: Modify the trigger for enabling the boat to an AP item, triggered through the `ap_boat` plot.
-- `start.center.center-06`: patch to the `quickwood` quest: skip the end cutscene (that softlocks), prevent the crumbling platforms from disappearing. (TODO can maybe be removed)
-- `start.south.south-01-bamboo`: remove a Nyx barrier so you can leave if you don't have Blunt.
+- `start.center.center-06`: patch to the `quickwood` quest: skip the end cutscene (that softlocks), prevent the crumbling platforms from disappearing, and require the combat to finish the quest (and this combat also requires the first part of the quest to trigger)
+- `start.south.south-01-bamboo`: remove a Nyx barrier so you can leave after the fight if you don't have Blunt. Also added a sign to tell players that the west bridge also requires CL1 (due to unlocking a CL1 quest).
 
 ## Plots
 

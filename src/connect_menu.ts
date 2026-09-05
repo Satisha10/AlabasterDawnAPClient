@@ -32,6 +32,8 @@ class ConnectionMenu {
         this.inputName.id = "input_name";
         this.inputPword.id = "input_pword";
 
+        this.inputIP.value = "archipelago.gg:"
+
         this.confirmButton.id = "button";
         this.confirmButton.textContent = "Connect";
         this.confirmButton.addEventListener("click", () => {init_client()});

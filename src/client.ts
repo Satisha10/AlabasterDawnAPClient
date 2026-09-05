@@ -6,6 +6,8 @@ import {giveGameItem} from "./item_handler";
 export const client = new Client();
 export const items_manager = new ItemsManager(client);
 
+
+// TODO refactor: extend Client, and add a connect/disconnect method
 export function init_client(url: string | null = null, name: string | null = null, password : string | null = null) {
     // TODO Connect when save loaded
     // TODO Datapackage
@@ -25,8 +27,8 @@ export function init_client(url: string | null = null, name: string | null = nul
         })
         .catch(() => addMessage(`Connection failed (url: ${connUrl}, Slot name: ${connName})`));
 
-    items_manager.on("itemsReceived", (items) => {
-        client_data.handleItems(items);
+    items_manager.on("itemsReceived", () => {
+        client_data.giveStashedItems();
     });
 }
 
@@ -37,7 +39,8 @@ class ClientData {
     password: string;
 
     alias: string;
-    last_item_index: number;
+    last_item_index: number;  // Last item index received by the player. The index is reset to last_saved_index on death
+    last_saved_index: number;  // Last item index that got saved (always equal or lower than last_item_index)
     is_loaded: boolean;
 
     checked_locations: Set<number>;
@@ -50,22 +53,26 @@ class ClientData {
         this.alias = "Player1";
 
         this.last_item_index = 0;
+        this.last_saved_index = 0;
         this.is_loaded = false;
         this.checked_locations = new Set();  // TODO
     }
 
+    // TODO Regroup the two functions
     handleItems(items: Item[]) {
         addDebug("Give items");
+        addDebug(`In ${this.last_item_index}`)
         if (!client.authenticated || !this.is_loaded) {
             return;
         }
         let item: Item;
-        items = items.slice(this.last_item_index);  // TODO verify
+        items = items.slice(this.last_item_index);
 
         for (item of items) {
             giveGameItem(item);
             this.last_item_index += 1;
         }
+        addDebug(`Out: ${this.last_item_index}`)
     }
 
     giveStashedItems() {
@@ -86,6 +93,7 @@ class ClientData {
 
     // Export data as an Object, to store it in the save file
     exportState(): Object {
+        this.last_saved_index = this.last_item_index;
         return {
             url: this.url,
             slot_name: this.slot_name,
@@ -106,6 +114,18 @@ class ClientData {
         if (!client.authenticated) {
             init_client();
         }
+    }
+
+    reset_state() {
+        // Reset some client variables, called when going to the menu
+        this.last_item_index = 0;
+        this.last_saved_index = 0;
+        this.is_loaded = false;
+        this.checked_locations.clear();
+    }
+
+    on_death() {
+        this.last_item_index = this.last_saved_index;
     }
 }
 

@@ -1,7 +1,7 @@
 import {Injectable} from "@project-selene/api"
-import {SaveFile, Game, SceneManager, TitleMenu, BUT_DATA_KEYS, Dialogs, Analytics} from "@project-selene/api/terra"
+import {SaveFile, Game, TitleMenu, BUT_DATA_KEYS, Dialogs, Analytics, SceneManager} from "@project-selene/api/terra"
 import {client, client_data} from "../client";
-import {addMessage} from "../doc";
+import {addMessage, addDebug} from "../doc";
 import {initializeFile} from "../file_init";
 import {connect_menu} from "../connect_menu";
 
@@ -9,12 +9,18 @@ import {connect_menu} from "../connect_menu";
 export class SaveAPData extends Injectable(SaveFile) {
     saveData(...args: unknown[]) {
         this.data["ap_data"] = client_data.exportState();
+        addDebug("Saved data")
         return super.saveData(...args);
     }
+    // TODO maybe use continue button hook,
+    //  load save using g_storage.getLastSave + g_storage.load(id)
+    //  and try to connect before loading the game (else abort with a message)
+    //  Use ModalButtonDialog to make the messages with more config than Dialogs
     loadData(...args: unknown[]) {
         let data: any = super.loadData(...args);
         if (data.hasOwnProperty("ap_data")) {
             client_data.importState(data["ap_data"]);
+            addDebug("Loaded data");
         }
         else {
             addMessage("Could not read ap_data from the save file.")
@@ -63,5 +69,24 @@ export class NewGameButton extends Injectable(TitleMenu) {
 export class RemoveAnalytics extends Injectable(Analytics) {
     isTrackingAllowed(...args: unknown[]) {
         return false;
+    }
+}
+
+export class ReturnMenu extends Injectable(SceneManager) {
+    goToTitle(...args: unknown[]) {
+        connect_menu.show();
+        client_data.reset_state();
+        // TODO disconnect from multiworld
+        return super.goToTitle(...args);
+    }
+}
+
+export class OnDeath extends Injectable(SceneManager) {
+    loadCheckpoint(onDeath: boolean, ...args: unknown[]) {
+        if (onDeath) {
+            addDebug("Player died")
+            client_data.on_death();
+        }
+        return super.loadCheckpoint(onDeath, ...args);
     }
 }

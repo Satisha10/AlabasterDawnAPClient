@@ -14,7 +14,6 @@
   "author": "Satisha",
   "dependencies": {
     "@project-selene/api": "^0.0.5",
-    "tslog": "^5.1.0",
     "@types/node": "^25.0.3",
     "archipelago.js": "^2.1.0"
   },
