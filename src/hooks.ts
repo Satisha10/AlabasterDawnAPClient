@@ -2,7 +2,7 @@ import {Mod} from "@project-selene/api";
 import {ChestPatch, SkipItemDialogs} from "./Patches/chest";
 import {DishTracker} from "./Patches/dish";
 import {ItemTracker, ElementTracker, WeaponTracker} from "./Patches/items";
-import {PlotCheck, PlotProgress} from "./Patches/plots";
+import {PlotCheck, PlotProgress, PlotCompleted} from "./Patches/plots";
 import {MapTags} from "./Patches/tags";
 import {SaveAPData, NewGameButton, LoadTracker, RemoveAnalytics, ReturnMenu, OnDeath} from "./Patches/save";
 
@@ -23,5 +23,6 @@ export class Hooks {
         mod.inject(RemoveAnalytics);
         mod.inject(ReturnMenu);
         mod.inject(OnDeath);
+        mod.inject(PlotCompleted);
     }
 }

@@ -1,5 +1,8 @@
 import {Injectable, terra} from "@project-selene/api";
-import {PlotManager, Plot} from "@project-selene/api/terra";
+import {PlotManager, Plot, QuestCompleteScreen} from "@project-selene/api/terra";
+import {loc_game_name_id} from "../location_gamename_id";
+import {client} from "../client";
+import {addDebug} from "../doc";
 
 export class PlotCheck extends Injectable(PlotManager) {
     checkPlotStateC(plotKey: string, stateKey: string, ...args: unknown[]) {
@@ -74,4 +77,14 @@ function modify_plot_keys(plotKey: string, stateKey: string): [string, string] {
         return ["southDngB", stateKey];
     }
     return [plotKey, stateKey]
+}
+
+export class PlotCompleted extends Injectable(QuestCompleteScreen) {
+    show(plot: string, ...args: unknown[]) {
+        addDebug(`Finished quest ${plot}`)
+        if (loc_game_name_id.has(plot)) {
+            client.check(<number>loc_game_name_id.get(plot));
+        }
+        return super.show(plot, ...args);
+    }
 }
