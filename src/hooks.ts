@@ -5,6 +5,7 @@ import {ElementTracker, WeaponTracker} from "./Patches/items";
 import {PlotCheck, PlotProgress, PlotCompleted} from "./Patches/plots";
 import {MapTags} from "./Patches/tags";
 import {SaveAPData, NewGameButton, LoadTracker, RemoveAnalytics, ReturnMenu, OnDeath} from "./Patches/save";
+import {FixLoadouts, MultiEquip} from "./Patches/weapon";
 
 export class Hooks {
     static init(mod: Mod) {
@@ -23,5 +24,7 @@ export class Hooks {
         mod.inject(ReturnMenu);
         mod.inject(OnDeath);
         mod.inject(PlotCompleted);
+        mod.inject(MultiEquip);
+        mod.inject(FixLoadouts);
     }
 }

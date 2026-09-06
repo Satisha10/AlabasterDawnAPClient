@@ -128,7 +128,7 @@
   {
     "op": "replace",
     "path": "/entities/1842/condition",
-    "value": "$p.has.quickwood.hammerBarrierSwitchPost"
+    "value": "$p.has.quickwood.afterHammerStuck"
   },
   {
     "op": "replace",

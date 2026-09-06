@@ -22,40 +22,14 @@ export function giveGameItem(item: Item) {
     if (item_data.name.startsWith("WEAPON:")) {
         let weapon = item_data.name.substring("WEAPON:".length);
         addDebug("Unlock " + weapon);
-        terra.g_player.combat.setWeaponUnlock(weapon, true);
         item_flags.gaveWeapon(weapon);
+        terra.g_player.combat.setWeaponUnlock(weapon, true);
     }
     else if (item_data.name.startsWith("ELEMENT:")) {
         addDebug("Unlock " + item_data.name)
         let elemID = Number(item_data.name.substring("ELEMENT:".length));
-        // TODO remove once init file is called
-        terra.g_player.setCore(18, true);  // Element change
-        terra.g_player.setCore(24, true);  // Loadouts
-        terra.g_player.setCore(elemID, true);
         item_flags.gaveElem(elemID);
-
-        let melee: string[] = terra.g_player.combat.getMeleeWeaponList();
-        let range: string[] = terra.g_player.combat.getRangedWeaponList();
-        let elem: number = terra.g_player.combat.getTotalElementsUnlocked();
-
-        // TODO maybe do that on setup
-        // Equip weapons manually (with duplicates) if not enough weapons available to fill all slots
-        if (melee.length < 2 || range.length < 2) {  // TODO elem instead of 2
-            terra.g_player.combat.setLoadout(0);
-
-            let state: LoadState = {  // Force duplicates on the loadout
-                melee: [melee[0], melee[0], melee[0], melee[0]],
-                ranged: [range[0], range[0], range[0], range[0]]
-            };
-            for (let i = 0; i < terra.g_player.combat.loadouts.length; i++) {
-                terra.g_player.combat.loadouts[i].setState(state);
-            }
-            terra.g_player.combat.setLoadout(1);  // Reload loadout 0 so the weapons get equipped on the new element
-            terra.g_player.combat.setLoadout(0);
-        }
-        else {
-            terra.g_player.autoEquipWeapons();  // This is what the game usually does
-        }
+        terra.g_player.setCore(elemID, true);
     }
         // TODO Items for party members
         //else if (item_data.name.startsWith("PARTY:")) {
@@ -82,14 +56,6 @@ export function giveGameItem(item: Item) {
         terra.g_plot.progressPlotToStateC("ap_lyhamn", "cl1");  // TODO Progress "ap_" + area
     }
     else if (item_data.name == "test") {
-        //terra.g_plot.progressPlotToStateC("ch1c", "goToRemisRock");
-        //let party_data = new PartyMember();
-        //let member_data = party_data.get("filia");
-        //terra.g_party.addPartyMember(member_data);
-
-        terra.g_plot.progressPlotToStateC("ch2b", "traineeFlashback");
-        //terra.g_scene.teleport("start.north.north-03-dungeon", "");
-        connect_menu.getInput();
     }
     else {
         terra.g_player.inventory.addItem(item_data.name, item_data.qty);

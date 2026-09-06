@@ -55,6 +55,7 @@ function modifyTag(tagKey: string): [boolean, boolean] {
         return [false, false]
     }
     // Valley bridges
+    // TODO BR1 also quickwood quest ? Messes with combat
     if (["BR1", "BRG"].includes(tagKey)) {
         return [true, terra.g_plot.checkPlotStateC("ap_bridges", "received")]
     }
