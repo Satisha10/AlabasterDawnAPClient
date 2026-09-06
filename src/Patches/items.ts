@@ -4,12 +4,6 @@ import {addMessage, addDebug} from "../doc";
 import {loc_game_name_id} from "../location_gamename_id";
 import {client, item_flags} from "../client";
 
-export class ItemTracker extends Injectable(PlayerInventory) {
-    addItem(key: string, quantity = 1, skipHUD = false, skipEvent = false, ...args: unknown[]) {
-        addDebug(`Received item ${key} times ${quantity}, skipHUD ${skipHUD}, skipEvent ${skipEvent}`);
-        return super.addItem(key, quantity, skipHUD, skipEvent, ...args);
-    }
-}
 
 export class ElementTracker extends Injectable(PlayerModel) {
     setCore(type: number, state: boolean, ...args: unknown[]) {

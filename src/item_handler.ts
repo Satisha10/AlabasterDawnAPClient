@@ -2,7 +2,7 @@ import {terra} from "@project-selene/api";
 import {Item} from "archipelago.js";
 
 import {addMessage, addDebug} from "./doc";
-import {item_name_data} from "./item_name_gamedata";
+import {item_name_data} from "./item_id_gamedata";
 import {item_flags, client_data} from "./client";
 
 import {connect_menu} from "./connect_menu";
@@ -13,7 +13,7 @@ type LoadState = {
 }
 
 export function giveGameItem(item: Item) {
-    let item_data = item_name_data.get(item.name);
+    let item_data = item_name_data.get(item.id);
     if (!item_data) {
         addMessage("Warning: Unknown item name received: " + item.name);
         return;

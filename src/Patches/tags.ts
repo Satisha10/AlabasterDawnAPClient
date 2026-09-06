@@ -1,6 +1,5 @@
 import {GameMap} from "@project-selene/api/terra";
 import {Injectable, terra} from "@project-selene/api";
-import {addDebug, addMessage} from "../doc";
 
 export class MapTags extends Injectable(GameMap) {
     updateTags() {
@@ -41,7 +40,6 @@ function modifyTag(tagKey: string): [boolean, boolean] {
         else {
             map = terra.g_game.map.active?.path;
         }
-        addMessage(`Map; ${map} load: ${terra.g_game.map.loading?.path}`)
         if (map == undefined) {
             return [false, false]
         }
