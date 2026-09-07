@@ -1,0 +1,310 @@
+[
+  {
+    "op": "replace",
+    "path": "/entities/359/states",
+    "value": [
+      {
+        "interactType": "NONE"
+      },
+      {
+        "condition": "$p.has.grandPass.showKama",
+        "collType": "FENCE",
+        "permaFx": "FX:interact.altar#on",
+        "event": [
+          {
+            "type": "DO_ACTION",
+            "action": [
+              {
+                "type": "NAV_TO",
+                "maxTime": 10,
+                "precise": true,
+                "slowDist": 3,
+                "target": [
+                  113.5,
+                  114,
+                  6
+                ]
+              },
+              {
+                "type": "FACE_TO_DIR",
+                "direction": "NORTH"
+              }
+            ],
+            "entity": {
+              "char": "CHA:main#Filia"
+            }
+          },
+          {
+            "type": "DO_ACTION",
+            "action": [
+              {
+                "type": "NAV_TO",
+                "maxTime": 10,
+                "precise": true,
+                "slowDist": 3,
+                "target": [
+                  112,
+                  112,
+                  6
+                ]
+              },
+              {
+                "type": "FACE_TO_DIR",
+                "direction": "NORTH"
+              },
+              {
+                "type": "SHOW_ANIMATION",
+                "animation": "chestSign"
+              },
+              {
+                "type": "WAIT_UNTIL_HOOK_READY",
+                "hook": "HOOK_1"
+              }
+            ],
+            "entity": {
+              "player": 1
+            },
+            "keepStateAfter": true
+          },
+          {
+            "type": "SET_CAMERA_TARGET",
+            "speed": 3,
+            "target": [
+              112,
+              113,
+              9
+            ],
+            "zoom": 1.5
+          },
+          {
+            "type": "WAIT",
+            "time": 0.5
+          },
+          {
+            "type": "WAIT_UNTIL_ACTION_DONE",
+            "entity": {
+              "player": 1
+            }
+          },
+          {
+            "type": "SPAWN_FX",
+            "duration": -1,
+            "effect": "FX:interact.altar#weaponAbsorb",
+            "target": {
+              "ent": "named",
+              "key": "kama",
+              "align": "CENTER"
+            },
+            "target2": {
+              "ent": "player",
+              "align": "CENTER"
+            }
+          },
+          {
+            "type": "WAIT",
+            "time": 1.2
+          },
+          {
+            "type": "DO_ACTION",
+            "action": [
+              {
+                "type": "SHOW_ANIMATION",
+                "animation": "chestSign2"
+              }
+            ],
+            "entity": {
+              "player": 1
+            },
+            "keepStateAfter": true,
+            "keepStateBefore": true
+          },
+          {
+            "type": "WAIT",
+            "time": 0.3
+          },
+          {
+            "type": "PROGRESS_PLOT",
+            "plotState": "grandPass.gotKama"
+          },
+          {
+            "type": "SPAWN_FX",
+            "effect": "FX:interact.altar#weaponGet",
+            "target": {
+              "ent": "player",
+              "align": "CENTER"
+            }
+          },
+          {
+            "type": "WAIT",
+            "time": 1
+          },
+          {
+            "type": "SET_CAMERA_TARGET",
+            "speed": 3,
+            "target": {
+              "ent": "player",
+              "align": "CENTER"
+            },
+            "zoom": 1.5
+          },
+          {
+            "type": "DO_ACTION",
+            "action": [
+              {
+                "type": "TURN_TO",
+                "target": {
+                  "ent": "char",
+                  "key": "CHA:main#Juno"
+                }
+              }
+            ],
+            "entity": {
+              "char": "CHA:main#Filia"
+            }
+          },
+          {
+            "type": "DO_ACTION",
+            "action": [
+              {
+                "type": "CLEAR_ANIMATION"
+              },
+              {
+                "type": "WAIT",
+                "time": 0.2
+              },
+              {
+                "type": "FACE_TO_DIR",
+                "direction": "WEST"
+              },
+              {
+                "type": "SHOW_ANIMATION",
+                "animation": "swordReadyPre"
+              },
+              {
+                "type": "WAIT",
+                "time": 0.3
+              },
+              {
+                "type": "SPAWN_FX",
+                "detached": true,
+                "effect": "FX:interact.altar#weaponShowFast",
+                "part": "PART_7",
+                "target": {
+                  "ent": "player",
+                  "align": "HOOK_1",
+                  "off": [
+                    0,
+                    0,
+                    -0.5
+                  ]
+                }
+              },
+              {
+                "type": "ATTACH_FIGURE",
+                "figure": "FIG:weapon.player-weapon#kama",
+                "name": "sword"
+              },
+              {
+                "type": "WAIT",
+                "time": 2.5
+              },
+              {
+                "type": "SHOW_ANIMATION",
+                "animation": "swordReady"
+              },
+              {
+                "type": "WAIT",
+                "time": 0.5
+              }
+            ],
+            "entity": {
+              "player": 1
+            },
+            "keepStateAfter": true
+          },
+          {
+            "type": "SET_CAMERA_TARGET",
+            "speed": 1.8,
+            "target": {
+              "ent": "player",
+              "align": "CENTER"
+            },
+            "wait": true,
+            "zoom": 2
+          },
+          {
+            "type": "SET_CAMERA_TARGET",
+            "speed": 1,
+            "spline": "EASE_OUT",
+            "target": {
+              "ent": "player",
+              "align": "CENTER"
+            },
+            "zoom": 1.5
+          },
+          {
+            "type": "WAIT",
+            "ignoreSlowDown": true,
+            "time": 0.5
+          },
+          {
+            "type": "ADD_SLOW_MOTION",
+            "fadeIn": 1,
+            "fadeOut": 1,
+            "timeFactor": 0
+          },
+          {
+            "type": "WAIT",
+            "ignoreSlowDown": true,
+            "time": 1
+          },
+          {
+            "type": "PLAY_SOUND",
+            "settings": {
+              "playback": {},
+              "speed": 0.62,
+              "type": "GAMEPLAY",
+              "volume": 0.76
+            },
+            "sound": "media/audio/sfx/menu/gem-equip-minor.wav",
+            "pos": "global"
+          },
+          {
+            "type": "SHOW_WEAPON_GET",
+            "description": {
+              "en_US": "- Divine Kama of Basil -\n\n\"A kama to connect people and pave the way to progress\"\n\n",
+              "langID": 51
+            },
+            "weapon": "kama"
+          },
+          {
+            "type": "CLEAR_SLOW_MOTION"
+          },
+          {
+            "type": "WAIT",
+            "ignoreSlowDown": true,
+            "time": 1.5
+          },
+          {
+            "type": "SET_PLAYER_WEAPON_UNLOCK",
+            "unlock": true,
+            "weapon": "kama"
+          }
+        ],
+        "interactType": "GRAB"
+      }
+    ],
+    "tags": [
+      "!Nat"
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/entities/359/spawnCond",
+    "value": "$p.has.grandPass.showKama"
+  },
+  {
+    "op": "remove",
+    "path": "/entities/358"
+  }
+]

@@ -31,8 +31,15 @@ export function initializeFile() {
     terra.g_player.setCore(20, true);
     terra.g_player.setCore(21, true);
     terra.g_player.setCore(22, true);
+    terra.g_player.setCore(23, true);
+    terra.g_player.setCore(24, true);
+    terra.g_player.setCore(25, true);
+    //terra.g_player.setCore(26, true);
+    //terra.g_player.setCore(27, true);
+    //terra.g_player.setCore(28, true);
 
     terra.g_player.inventory.addItem("speed-run")
+    terra.g_player.inventory.toggleRelic("speed-run")
 
     //let melee: string[] = terra.g_player.combat.getMeleeWeaponList();
     //let range: string[] = terra.g_player.combat.getRangedWeaponList();
@@ -53,6 +60,8 @@ export function initializeFile() {
     }
     terra.g_player.combat.setLoadout(1);  // Reload loadout 0 so the weapons get equipped
     terra.g_player.combat.setLoadout(0);
+
+    terra.g_plot.progressPlotToStateC("filia-dmg", "full");
 
     item_flags.is_init = false;
 }
