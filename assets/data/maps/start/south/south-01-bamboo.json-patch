@@ -72,7 +72,7 @@
         "interactType": "NONE"
       },
       {
-        "condition": "$p.is.quickwood.hammerShow",
+        "condition": "$p.has.quickwood.hammerShow",
         "collType": "FENCE",
         "permaFx": "FX:interact.altar#on",
         "event": [
@@ -326,5 +326,13 @@
         "interactType": "GRAB"
       }
     ]
+  },
+  {
+    "op": "remove",
+    "path": "/entities/980/endEvent/-2"
+  },
+  {
+    "op": "remove",
+    "path": "/entities/968/switch/event/-1"
   }
 ]

@@ -306,5 +306,9 @@
   {
     "op": "remove",
     "path": "/entities/358"
+  },
+  {
+    "op": "remove",
+    "path": "/entities/359/states/-1"
   }
 ]

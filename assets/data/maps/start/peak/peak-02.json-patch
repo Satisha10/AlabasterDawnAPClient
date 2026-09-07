@@ -301,5 +301,13 @@
   {
     "op": "remove",
     "path": "/entities/90"
+  },
+  {
+    "op": "remove",
+    "path": "/entities/89/endEvent/-1"
+  },
+  {
+    "op": "remove",
+    "path": "/entities/2004"
   }
 ]
