@@ -8,7 +8,8 @@
 - `start.north.north-03-dungeon`: Remove the condition for Filia to join.
 - `start.north.north-02-bridge` and `hub.south.south-06-bridge`: Modify the trigger for enabling the boat to an AP item, triggered through the `ap_boat` plot.
 - `start.center.center-06`: patch to the `quickwood` quest: skip the end cutscene (that softlocks), prevent the crumbling platforms from disappearing, and require the combat to finish the quest (and this combat also requires the first part of the quest to trigger)
-- `start.south.south-01-bamboo`: remove a Nyx barrier so you can leave after the fight if you don't have Blunt. Also added a sign to tell players that the west bridge also requires CL1 (due to unlocking a CL1 quest).
+- `start.south.south-01-bamboo`: added a sign to tell players that the west bridge also requires CL1 (due to unlocking a CL1 quest).
+- `start.north.north-04-bridge-island`, `start.peak.peak-02`, `start.south.south-01-bamboo`: patch getting the weapon: remove the barrier, make the pedestal permanent, don't equip the weapon, remove the gui/task messages that persist on the screen.
 
 ## Plots
 
@@ -20,3 +21,4 @@ The main plot progress is set to the end by the client on initialization.
 - Separate the Aether Dungeon from the main plot.
 - Split the Aether Dungeon plot into two parts, so progressing on the second part doesn't skip the first one.
 - Change the combat level of all areas.
+- Remove the teleporter restrictions after getting a weapon or during some quest sequences.

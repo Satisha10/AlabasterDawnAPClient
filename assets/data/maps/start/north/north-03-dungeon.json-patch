@@ -7,6 +7,13 @@
     ]
   },
   {
+    "op": "replace",
+    "path": "/entities/1456/tags",
+    "value": [
+      "APTIDE"
+    ]
+  },
+  {
     "op": "add",
     "path": "/tags/APTIDE",
     "value": {

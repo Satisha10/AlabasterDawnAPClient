@@ -129,6 +129,14 @@
     "path": "/plots/quickwood/states/platformsCrumbling/mobilityBlock"
   },
   {
+    "op": "remove",
+    "path": "/plots/silverPeak/states/platformsCrumbling/mobilityBlock"
+  },
+  {
+    "op": "remove",
+    "path": "/plots/grandPass/states/showKama/mobilityBlock"
+  },
+  {
     "op": "replace",
     "path": "/combat/3",
     "value": {
