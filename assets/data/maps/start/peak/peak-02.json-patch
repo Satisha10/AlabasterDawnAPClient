@@ -304,7 +304,7 @@
   },
   {
     "op": "remove",
-    "path": "/entities/89/endEvent/-1"
+    "path": "/entities/89/endEvent/20"
   },
   {
     "op": "remove",

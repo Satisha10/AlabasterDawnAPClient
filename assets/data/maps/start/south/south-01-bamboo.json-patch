@@ -329,10 +329,10 @@
   },
   {
     "op": "remove",
-    "path": "/entities/980/endEvent/-2"
+    "path": "/entities/980/endEvent/28"
   },
   {
     "op": "remove",
-    "path": "/entities/968/switch/event/-1"
+    "path": "/entities/968/switch/event/19"
   }
 ]

@@ -125,12 +125,22 @@
     "value": []
   },
   {
+    "op": "replace",
+    "path": "/plots/filia-dmg/states/little/condition",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/plots/filia-dmg/states/medium/condition",
+    "value": []
+  },
+  {
     "op": "remove",
     "path": "/plots/quickwood/states/platformsCrumbling/mobilityBlock"
   },
   {
     "op": "remove",
-    "path": "/plots/silverPeak/states/platformsCrumbling/mobilityBlock"
+    "path": "/plots/silverPeak/states/chakramShow/mobilityBlock"
   },
   {
     "op": "remove",

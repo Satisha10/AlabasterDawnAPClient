@@ -299,16 +299,7 @@
     ]
   },
   {
-    "op": "replace",
-    "path": "/entities/359/spawnCond",
-    "value": "$p.has.grandPass.showKama"
-  },
-  {
     "op": "remove",
     "path": "/entities/358"
-  },
-  {
-    "op": "remove",
-    "path": "/entities/359/states/-1"
   }
 ]
