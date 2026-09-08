@@ -38,8 +38,11 @@ export function initializeFile() {
     //terra.g_player.setCore(27, true);
     //terra.g_player.setCore(28, true);
 
-    terra.g_player.inventory.addItem("speed-run")
-    terra.g_player.inventory.toggleRelic("speed-run")
+    // Quality of life relics
+    terra.g_player.inventory.addItem("speed-run");
+    terra.g_player.inventory.addItem("loadout-ext-1");
+    terra.g_player.inventory.addItem("loadout-ext-2");
+    terra.g_player.inventory.toggleRelic("speed-run");
 
     //let melee: string[] = terra.g_player.combat.getMeleeWeaponList();
     //let range: string[] = terra.g_player.combat.getRangedWeaponList();

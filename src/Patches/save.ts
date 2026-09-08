@@ -32,12 +32,14 @@ export class SaveAPData extends Injectable(SaveFile) {
 export class LoadTracker extends Injectable(Game) {
     onLoadingComplete(...args: unknown[]) {
         let result = super.onLoadingComplete(...args);
+        connect_menu.hide();  // Hide the connect menu immediately, don't wait until the game is fully loaded
         if (is_new_game != 0) {
-            if (is_new_game == 3) {
-                initializeFile();
-                is_new_game = -1  // Set it back to 0, since there is a +1 just below
+            if (is_new_game != 3) {  // New game requires a few loads before behaving well with applying rando changes
+                is_new_game += 1;
+                return result;
             }
-            is_new_game += 1;
+            initializeFile();
+            is_new_game = 0
         }
         // TODO check seed and slot_name
         if (this.state == GAME_STATE.RUNNING) {
@@ -49,7 +51,6 @@ export class LoadTracker extends Injectable(Game) {
             client_data.is_loaded = false;
         }
 
-        connect_menu.hide();  // Hide the connect menu immediately, don't wait until the game is fully loaded
         return result;
     }
 }
