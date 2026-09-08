@@ -309,10 +309,6 @@
           "offFlags": [],
           "onFlags": []
         }
-      },
-      "flags": {
-        "chestBarrier1": {},
-        "chestBarrier2": {}
       }
     }
   },
@@ -477,6 +473,8 @@
       },
       "flags": {
         "shortcut1": {},
+        "chestBarrier1": {},
+        "chestBarrier2": {},
         "chestBarrier3": {},
         "bonusBattle1": {
           "info": "room-02b bonus battle with chest reward"

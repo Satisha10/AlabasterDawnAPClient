@@ -56,10 +56,18 @@ function modifyTag(tagKey: string): [boolean, boolean] {
     }
     // Valley bridges
     // TODO BR1 also quickwood quest ? Messes with combat
-    if (["BR1", "BRG", "br1"].includes(tagKey)) {
+    if (["BRG", "br1"].includes(tagKey)) {
         return [true, terra.g_plot.checkPlotStateC("ap_bridges", "received")]
     }
-    // Quickwood quest
+    // Start.center.center-06: also require finishing quickwood
+    if (tagKey == "BR1") {
+        return [
+            true,
+            terra.g_plot.checkPlotStateC("ap_bridges", "received")
+                && terra.g_plot.checkPlotStateC("quickwood", "end")
+        ]
+    }
+    // Start.south.south-01-bamboo: also require quickwood and CL1
     if (tagKey == "BRD") {
         return [
             true,
