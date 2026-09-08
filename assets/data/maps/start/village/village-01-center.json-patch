@@ -2,5 +2,48 @@
   {
     "op": "remove",
     "path": "/entities/2346"
+  },
+  {
+    "op": "add",
+    "path": "/entities/40000",
+    "value": {
+      "type": "CharSpot",
+      "pos": [
+        33.25,
+        64.5,
+        -4
+      ],
+      "name": "smith1",
+      "char": "CHA:south#Blacksmith-petros",
+      "speed": "WALKING",
+      "clone": true,
+      "event": [
+        {
+          "type": "TALK",
+          "char": "CHA:main#Juno>normal",
+          "pos": "RIGHT"
+        },
+        {
+          "type": "TALK",
+          "char": "CHA:south#Blacksmith-petros>default",
+          "message": {
+            "en_US": "Want me to give this hammer a swing at your divine gear?",
+            "langID": 625
+          },
+          "pos": null
+        },
+        {
+          "type": "CALL_MAP_EVENT",
+          "entity": {
+            "named": "callSmithCraftingDefault"
+          }
+        }
+      ],
+      "face": "SOUTH",
+      "interact": "TALK",
+      "tags": [
+        "!CL1"
+      ]
+    }
   }
 ]
