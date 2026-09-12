@@ -30,6 +30,7 @@ export function giveGameItem(item: Item) {
         let elemID = Number(item_data.name.substring("ELEMENT:".length));
         item_flags.gaveElem(elemID);
         terra.g_player.setCore(elemID, true);
+        equipWeaponsForElement(elemID)
     }
         // TODO Items for party members
         //else if (item_data.name.startsWith("PARTY:")) {
@@ -69,4 +70,21 @@ function display_item_message(item_name: string, sender: string) {
     } else {
         addMessage(`Received ${item_name} from ${sender}`);
     }
+}
+
+
+export function equipWeaponsForElement(elemID: number) {
+    let currentLoadout: number = terra.g_player.combat.currentLoadout;
+    let eleIndexMap = new Map([[14, 0], [15, 1], [16, 2], [17, 3]]);
+    let eleIndex = eleIndexMap.get(elemID);
+    if (eleIndex == undefined) {
+        addMessage(`Unknown element number ${elemID} used in equipWeaponsForElement.`);
+        return;
+    }
+    for (let i = 0; i < terra.g_player.combat.loadouts.length; i++) {
+        terra.g_player.combat.setLoadout((i + currentLoadout) % terra.g_player.combat.loadouts.length);
+        terra.g_player.combat.equipWeapon(eleIndex, "sword", true);  // TODO use spawn weapons
+        terra.g_player.combat.equipWeapon(eleIndex, "crossbow", true);
+    }
+    terra.g_player.combat.setLoadout(currentLoadout);
 }

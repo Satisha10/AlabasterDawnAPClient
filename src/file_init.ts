@@ -1,10 +1,6 @@
 import {terra} from "@project-selene/api";
 import {item_flags} from "./client";
-
-type LoadState = {
-    melee: string[];
-    ranged: string[];
-}
+import {equipWeaponsForElement} from "./item_handler";
 
 // TODO Fix main quests skipped and bridges repaired
 export function initializeFile() {
@@ -44,25 +40,12 @@ export function initializeFile() {
     terra.g_player.inventory.addItem("loadout-ext-2");
     terra.g_player.inventory.toggleRelic("speed-run");
 
-    //let melee: string[] = terra.g_player.combat.getMeleeWeaponList();
-    //let range: string[] = terra.g_player.combat.getRangedWeaponList();
-
     terra.g_player.combat.setLoadout(0);
 
     terra.g_player.combat.setWeaponUnlock("sword", true);
     terra.g_player.combat.setWeaponUnlock("crossbow", true);
 
-    // Create the loadouts with duplicates, so there are weapons equipped for every element even if there are not
-    // enough different weapons to fill all slots.
-    let state: LoadState = {
-        melee: ["sword", "sword", "sword", "sword"],
-        ranged: ["crossbow", "crossbow", "crossbow", "crossbow"],
-    }
-    for (let i = 0; i < terra.g_player.combat.loadouts.length; i++) {
-        terra.g_player.combat.loadouts[i].setState(state);
-    }
-    terra.g_player.combat.setLoadout(1);  // Reload loadout 0 so the weapons get equipped
-    terra.g_player.combat.setLoadout(0);
+    equipWeaponsForElement(14);
 
     terra.g_plot.progressPlotToStateC("filia-dmg", "full");
 
