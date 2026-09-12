@@ -1,4 +1,4 @@
-import {Client, Item, ItemsManager} from "archipelago.js";
+import {Client, Item, ItemsManager, SocketManager} from "archipelago.js";
 import {addDebug, addMessage} from "./doc";
 import {giveGameItem} from "./item_handler";
 
@@ -6,8 +6,10 @@ import {giveGameItem} from "./item_handler";
 export const client = new Client();
 export const items_manager = new ItemsManager(client);
 
-
+// TODO location check packets with printJSON: show message + remove from stashed locations
 // TODO refactor: extend Client, and add a connect/disconnect method
+
+// Add callbacks to the websocket client
 export function init_client(url: string | null = null, name: string | null = null, password : string | null = null) {
     // TODO Connect when save loaded
     // TODO Datapackage
@@ -25,12 +27,35 @@ export function init_client(url: string | null = null, name: string | null = nul
             client_data.slot_name = connName;
             client_data.password  = connPassword;
         })
+        // TODO show error message
         .catch(() => addMessage(`Connection failed (url: ${connUrl}, Slot name: ${connName})`));
 
+    // Handle received items
     items_manager.on("itemsReceived", () => {
         client_data.giveStashedItems();
     });
+
+    // Warn when lost connection.
+    client.socket.on("disconnected", () => {
+        addMessage("Lost connection to the AP server");
+    });
+
+    // Show sent items
+    client.socket.on("printJSON", (packet) => {
+        if (packet.type == "ItemSend" || packet.type == "ItemCheat") {
+            // Only display if the item is not a local item, and comes from this game
+            if (packet.receiving != client_data.slot_id && packet.item.player == client_data.slot_id) {
+                let game = client.players.slots[packet.receiving].game;
+                let item_name = client.package.lookupItemName(game, packet.item.item)
+                let player_name = client.players.slots[packet.receiving].name;  // TODO use alias instead
+                addMessage(`Sent ${item_name} to ${player_name}`);
+                client_data.checked_locations.delete(packet.item.location);  // The location got sent to the server
+            }
+        }
+        // TODO handle other messages, and use helpers to facilitate getting game, item_name...
+    });
 }
+
 
 
 class ClientData {
@@ -39,6 +64,7 @@ class ClientData {
     password: string;
 
     alias: string;
+    slot_id: number;
     last_item_index: number;  // Last item index received by the player. The index is reset to last_saved_index on death
     last_saved_index: number;  // Last item index that got saved (always equal or lower than last_item_index)
     is_loaded: boolean;
@@ -51,6 +77,7 @@ class ClientData {
         this.password = "";
 
         this.alias = "Player1";
+        this.slot_id = 0;  // TODO initialize on connection
 
         this.last_item_index = 0;
         this.last_saved_index = 0;
@@ -84,9 +111,16 @@ class ClientData {
         if (!client.authenticated || !this.is_loaded) {
             return;
         }
+        this.sendStashedLocations();
+    }
+
+    sendStashedLocations() {
         for (const location of this.checked_locations) {
             if (client.room.missingLocations.includes(location)) {
                 client.check(location);
+            }
+            else {
+                this.checked_locations.delete(location);  // TODO see if it's fine to delete while in the loop
             }
         }
     }

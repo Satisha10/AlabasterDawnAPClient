@@ -1,7 +1,17 @@
 import {Injectable} from "@project-selene/api"
-import {SaveFile, Game, TitleMenu, BUT_DATA_KEYS, Dialogs, Analytics, SceneManager, GAME_STATE} from "@project-selene/api/terra"
+import {
+    Analytics,
+    BUT_DATA_KEYS,
+    Dialogs,
+    Game,
+    GAME_STATE,
+    LoadMenu,
+    SaveFile,
+    SceneManager,
+    TitleMenu
+} from "@project-selene/api/terra"
 import {client, client_data} from "../client";
-import {addMessage, addDebug} from "../doc";
+import {addDebug, addMessage} from "../doc";
 import {initializeFile} from "../file_init";
 import {connect_menu} from "../connect_menu";
 
@@ -17,17 +27,23 @@ export class SaveAPData extends Injectable(SaveFile) {
     //  and try to connect before loading the game (else abort with a message)
     //  Use ModalButtonDialog to make the messages with more config than Dialogs
     loadData(...args: unknown[]) {
-        let data: any = super.loadData(...args);
-        if (data.hasOwnProperty("ap_data")) {
-            client_data.importState(data["ap_data"]);
-            addDebug("Loaded data");
-        }
-        else {
-            addMessage("Could not read ap_data from the save file.")
-        }
-        return data;
+        return super.loadData(...args).then(() => {
+            if (this.data) {
+                addDebug("Data exists")
+            }
+            else {
+                addDebug("Data empty")
+            }
+            if (this.data.hasOwnProperty("ap_data")) {
+                client_data.importState(this.data["ap_data"]);
+                addDebug("Loaded data");
+            } else {
+                addMessage("Could not read ap_data from the save file.")
+            }
+        });
     }
 }
+
 
 export class LoadTracker extends Injectable(Game) {
     onLoadingComplete(...args: unknown[]) {
@@ -45,6 +61,7 @@ export class LoadTracker extends Injectable(Game) {
         if (this.state == GAME_STATE.RUNNING) {
             client_data.is_loaded = true;
             client_data.giveStashedItems();
+            client_data.sendStashedLocations()
             addDebug("Loading completed");
         }
         else {
@@ -63,16 +80,43 @@ export class NewGameButton extends Injectable(TitleMenu) {
         if (!button)
             return;
         const key = button.getData(BUT_DATA_KEYS.KEY);
-        if (key == "START" && !client.authenticated) {
+        if (key == "START") {
+            if (!client.authenticated) {
+                // @ts-ignore
+                Dialogs.showInfo("You cannot start a new game without being connected to a multiworld !")
+            }
+            else {
+                is_new_game = 1;
+                return super.onLayoutClick(button, ...args);
+            }
+        }
+        else if (key == "CONTINUE") {
+            if (!client.authenticated) {
+                // TODO read file
+                // @ts-ignore
+                Dialogs.showInfo("You (currently) cannot load a game without being connected to a multiworld !")  // TODO: connect, show info, callback cancel
+            }
+            else {
+                return super.onLayoutClick(button, ...args);
+            }
+        }
+
+    }
+}
+
+
+export class LoadFile extends Injectable(LoadMenu) {
+    onLayoutClick(...args: unknown[]) {
+        if (!client.authenticated) {
             // @ts-ignore
-            Dialogs.showInfo("You cannot start a new game without being connected to a multiworld !")
+            Dialogs.showInfo("You (currently) cannot load a game without being connected to a multiworld !")  // TODO: connect, show info, callback cancel
         }
         else {
-            is_new_game = 1;
-            return super.onLayoutClick(button, ...args);
+            return super.onLayoutClick(...args);
         }
     }
 }
+
 
 export class RemoveAnalytics extends Injectable(Analytics) {
     isTrackingAllowed(...args: unknown[]) {
