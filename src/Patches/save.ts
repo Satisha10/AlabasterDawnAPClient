@@ -1,4 +1,4 @@
-import {Injectable} from "@project-selene/api"
+import {Injectable, terra} from "@project-selene/api"
 import {
     Analytics,
     BUT_DATA_KEYS,
@@ -20,34 +20,24 @@ export class SaveAPData extends Injectable(SaveFile) {
     saveData(...args: unknown[]) {
         this.data["ap_data"] = client_data.exportState();
         addDebug("Saved data")
+        addDebug(`${client_data.last_item_index}`)
         return super.saveData(...args);
     }
     // TODO maybe use continue button hook,
     //  load save using g_storage.getLastSave + g_storage.load(id)
     //  and try to connect before loading the game (else abort with a message)
     //  Use ModalButtonDialog to make the messages with more config than Dialogs
-    loadData(...args: unknown[]) {
-        return super.loadData(...args).then(() => {
-            if (this.data) {
-                addDebug("Data exists")
-            }
-            else {
-                addDebug("Data empty")
-            }
-            if (this.data.hasOwnProperty("ap_data")) {
-                client_data.importState(this.data["ap_data"]);
-                addDebug("Loaded data");
-            } else {
-                addMessage("Could not read ap_data from the save file.")
-            }
-        });
-    }
 }
 
 
 export class LoadTracker extends Injectable(Game) {
     onLoadingComplete(...args: unknown[]) {
         let result = super.onLoadingComplete(...args);
+        if (terra.g_storage.system?.data?.hasOwnProperty("ap_data")) {
+            client_data.importState(terra.g_storage.system.data.ap_data);
+            addDebug(`Import state. ${client_data.last_item_index}`)
+        }
+
         connect_menu.hide();  // Hide the connect menu immediately, don't wait until the game is fully loaded
         if (is_new_game != 0) {
             if (is_new_game != 3) {  // New game requires a few loads before behaving well with applying rando changes
@@ -97,10 +87,16 @@ export class NewGameButton extends Injectable(TitleMenu) {
                 Dialogs.showInfo("You (currently) cannot load a game without being connected to a multiworld !")  // TODO: connect, show info, callback cancel
             }
             else {
+                if (terra.g_storage.system?.data?.hasOwnProperty("ap_data")) {
+                    // Second load: the data is already loaded
+                    client_data.importState(terra.g_storage.system.data.ap_data);
+                }
                 return super.onLayoutClick(button, ...args);
             }
         }
-
+        else {
+            return super.onLayoutClick(button, ...args);
+        }
     }
 }
 

@@ -1,4 +1,4 @@
-import {Client, Item, ItemsManager, SocketManager} from "archipelago.js";
+import {Client, Item, ItemsManager, NetworkPlayer} from "archipelago.js";
 import {addDebug, addMessage} from "./doc";
 import {giveGameItem} from "./item_handler";
 
@@ -35,6 +35,14 @@ export function init_client(url: string | null = null, name: string | null = nul
         client_data.giveStashedItems();
     });
 
+    client.socket.on("connected", (packet) => {
+        client_data.slot_id = packet.slot;
+        for (let player of packet.players) {
+            client_data.player_map.set(player.slot, player);
+        }
+        client_data.alias = client_data.player_map.get(client_data.slot_id)?.alias
+    });
+
     // Warn when lost connection.
     client.socket.on("disconnected", () => {
         addMessage("Lost connection to the AP server");
@@ -47,9 +55,8 @@ export function init_client(url: string | null = null, name: string | null = nul
             if (packet.receiving != client_data.slot_id && packet.item.player == client_data.slot_id) {
                 let game = client.players.slots[packet.receiving].game;
                 let item_name = client.package.lookupItemName(game, packet.item.item)
-                let player_name = client.players.slots[packet.receiving].name;  // TODO use alias instead
-                addMessage(`Sent ${item_name} to ${player_name}`);
-                client_data.checked_locations.delete(packet.item.location);  // The location got sent to the server
+                let player_name = client_data.player_map.get(packet.receiving);
+                addMessage(`Sent ${item_name} to ${player_name?.alias}`);
             }
         }
         // TODO handle other messages, and use helpers to facilitate getting game, item_name...
@@ -57,19 +64,20 @@ export function init_client(url: string | null = null, name: string | null = nul
 }
 
 
-
 class ClientData {
     url: string;
     slot_name: string;
     password: string;
 
-    alias: string;
+    alias: string | undefined;
     slot_id: number;
+    player_map: Map<number, NetworkPlayer>;
+
     last_item_index: number;  // Last item index received by the player. The index is reset to last_saved_index on death
     last_saved_index: number;  // Last item index that got saved (always equal or lower than last_item_index)
     is_loaded: boolean;
 
-    checked_locations: Set<number>;
+    checked_locations: number[];
 
     constructor() {
         this.url = "ws://localhost:38281";  // TODO
@@ -77,12 +85,12 @@ class ClientData {
         this.password = "";
 
         this.alias = "Player1";
-        this.slot_id = 0;  // TODO initialize on connection
-
+        this.slot_id = 0;
+        this.player_map = new Map()
         this.last_item_index = 0;
         this.last_saved_index = 0;
         this.is_loaded = false;
-        this.checked_locations = new Set();  // TODO
+        this.checked_locations = [];
     }
 
     // TODO Regroup the two functions
@@ -107,7 +115,7 @@ class ClientData {
     }
 
     checkLocation(id: number) {
-        this.checked_locations.add(id);
+        this.checked_locations.push(id);
         if (!client.authenticated || !this.is_loaded) {
             return;
         }
@@ -115,14 +123,19 @@ class ClientData {
     }
 
     sendStashedLocations() {
+        addMessage("1");
+        addMessage(`${this.checked_locations.length} locations`);
+        let new_locs: number[] = []
         for (const location of this.checked_locations) {
+            addMessage(`Location: ${location}`);
             if (client.room.missingLocations.includes(location)) {
                 client.check(location);
-            }
-            else {
-                this.checked_locations.delete(location);  // TODO see if it's fine to delete while in the loop
+                if (!new_locs.includes(location)) {
+                    new_locs.push(location);
+                }
             }
         }
+        this.checked_locations = new_locs;
     }
 
     // Export data as an Object, to store it in the save file
@@ -143,11 +156,10 @@ class ClientData {
         this.url = data.url;
         this.slot_name = data.slot_name;
         this.password = data.password;
-        this.alias = data.alias;
         this.last_item_index = data.last_item_index;
-        if (!client.authenticated) {
-            init_client();
-        }
+        addMessage(`import check: ${data.checked_locations.size}`);
+        addMessage(`import check: ${data.checked_locations}`);
+        this.checked_locations = data.checked_locations;
     }
 
     reset_state() {
@@ -155,7 +167,7 @@ class ClientData {
         this.last_item_index = 0;
         this.last_saved_index = 0;
         this.is_loaded = false;
-        this.checked_locations.clear();
+        this.checked_locations = [];
     }
 
     on_death() {
