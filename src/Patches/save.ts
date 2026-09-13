@@ -26,8 +26,7 @@ export class SaveAPData extends Injectable(SaveFile) {
     saveData(...args: unknown[]) {
         if (this.id != -1000) {  // System data: don't save there
             this.data["ap_data"] = client_data.exportState();
-            addDebug("Saved data")
-            addDebug(`${client_data.last_item_index}`)
+            addDebug(`Saved data (ID: ${this.id}, index: ${client_data.last_item_index})`)
         }
         return super.saveData(...args);
     }
@@ -43,7 +42,6 @@ export class LoadTracker extends Injectable(Game) {
         let result = super.onLoadingComplete(...args);
         if (terra.g_storage.system?.data?.hasOwnProperty("ap_data") && should_load_data) {
             client_data.importState(terra.g_storage.system.data.ap_data);
-            addDebug(`Import state. ${client_data.last_item_index}`)
             should_load_data = false;
         }
 

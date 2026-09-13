@@ -1,5 +1,5 @@
 import {addMessage} from "./doc";
-import {init_client} from "./client";
+import {client_data, init_client} from "./client";
 
 
 class ConnectionMenu {
@@ -36,7 +36,10 @@ class ConnectionMenu {
 
         this.confirmButton.id = "button";
         this.confirmButton.textContent = "Connect";
-        this.confirmButton.addEventListener("click", () => {init_client()});
+        this.confirmButton.addEventListener("click", () => {
+            let conn_info = this.getInput();
+            client_data.connect(conn_info[0], conn_info[1], conn_info[2]);
+        });
 
         const textIP = document.createElement("div");
         const textName = document.createElement("div");

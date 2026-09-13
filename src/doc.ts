@@ -1,20 +1,21 @@
+import {is_debug} from "./main";
+
 export let container: HTMLDivElement;
 container = document.createElement('div');
 container.id = 'ap-logs';
 container.style.position = 'absolute';
-container.style.top = '30px';
+container.style.top = '130px';
 container.style.left = '30px';
 container.style.zIndex = '9999';
-container.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+container.style.backgroundColor = 'rgba(0, 0, 0, 0.4)';
 container.style.userSelect = 'none';
-container.style.fontSize = '14pt';
+container.style.fontSize = '15pt';
 container.inert = true;
 document.body.appendChild(container);
 
-let debug = true;
 
 export function addDebug(message: string) {
-    if (!debug) {
+    if (!is_debug) {
         return;
     }
     const msg = document.createElement('div');

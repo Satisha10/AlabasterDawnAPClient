@@ -4,25 +4,23 @@ import {addMessage, addDebug} from "../doc";
 import {client_data} from "../client";
 import {loc_game_name_id} from "../location_gamename_id"
 
+
+// Hide messages when checking a location
 export class SkipItemDialogs extends Injectable(ChestDatabase) {
-    runItemGetDialog(...args: unknown[]) {  // Don't show the item message
-        addDebug("Skipped ChestDatabase.runItemGetDialog");
+    runItemGetDialog(...args: unknown[]) {
     }
-    runWeaponGetDialog(...args: unknown[]) {  // Don't show the weapon message
-        addDebug("Skipped ChestDatabase.runWeaponGetDialog");
+    runWeaponGetDialog(...args: unknown[]) {
     }
-    runElementGetDialog(...args: unknown[]) {  // Don't show the weapon message
-        addDebug("Skipped ChestDatabase.runWeaponGetDialog");
+    runElementGetDialog(...args: unknown[]) {
     }
-    runSyncLevelUp(...args: unknown[]) {  // Don't show the weapon message
-        addDebug("Skipped ChestDatabase.runSyncLevelUp");
+    runSyncLevelUp(...args: unknown[]) {
     }
 }
 
 
 export class ChestPatch extends Injectable(Chest) {
     open(...args: unknown[]) {
-        addMessage(`Opened Chest ${this.key}`);
+        addDebug(`Opened Chest ${this.key}`);
         if (loc_game_name_id.has(this.key)) {
             client_data.checkLocation(<number>loc_game_name_id.get(this.key))
         }
@@ -30,6 +28,5 @@ export class ChestPatch extends Injectable(Chest) {
     }
 
     addItemContent(...args: unknown[]) {  // Don't give the chest items
-        addDebug(`Skip giving ${this.items[0].key}`);
     }
 }

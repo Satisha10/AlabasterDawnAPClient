@@ -10,26 +10,10 @@ export const items_manager = new ItemsManager(client);
 // TODO refactor: extend Client, and add a connect/disconnect method
 
 // Add callbacks to the websocket client
-export function init_client(url: string | null = null, name: string | null = null, password : string | null = null) {
+export function init_client() {
     // TODO Connect when save loaded
     // TODO Datapackage
-    // TODO last item index: save and load it on the save file
     // TODO Slot data
-
-    let connUrl = url == null ? client_data.url : url;
-    let connName = name == null ? client_data.slot_name : name;
-    let connPassword = password == null ? client_data.password : password;
-
-    client.login(connUrl, connName, "Alabaster Dawn", {password: connPassword})
-        .then(() => {
-            addMessage(`Connected to Archipelago as ${connName}`);
-            client_data.url = connUrl;
-            client_data.slot_name = connName;
-            client_data.password  = connPassword;
-        })
-        // TODO show error message
-        .catch(() => addMessage(`Connection failed (url: ${connUrl}, Slot name: ${connName})`));
-
     // Handle received items
     items_manager.on("itemsReceived", () => {
         client_data.giveStashedItems();
@@ -93,10 +77,31 @@ class ClientData {
         this.checked_locations = [];
     }
 
-    // TODO Regroup the two functions
+    // Connect to the multiworld with the given connection info (optional, otherwise use the ones from the instance.
+    connect(url: string | null = null, name: string | null = null, password : string | null = null) {
+        // TODO Connect when save loaded
+        // TODO Datapackage
+        // TODO last item index: save and load it on the save file
+        // TODO Slot data
+
+        let connUrl = url == null ? this.url : url;
+        let connName = name == null ? this.slot_name : name;
+        let connPassword = password == null ? this.password : password;
+
+        client.login(connUrl, connName, "Alabaster Dawn", {password: connPassword})
+            .then(() => {
+                addMessage(`Connected to Archipelago as ${connName}`);
+                this.url = connUrl;
+                this.slot_name = connName;
+                this.password = connPassword;
+            })
+            // TODO show error message
+            .catch(() => addMessage(`Connection failed (url: ${connUrl}, Slot name: ${connName})`));
+    }
+
+        // TODO Regroup the two functions
     handleItems(items: Item[]) {
         addDebug("Give items");
-        addDebug(`In ${this.last_item_index}`)
         if (!client.authenticated || !this.is_loaded) {
             return;
         }
@@ -107,7 +112,6 @@ class ClientData {
             giveGameItem(item);
             this.last_item_index += 1;
         }
-        addDebug(`Out: ${this.last_item_index}`)
     }
 
     giveStashedItems() {
@@ -123,11 +127,8 @@ class ClientData {
     }
 
     sendStashedLocations() {
-        addMessage("1");
-        addMessage(`${this.checked_locations.length} locations`);
         let new_locs: number[] = []
         for (const location of this.checked_locations) {
-            addMessage(`Location: ${location}`);
             if (client.room.missingLocations.includes(location)) {
                 client.check(location);
                 if (!new_locs.includes(location)) {
@@ -157,8 +158,6 @@ class ClientData {
         this.slot_name = data.slot_name;
         this.password = data.password;
         this.last_item_index = data.last_item_index;
-        addMessage(`import check: ${data.checked_locations.size}`);
-        addMessage(`import check: ${data.checked_locations}`);
         this.checked_locations = data.checked_locations;
     }
 
