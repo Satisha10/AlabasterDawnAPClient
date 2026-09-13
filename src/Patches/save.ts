@@ -40,8 +40,10 @@ export class SaveAPData extends Injectable(SaveFile) {
 export class LoadTracker extends Injectable(Game) {
     onLoadingComplete(...args: unknown[]) {
         let result = super.onLoadingComplete(...args);
-        if (terra.g_storage.system?.data?.hasOwnProperty("ap_data") && should_load_data) {
-            client_data.importState(terra.g_storage.system.data.ap_data);
+        let save_id = terra.g_storage.getLastSave();
+        addDebug(`Read data from ${save_id}`);
+        if (terra.g_storage.files[save_id].data?.hasOwnProperty("ap_data") && should_load_data) {
+            client_data.importState(terra.g_storage.files[save_id].data.ap_data);
             should_load_data = false;
         }
 
@@ -92,11 +94,6 @@ export class MenuButtons extends Injectable(TitleMenu) {
             }
             else {
                 should_load_data = true;
-                if (terra.g_storage.system?.data?.hasOwnProperty("ap_data")) {
-                    // Second load: the data is already loaded
-                    client_data.importState(terra.g_storage.system.data.ap_data);
-                    should_load_data = false;
-                }
                 return super.onLayoutClick(button, ...args);
             }
         }
