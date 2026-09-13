@@ -15,12 +15,20 @@ import {addDebug, addMessage} from "../doc";
 import {initializeFile} from "../file_init";
 import {connect_menu} from "../connect_menu";
 
+// If non-zero, count the number of times the loaded occurs, and only call initializeFile at a specific time
+let is_new_game = 0;
+
+// Flag to only load the AP data when needed (i.e. when opening a save file)
+let should_load_data = false;
+
 
 export class SaveAPData extends Injectable(SaveFile) {
     saveData(...args: unknown[]) {
-        this.data["ap_data"] = client_data.exportState();
-        addDebug("Saved data")
-        addDebug(`${client_data.last_item_index}`)
+        if (this.id != -1000) {  // System data: don't save there
+            this.data["ap_data"] = client_data.exportState();
+            addDebug("Saved data")
+            addDebug(`${client_data.last_item_index}`)
+        }
         return super.saveData(...args);
     }
     // TODO maybe use continue button hook,
@@ -33,9 +41,10 @@ export class SaveAPData extends Injectable(SaveFile) {
 export class LoadTracker extends Injectable(Game) {
     onLoadingComplete(...args: unknown[]) {
         let result = super.onLoadingComplete(...args);
-        if (terra.g_storage.system?.data?.hasOwnProperty("ap_data")) {
+        if (terra.g_storage.system?.data?.hasOwnProperty("ap_data") && should_load_data) {
             client_data.importState(terra.g_storage.system.data.ap_data);
             addDebug(`Import state. ${client_data.last_item_index}`)
+            should_load_data = false;
         }
 
         connect_menu.hide();  // Hide the connect menu immediately, don't wait until the game is fully loaded
@@ -62,10 +71,7 @@ export class LoadTracker extends Injectable(Game) {
     }
 }
 
-// If non-zero, count the number of times the loaded occurs, and only call initializeFile at a specific time
-let is_new_game = 0;
-
-export class NewGameButton extends Injectable(TitleMenu) {
+export class MenuButtons extends Injectable(TitleMenu) {
     onLayoutClick(button: any, ...args: unknown[]) {
         if (!button)
             return;
@@ -87,9 +93,11 @@ export class NewGameButton extends Injectable(TitleMenu) {
                 Dialogs.showInfo("You (currently) cannot load a game without being connected to a multiworld !")  // TODO: connect, show info, callback cancel
             }
             else {
+                should_load_data = true;
                 if (terra.g_storage.system?.data?.hasOwnProperty("ap_data")) {
                     // Second load: the data is already loaded
                     client_data.importState(terra.g_storage.system.data.ap_data);
+                    should_load_data = false;
                 }
                 return super.onLayoutClick(button, ...args);
             }
@@ -108,6 +116,7 @@ export class LoadFile extends Injectable(LoadMenu) {
             Dialogs.showInfo("You (currently) cannot load a game without being connected to a multiworld !")  // TODO: connect, show info, callback cancel
         }
         else {
+            should_load_data = true;
             return super.onLayoutClick(...args);
         }
     }

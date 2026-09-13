@@ -4,7 +4,7 @@ import {DishTracker} from "./Patches/dish";
 import {ElementTracker, WeaponTracker} from "./Patches/items";
 import {PlotCheck, PlotProgress, PlotCompleted} from "./Patches/plots";
 import {MapTags} from "./Patches/tags";
-import {SaveAPData, NewGameButton, LoadTracker, RemoveAnalytics, ReturnMenu, OnDeath, LoadFile} from "./Patches/save";
+import {SaveAPData, MenuButtons, LoadTracker, RemoveAnalytics, ReturnMenu, OnDeath, LoadFile} from "./Patches/save";
 import {MultiEquip} from "./Patches/weapon";
 
 export class Hooks {
@@ -18,7 +18,7 @@ export class Hooks {
         mod.inject(PlotProgress);
         mod.inject(MapTags);
         mod.inject(SaveAPData);
-        mod.inject(NewGameButton);
+        mod.inject(MenuButtons);
         mod.inject(LoadTracker);
         mod.inject(RemoveAnalytics);
         mod.inject(ReturnMenu);
