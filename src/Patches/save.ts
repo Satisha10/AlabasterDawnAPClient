@@ -42,7 +42,7 @@ export class LoadTracker extends Injectable(Game) {
         let result = super.onLoadingComplete(...args);
         let save_id = terra.g_storage.getLastSave();
         addDebug(`Read data from ${save_id}`);
-        if (terra.g_storage.files[save_id].data?.hasOwnProperty("ap_data") && should_load_data) {
+        if (terra.g_storage.files[save_id]?.data?.ap_data && should_load_data) {
             client_data.importState(terra.g_storage.files[save_id].data.ap_data);
             should_load_data = false;
         }

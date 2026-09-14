@@ -42,6 +42,20 @@ export function initializeFile() {
     terra.g_player.inventory.addItem("loadout-ext-2");
     terra.g_player.inventory.toggleRelic("speed-run");
 
+    terra.g_player.inventory.addItem("ration-basic");
+    terra.g_player.inventory.addItem("ration", 10);
+
+    terra.g_player.inventory.addItem("bp-mel-str");
+    terra.g_player.inventory.addItem("bp-rng-str");
+    terra.g_player.inventory.addItem("bp-up-maj-l-def");
+    terra.g_player.inventory.addItem("bp-mid-maj-l-off");
+    terra.g_player.inventory.addItem("bp-low-maj-l-def");
+    terra.g_player.inventory.addItem("bp-mel-crit");
+    terra.g_player.inventory.addItem("bp-rng-crit");
+    terra.g_player.inventory.addItem("bp-up-maj-l-off");
+    terra.g_player.inventory.addItem("bp-mid-maj-l-def");
+    terra.g_player.inventory.addItem("bp-low-maj-l-off");
+
     terra.g_player.combat.setLoadout(0);
 
     terra.g_player.combat.setWeaponUnlock("sword", true);
