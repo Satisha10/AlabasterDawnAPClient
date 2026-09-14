@@ -2,7 +2,7 @@
 // Check the `data_extractors` folder in the AP World source code at
 // https://github.com/Satisha10/Archipelago_wotw/tree/alabaster-dawn/worlds/alabaster_dawn/data_extractors
 // to see how to generate this file or to make modifications.
-// This file got generated in `item_maps.py` with `item_gamename_map`."""
+// This file got generated in `item_maps.py` with `item_id_gamename_map`."""
 
 type ItemData = {
     name: string;
@@ -124,26 +124,27 @@ export const item_name_data = new Map<number, ItemData>([
     [112, {name: "gartoffel-prapple", qty: 1}],
     [113, {name: "cloudberry-snack", qty: 1}],
     [114, {name: "frumato-rice", qty: 1}],
-    [115, {name: "chest-ess-1-whisper", qty: 5}],
+    [115, {name: "chest-ess-1-whisper", qty: 10}],
     [116, {name: "chest-ess-2-verse", qty: 3}],
-    [117, {name: "ball-ess", qty: 5}],
-    [118, {name: "ess-armor-ball", qty: 5}],
-    [119, {name: "ess-hair-ball", qty: 5}],
-    [120, {name: "wasp-ess", qty: 5}],
-    [121, {name: "flower-ess", qty: 5}],
-    [122, {name: "guard-flower-ess", qty: 5}],
-    [123, {name: "ess-hedgebird", qty: 3}],
-    [124, {name: "ess-turtle", qty: 3}],
-    [125, {name: "ess-frog", qty: 5}],
-    [126, {name: "ess-flyfish", qty: 3}],
-    [127, {name: "ess-common-spider", qty: 1}],
-    [128, {name: "ess-algae", qty: 5}],
-    [129, {name: "ess-molerat", qty: 3}],
-    [130, {name: "ess-butterflybird", qty: 3}],
-    [131, {name: "ess-bowcow", qty: 3}],
-    [132, {name: "ess-evil-garrot", qty: 5}],
-    [133, {name: "ess-bamboo", qty: 5}],
-    [134, {name: "ess-water-plant", qty: 5}],
-    [135, {name: "ess-hexa-plant", qty: 5}],
-    [136, {name: "ess-pumpkin", qty: 5}],
+    [117, {name: "dng-ess-aether", qty: 5}],
+    [118, {name: "ball-ess", qty: 5}],
+    [119, {name: "ess-armor-ball", qty: 5}],
+    [120, {name: "ess-hair-ball", qty: 5}],
+    [121, {name: "wasp-ess", qty: 5}],
+    [122, {name: "flower-ess", qty: 5}],
+    [123, {name: "guard-flower-ess", qty: 5}],
+    [124, {name: "ess-hedgebird", qty: 3}],
+    [125, {name: "ess-turtle", qty: 3}],
+    [126, {name: "ess-frog", qty: 5}],
+    [127, {name: "ess-flyfish", qty: 3}],
+    [128, {name: "ess-common-spider", qty: 1}],
+    [129, {name: "ess-algae", qty: 5}],
+    [130, {name: "ess-molerat", qty: 3}],
+    [131, {name: "ess-butterflybird", qty: 3}],
+    [132, {name: "ess-bowcow", qty: 3}],
+    [133, {name: "ess-evil-garrot", qty: 5}],
+    [134, {name: "ess-bamboo", qty: 5}],
+    [135, {name: "ess-water-plant", qty: 5}],
+    [136, {name: "ess-hexa-plant", qty: 5}],
+    [137, {name: "ess-pumpkin", qty: 5}],
 ]);

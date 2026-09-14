@@ -2,7 +2,7 @@ import {Injectable, terra} from "@project-selene/api";
 import {PlotManager, Plot, QuestCompleteScreen} from "@project-selene/api/terra";
 import {loc_game_name_id} from "../location_gamename_id";
 import {client} from "../client";
-import {addDebug} from "../doc";
+import {addDebug, addMessage} from "../doc";
 
 // Flags that track when the methods are recalled in Plot, to prevent infinitely calling them
 let plot_progress_called = false;
@@ -123,6 +123,10 @@ export class PlotCompleted extends Injectable(QuestCompleteScreen) {
         addDebug(`Finished quest ${plot}`)
         if (loc_game_name_id.has(plot)) {
             client.check(<number>loc_game_name_id.get(plot));
+        }
+        if (plot == "subDungeonMesa") {
+            client.goal();
+            addMessage("Goal completed ! Congratulations !")
         }
         return super.show(plot, ...args);
     }

@@ -154,6 +154,10 @@
         {
           "area": "start-dng",
           "level": 9
+        },
+        {
+          "area": "start-sub-dng-1",
+          "level": 10
         }
       ],
       "condition": "$p.has.ch2.natureReturn",
