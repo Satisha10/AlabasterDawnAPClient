@@ -32,6 +32,15 @@ export function init_client() {
         addMessage("Lost connection to the AP server");
     });
 
+    client.socket.on("connectionRefused", (packet) => {
+        if (packet.errors) {
+            addMessage(`Connection refused: ${packet.errors.join(", ")}`);
+        }
+        else {
+            addMessage("Connection refused");
+        }
+    });
+
     // Show sent items
     client.socket.on("printJSON", (packet) => {
         if (packet.type == "ItemSend" || packet.type == "ItemCheat") {
