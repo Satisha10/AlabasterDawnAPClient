@@ -60,6 +60,7 @@ class ClientData {
     last_item_index: number;  // Last item index received by the player. The index is reset to last_saved_index on death
     last_saved_index: number;  // Last item index that got saved (always equal or lower than last_item_index)
     is_loaded: boolean;
+    is_save_valid: boolean;
 
     checked_locations: number[];
 
@@ -73,7 +74,11 @@ class ClientData {
         this.player_map = new Map()
         this.last_item_index = 0;
         this.last_saved_index = 0;
+        // Flag, true when the game is loaded in a running state: items can be safely received.
         this.is_loaded = false;
+        // Flag, true if the opened save file contains valid AP data
+        this.is_save_valid = false;
+        // Contains locations checked, but not yet validated by the server
         this.checked_locations = [];
     }
 
@@ -167,6 +172,7 @@ class ClientData {
         this.last_saved_index = 0;
         this.is_loaded = false;
         this.checked_locations = [];
+        this.is_save_valid = false;
     }
 
     on_death() {

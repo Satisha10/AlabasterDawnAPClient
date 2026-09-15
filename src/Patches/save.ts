@@ -43,8 +43,18 @@ export class LoadTracker extends Injectable(Game) {
         let save_id = terra.g_storage.getLastSave();
         addDebug(`Read data from ${save_id}`);
         if (terra.g_storage.files[save_id]?.data?.ap_data && should_load_data) {
-            client_data.importState(terra.g_storage.files[save_id].data.ap_data);
-            should_load_data = false;
+            try {
+                client_data.importState(terra.g_storage.files[save_id].data.ap_data);
+                should_load_data = false;
+                client_data.is_save_valid = true;
+                addDebug("Loaded AP data");
+            }
+            catch(err) {
+                addMessage(`Failed to load the AP save data: ${err}`);
+            }
+        }
+        else {
+            addDebug("AP data not found");
         }
 
         connect_menu.hide();  // Hide the connect menu immediately, don't wait until the game is fully loaded
@@ -53,15 +63,22 @@ export class LoadTracker extends Injectable(Game) {
                 is_new_game += 1;
                 return result;
             }
+            client_data.is_save_valid = true;
             initializeFile();
             is_new_game = 0
         }
         // TODO check seed and slot_name
         if (this.state == GAME_STATE.RUNNING) {
-            client_data.is_loaded = true;
-            client_data.giveStashedItems();
-            client_data.sendStashedLocations()
-            addDebug("Loading completed");
+            if (!client_data.is_save_valid) {
+                addMessage("The save that you loaded is either invalid or a vanilla save.")
+                addMessage("Load a valid AP save or make a new one to receive items and send locations.")
+                client_data.is_loaded = false;
+            } else {
+                client_data.is_loaded = true;
+                client_data.giveStashedItems();
+                client_data.sendStashedLocations()
+                addDebug("Loading completed");
+            }
         }
         else {
             client_data.is_loaded = false;
