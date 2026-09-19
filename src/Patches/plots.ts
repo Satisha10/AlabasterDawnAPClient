@@ -1,8 +1,8 @@
 import {Injectable, terra} from "@project-selene/api";
 import {PlotManager, Plot, QuestCompleteScreen} from "@project-selene/api/terra";
 import {loc_game_name_id} from "../location_gamename_id";
-import {client} from "../client";
-import {addDebug, addMessage} from "../doc";
+import {client, client_data} from "../client";
+import {addDebug} from "../doc";
 
 // Flags that track when the methods are recalled in Plot, to prevent infinitely calling them
 let plot_progress_called = false;
@@ -31,7 +31,19 @@ export class PlotProgress extends Injectable(Plot) {
         plotKey = out[0]
         let newState = out[1]
         plot_progress_called = true;
-        return terra.g_plot.plots[plotKey].progressToState(newState, ...args);
+        let plot_name: string = `${plotKey}.${newState}`;
+
+        let output: any = terra.g_plot.plots[plotKey].progressToState(newState, ...args);
+
+        if (["ap_nest_valley.weaved",  // Plot states that trigger a location
+            "ap_nest_plains.weaved",
+            "subDungeonMesa.nestCleared",
+            "ap_spire_aether.weaved"
+        ].includes(plot_name)) {
+            client.check(<number>loc_game_name_id.get(plot_name));
+            client_data.checkGoal()
+        }
+        return output;
     }
 
     setFlag(flag: string, ...args: unknown[]) {
@@ -123,10 +135,6 @@ export class PlotCompleted extends Injectable(QuestCompleteScreen) {
         addDebug(`Finished quest ${plot}`)
         if (loc_game_name_id.has(plot)) {
             client.check(<number>loc_game_name_id.get(plot));
-        }
-        if (plot == "subDungeonMesa") {
-            client.goal();
-            addMessage("Goal completed ! Congratulations !")
         }
         return super.show(plot, ...args);
     }

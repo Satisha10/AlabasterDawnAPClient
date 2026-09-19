@@ -1,0 +1,504 @@
+[
+  {
+    "op": "remove",
+    "path": "/entities/5/tags"
+  },
+  {
+    "op": "remove",
+    "path": "/entities/6/tags"
+  },
+  {
+    "op": "replace",
+    "path": "/entities/6/setPlot",
+    "value": "ap_boss_valley.defeated"
+  },
+  {
+    "op": "remove",
+    "path": "/entities/83/tags"
+  },
+  {
+    "op": "replace",
+    "path": "/entities/83/startCond",
+    "value": "!$p.has.ap_boss_valley.defeated"
+  },
+  {
+    "op": "remove",
+    "path": "/entities/1211/tags"
+  },
+  {
+    "op": "add",
+    "path": "/entities/1211/startCond",
+    "value": "!$p.has.ap_nest_valley.weaved"
+  },
+  {
+    "op": "replace",
+    "path": "/entities/1211/setPlot",
+    "value": "ap_nest_valley.weaved"
+  },
+  {
+    "op": "replace",
+    "path": "/entities/1211/triggerType",
+    "value": "ONCE_PER_ENTRY"
+  },
+  {
+    "op": "replace",
+    "path": "/entities/1211/event",
+    "value": [
+      {
+        "type": "DO_ACTION",
+        "action": [
+          {
+            "type": "HEAD_ROT_TO",
+            "target": [
+              59,
+              24,
+              -2
+            ]
+          },
+          {
+            "type": "SET_SPEED",
+            "relative": 0.4
+          },
+          {
+            "type": "NAV_TO",
+            "target": [
+              59,
+              32,
+              -2
+            ]
+          },
+          {
+            "type": "FACE_TO_HEAD_ROT"
+          }
+        ],
+        "entity": {
+          "player": 1
+        }
+      },
+      {
+        "type": "SET_CAMERA_TARGET",
+        "parallel": true,
+        "speed": "SLOWER",
+        "target": [
+          59,
+          28,
+          3.5
+        ],
+        "wait": true,
+        "waitSkip": 0.6,
+        "zoomOut": 5
+      },
+      {
+        "type": "FORCE_SCENE",
+        "scene": "nestWeave"
+      },
+      {
+        "type": "TALK",
+        "char": "CHA:main#Juno>surprised",
+        "message": {
+          "en_US": "...",
+          "langID": 14
+        },
+        "pos": "RIGHT"
+      },
+      {
+        "type": "SET_CAMERA_TARGET",
+        "parallel": true,
+        "speed": "SLOWER",
+        "target": [
+          59,
+          29,
+          1.5
+        ],
+        "waitSkip": 0.6
+      },
+      {
+        "type": "TALK",
+        "char": "CHA:main#Cabbage>default",
+        "message": {
+          "en_US": "You know what to do?",
+          "langID": 15
+        },
+        "pos": "LEFT"
+      },
+      {
+        "type": "TALK",
+        "char": "CHA:main#Juno>worried",
+        "message": {
+          "en_US": "I-{.}I think I remember...",
+          "langID": 16
+        },
+        "pos": null
+      },
+      {
+        "type": "TALK",
+        "char": "CHA:main#Juno>doubt",
+        "message": {
+          "en_US": "Still...{.} it's a bit intimidating up close.",
+          "langID": 17
+        },
+        "pos": null
+      },
+      {
+        "type": "TALK",
+        "char": "CHA:main#Cabbage>downClosed",
+        "message": {
+          "en_US": "I'm sure you'll handle it fine.",
+          "langID": 18
+        },
+        "pos": null
+      },
+      {
+        "type": "TALK",
+        "char": "CHA:main#Cabbage>toward",
+        "message": {
+          "en_US": "Just give it your all.",
+          "langID": 19
+        },
+        "pos": null
+      },
+      {
+        "type": "TALK",
+        "char": "CHA:main#Juno>doubt",
+        "message": {
+          "en_US": "...",
+          "langID": 20
+        },
+        "pos": null
+      },
+      {
+        "type": "TALK",
+        "char": "CHA:main#Juno>serious",
+        "message": {
+          "en_US": "Okay...{.} let's hope this works!",
+          "langID": 21
+        },
+        "pos": null
+      },
+      {
+        "type": "CANCEL_SKIP"
+      },
+      {
+        "type": "SET_CAMERA_TARGET",
+        "speed": 2,
+        "spline": "EASE_IN",
+        "target": [
+          59,
+          30.75,
+          -0.5
+        ],
+        "zoom": 1.5
+      },
+      {
+        "type": "DO_ACTION",
+        "action": [
+          {
+            "type": "SET_SPEED",
+            "relative": 0.3
+          },
+          {
+            "type": "NAV_TO",
+            "target": [
+              59,
+              31,
+              -2
+            ]
+          },
+          {
+            "type": "CLEAR_HEAD_ROT",
+            "immediately": true
+          },
+          {
+            "type": "SET_CAMERA_TARGET",
+            "speed": 1,
+            "target": [
+              59.5,
+              30.25,
+              -0.5
+            ],
+            "zoom": 1.1
+          },
+          {
+            "type": "SHOW_ANIMATION",
+            "animation": "nestWeave1"
+          },
+          {
+            "type": "WAIT_UNTIL_HOOK_READY",
+            "hook": "HOOK_1"
+          },
+          {
+            "type": "SET_CAMERA_ZOOM",
+            "duration": 2,
+            "spline": "EASE_IN",
+            "zoom": 1.75
+          },
+          {
+            "type": "SPAWN_FX",
+            "effect": "FX:scene.weaving#nestWeaveStartPre",
+            "target": {
+              "ent": "self",
+              "align": "HOOK_1"
+            },
+            "wait": true
+          },
+          {
+            "type": "SET_CAMERA_TARGET",
+            "speed": 0.3,
+            "spline": "EASE_OUT",
+            "target": [
+              60.25,
+              31.75,
+              -0.5
+            ],
+            "zoom": 2
+          },
+          {
+            "type": "SPAWN_FX",
+            "duration": -1,
+            "effect": "FX:scene.weaving#nestWeaveStart",
+            "target": {
+              "ent": "self",
+              "align": "HOOK_1"
+            }
+          },
+          {
+            "type": "WAIT",
+            "time": 0.5
+          },
+          {
+            "type": "SET_CAMERA_TARGET",
+            "parallel": true,
+            "speed": 1.5,
+            "spline": "EASE_STRONG",
+            "target": [
+              59,
+              28.5,
+              -1
+            ],
+            "zoom": 1.2
+          },
+          {
+            "type": "SHOW_ANIMATION",
+            "animation": "nestWeave2"
+          },
+          {
+            "type": "WAIT_UNTIL_HOOK_READY",
+            "hook": "HOOK_2"
+          },
+          {
+            "type": "SPAWN_FX",
+            "effect": "FX:scene.weaving#nestWeaveSpin",
+            "target": {
+              "ent": "self",
+              "align": "HOOK_2"
+            }
+          },
+          {
+            "type": "SET_SPEED",
+            "relative": 0.3
+          },
+          {
+            "type": "MOVE_FORWARD",
+            "collideCancel": 0,
+            "maxTargetDistance": 0,
+            "time": 0.3
+          },
+          {
+            "type": "WAIT_UNTIL_HOOK_READY",
+            "hook": "HOOK_1"
+          },
+          {
+            "type": "CLEAR_FX"
+          },
+          {
+            "type": "SPAWN_FX",
+            "_skip": true,
+            "duration": -1,
+            "effect": "FX:scene.weaving#nestWeaveBigger",
+            "target": {
+              "ent": "self",
+              "align": "HOOK_1"
+            }
+          },
+          {
+            "type": "WAIT",
+            "_skip": true,
+            "time": 0.5
+          },
+          {
+            "type": "SET_CAMERA_TARGET",
+            "_skip": true,
+            "parallel": true,
+            "speed": 0.7,
+            "target": [
+              58,
+              30,
+              -1
+            ],
+            "zoom": 1.3
+          },
+          {
+            "type": "SHOW_ANIMATION",
+            "_skip": true,
+            "animation": "nestWeave3"
+          },
+          {
+            "type": "WAIT_UNTIL_HOOK_READY",
+            "_skip": true,
+            "hook": "HOOK_1"
+          },
+          {
+            "type": "SET_CAMERA_TARGET",
+            "_skip": true,
+            "parallel": true,
+            "speed": 0.6,
+            "spline": "EASE_OUT",
+            "target": [
+              59,
+              28,
+              0
+            ],
+            "zoom": 1.5
+          },
+          {
+            "type": "CLEAR_FX"
+          },
+          {
+            "type": "SPAWN_FX",
+            "duration": -1,
+            "effect": "FX:scene.weaving#nestWeaveBiggest",
+            "target": {
+              "ent": "self",
+              "align": "HOOK_1"
+            }
+          },
+          {
+            "type": "WAIT",
+            "time": 0.3
+          },
+          {
+            "type": "SET_CAMERA_TARGET",
+            "parallel": true,
+            "speed": 2,
+            "target": [
+              59,
+              27.5,
+              5
+            ],
+            "zoomOut": 5
+          },
+          {
+            "type": "WAIT",
+            "time": 0.5
+          },
+          {
+            "type": "SPAWN_FX",
+            "duration": -1,
+            "effect": "FX:scene.weaving#nestWeaveTargeting",
+            "target": [
+              59,
+              26.75,
+              5
+            ]
+          },
+          {
+            "type": "WAIT",
+            "time": 0.6
+          },
+          {
+            "type": "SET_CAMERA_TARGET",
+            "speed": 0.5,
+            "spline": "EASE_OUT",
+            "target": [
+              59,
+              27.5,
+              5
+            ],
+            "zoom": 1.25
+          },
+          {
+            "type": "SPAWN_FX",
+            "duration": -1,
+            "effect": "FX:scene.weaving#nestWeaveConnect",
+            "target": [
+              60,
+              25.5,
+              3
+            ],
+            "target2": {
+              "ent": "self",
+              "align": "HOOK_1",
+              "off": [
+                1,
+                0,
+                0
+              ]
+            }
+          },
+          {
+            "type": "WAIT",
+            "time": 0.2
+          },
+          {
+            "type": "SPAWN_FX",
+            "duration": -1,
+            "effect": "FX:scene.weaving#nestWeaveConnect",
+            "target": [
+              58,
+              25.5,
+              3
+            ],
+            "target2": {
+              "ent": "self",
+              "align": "HOOK_1",
+              "off": [
+                -1,
+                0,
+                0
+              ]
+            }
+          },
+          {
+            "type": "WAIT",
+            "time": 0.2
+          },
+          {
+            "type": "SPAWN_FX",
+            "duration": -1,
+            "effect": "FX:scene.weaving#nestWeaveConnect",
+            "target": [
+              59,
+              26.75,
+              7
+            ],
+            "target2": {
+              "ent": "self",
+              "align": "HOOK_1"
+            }
+          },
+          {
+            "type": "WAIT",
+            "time": 1
+          }
+        ],
+        "entity": {
+          "player": 1
+        },
+        "keepStateAfter": true,
+        "wait": true
+      },
+      {
+        "type": "SET_CAMERA_TARGET",
+        "parallel": true,
+        "speed": 5,
+        "spline": "EASE_IN",
+        "target": [
+          59,
+          24.5,
+          1
+        ],
+        "zoom": 3
+      }
+    ]
+  }
+]

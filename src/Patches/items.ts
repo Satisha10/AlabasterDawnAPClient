@@ -44,6 +44,10 @@ export class WeaponTracker extends Injectable(PlayerCombat) {
         return super.setWeaponUnlock(key, unlock, ...args);
     }
     increaseSyncLevel(...args: unknown[]) {
+        if (item_flags.checkedSync()) {
+            addDebug("Skipped sync level");
+            return;
+        }
         addDebug("Increased sync level");
         return super.increaseSyncLevel(...args);
     }

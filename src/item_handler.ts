@@ -39,6 +39,7 @@ export function giveGameItem(item: Item) {
         //    terra.g_party.addPartyMember("filia");
     //}
     else if (item_data.name == "Divine Connection") {
+        item_flags.gaveSync();
         terra.g_player.combat.increaseSyncLevel();
     }
     else if (item_data.name.startsWith("PLOT:")) {
@@ -57,6 +58,9 @@ export function giveGameItem(item: Item) {
         terra.g_plot.progressPlotToStateC("ap_lyhamn", "cl1");  // TODO Progress "ap_" + area
     }
     else if (item_data.name == "test") {
+        // terra.g_player.combat.core.addExp(90000, 30)
+        // terra.g_scene.teleport("start.subdng.room-04", "")
+        // terra.g_plot.plots["southDng"].progressToState("finalElevator")
     }
     else {
         terra.g_player.inventory.addItem(item_data.name, item_data.qty);

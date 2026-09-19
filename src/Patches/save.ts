@@ -144,7 +144,7 @@ export class RemoveAnalytics extends Injectable(Analytics) {
 export class ReturnMenu extends Injectable(SceneManager) {
     goToTitle(...args: unknown[]) {
         connect_menu.show();
-        client_data.reset_state();
+        client_data.resetState();
         // TODO disconnect from multiworld
         return super.goToTitle(...args);
     }
@@ -154,7 +154,7 @@ export class OnDeath extends Injectable(SceneManager) {
     loadCheckpoint(onDeath: boolean, ...args: unknown[]) {
         if (onDeath) {
             addDebug("Player died")
-            client_data.on_death();
+            client_data.onDeath();
         }
         return super.loadCheckpoint(onDeath, ...args);
     }

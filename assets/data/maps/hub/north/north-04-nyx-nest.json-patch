@@ -1,0 +1,31 @@
+[
+  {
+    "op": "add",
+    "path": "/entities/1853/startCond",
+    "value": "!$p.has.ap_boss_plains.defeated"
+  },
+  {
+    "op": "replace",
+    "path": "/entities/1853/setPlot",
+    "value": "ap_boss_plains.defeated"
+  },
+  {
+    "op": "remove",
+    "path": "/entities/1880/tags"
+  },
+  {
+    "op": "add",
+    "path": "/entities/1880/startCond",
+    "value": "!$p.has.ap_nest_plains.weaved"
+  },
+  {
+    "op": "replace",
+    "path": "/entities/1880/setPlot",
+    "value": "ap_nest_plains.weaved"
+  },
+  {
+    "op": "replace",
+    "path": "/entities/1880/triggerType",
+    "value": "ONCE_PER_ENTRY"
+  }
+]

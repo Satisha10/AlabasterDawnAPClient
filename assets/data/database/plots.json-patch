@@ -80,6 +80,126 @@
     }
   },
   {
+    "op": "add",
+    "path": "/plots/ap_boss_valley",
+    "value": {
+      "category": "OTHER",
+      "states": {
+        "alive": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "defeated": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        }
+      },
+      "flags": {}
+    }
+  },
+  {
+    "op": "add",
+    "path": "/plots/ap_boss_plains",
+    "value": {
+      "category": "OTHER",
+      "states": {
+        "alive": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "defeated": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        }
+      },
+      "flags": {}
+    }
+  },
+  {
+    "op": "add",
+    "path": "/plots/ap_boss_aether",
+    "value": {
+      "category": "OTHER",
+      "states": {
+        "alive": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "defeated": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        }
+      },
+      "flags": {}
+    }
+  },
+  {
+    "op": "add",
+    "path": "/plots/ap_nest_valley",
+    "value": {
+      "category": "OTHER",
+      "states": {
+        "init": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "weaved": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        }
+      },
+      "flags": {}
+    }
+  },
+  {
+    "op": "add",
+    "path": "/plots/ap_nest_plains",
+    "value": {
+      "category": "OTHER",
+      "states": {
+        "init": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "weaved": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        }
+      },
+      "flags": {}
+    }
+  },
+  {
+    "op": "add",
+    "path": "/plots/ap_spire_aether",
+    "value": {
+      "category": "OTHER",
+      "states": {
+        "init": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "weaved": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        }
+      },
+      "flags": {}
+    }
+  },
+  {
     "op": "replace",
     "path": "/plots/silverPeak/states/ready/condition",
     "value": []

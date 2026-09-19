@@ -1,0 +1,27 @@
+[
+  {
+    "op": "add",
+    "path": "/entities/318/startCond",
+    "value": "!$p.has.ap_boss_plains.defeated"
+  },
+  {
+    "op": "replace",
+    "path": "/entities/318/setPlot",
+    "value": "ap_boss_aether.defeated"
+  },
+  {
+    "op": "add",
+    "path": "/entities/704/startCond",
+    "value": "!$p.has.ap_spire_aether.weaved"
+  },
+  {
+    "op": "replace",
+    "path": "/entities/704/setPlot",
+    "value": "ap_spire_aether.weaved"
+  },
+  {
+    "op": "replace",
+    "path": "/entities/704/triggerType",
+    "value": "ONCE_PER_ENTRY"
+  }
+]

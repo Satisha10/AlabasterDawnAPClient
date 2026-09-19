@@ -1,6 +1,7 @@
 import {Client, Item, ItemsManager, NetworkPlayer} from "archipelago.js";
 import {addDebug, addMessage} from "./doc";
 import {giveGameItem} from "./item_handler";
+import {terra} from "@project-selene/api";
 
 // Create a new instance of the Client class.
 export const client = new Client();
@@ -175,7 +176,7 @@ class ClientData {
         this.checked_locations = data.checked_locations;
     }
 
-    reset_state() {
+    resetState() {
         // Reset some client variables, called when going to the menu
         this.last_item_index = 0;
         this.last_saved_index = 0;
@@ -184,8 +185,24 @@ class ClientData {
         this.is_save_valid = false;
     }
 
-    on_death() {
+    onDeath() {
         this.last_item_index = this.last_saved_index;
+    }
+
+    checkGoal() {
+        // Called when advancing a goal, check that all conditions are met to send the goal.
+        if (
+            terra.g_plot.checkPlotStateC("ap_nest_valley", "weaved")
+            && terra.g_plot.checkPlotStateC("ap_nest_plains", "weaved")
+            && terra.g_plot.checkPlotStateC("subDungeonMesa", "nestCleared")
+            && terra.g_plot.checkPlotStateC("ap_spire_aether", "weaved")
+        ) {
+            client.goal();
+            addMessage("Goal completed ! Congratulations !")
+        }
+        else {
+            addMessage("Nest or spire weaved ! Some are still missing for the goal")
+        }
     }
 }
 
@@ -195,11 +212,13 @@ export const client_data = new ClientData();
 class ItemFlags {
     elemID: number;
     weaponKey: string;
+    received_sync_level: boolean;
     is_init: boolean;  // Used when initializing, to skip the item/location patches
     constructor() {
         this.elemID = 0;
         this.weaponKey = "";
         this.is_init = false;
+        this.received_sync_level = false;
     }
     gaveElem(value: number) {
         // Received an element (with value its ID) through an AP item
@@ -223,6 +242,19 @@ class ItemFlags {
         // return false if the change is caused by receiving an item.
         if (value == this.weaponKey) {
             this.weaponKey = "";
+            return false;
+        }
+        return true;
+    }
+    gaveSync() {
+        // Received a sync level through an AP item
+        this.received_sync_level = true;
+    }
+    checkedSync(): boolean {
+        // Called in the WeaponTracker hook when detecting a new weapon,
+        // return false if the change is caused by receiving an item.
+        if (this.received_sync_level) {
+            this.received_sync_level = false;
             return false;
         }
         return true;
