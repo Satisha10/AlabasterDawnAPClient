@@ -5,12 +5,9 @@ import {addMessage, addDebug} from "./doc";
 import {item_name_data} from "./item_id_gamedata";
 import {item_flags, client_data} from "./client";
 
-import {connect_menu} from "./connect_menu";
-
-type LoadState = {
-    melee: string[];
-    ranged: string[];
-}
+// Flag, set to true while executing equipWeaponsForElement to allow multi-equip
+// That way, the other elements in the loadouts are not affected by receiving an element
+export let imposeMultiEquip = false;
 
 export function giveGameItem(item: Item) {
     let item_data = item_name_data.get(item.id);
@@ -30,7 +27,9 @@ export function giveGameItem(item: Item) {
         let elemID = Number(item_data.name.substring("ELEMENT:".length));
         item_flags.gaveElem(elemID);
         terra.g_player.setCore(elemID, true);
+        imposeMultiEquip = true;
         equipWeaponsForElement(elemID)
+        imposeMultiEquip = false;
     }
         // TODO Items for party members
         //else if (item_data.name.startsWith("PARTY:")) {

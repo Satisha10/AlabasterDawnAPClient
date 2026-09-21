@@ -62,5 +62,27 @@
       },
       "category": "ARCHIPELAGO"
     }
+  },
+  {
+    "op": "add",
+    "path": "/multi_equip",
+    "value": {
+      "debug": false,
+      "description": {
+        "en_US": "Allow to equip the same weapon to multiple elements. Otherwise, it is only possible while having less weapons than elements.",
+        "langID": 15458
+      },
+      "hidden": false,
+      "label": {
+        "en_US": "Remove weapon equip restriction",
+        "langID": 15912489
+      },
+      "local": false,
+      "type": {
+        "default": false,
+        "type": "CHECKBOX"
+      },
+      "category": "ARCHIPELAGO"
+    }
   }
 ]
