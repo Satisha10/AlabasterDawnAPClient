@@ -8,6 +8,8 @@ import {
     LoadMenu,
     SaveFile,
     SceneManager,
+    SUB_MENU,
+    SubMenuManager,
     TitleMenu
 } from "@project-selene/api/terra"
 import {client, client_data} from "../client";
@@ -114,9 +116,24 @@ export class MenuButtons extends Injectable(TitleMenu) {
                 return super.onLayoutClick(button, ...args);
             }
         }
+        else if (key == "OPTIONS") {  // The connect menu hides some parts of the options
+            connect_menu.hide();
+            return super.onLayoutClick(button, ...args);
+        }
         else {
             return super.onLayoutClick(button, ...args);
         }
+    }
+}
+
+
+export class OptionsExit extends Injectable(SubMenuManager) {
+    exit(...args: unknown[]) {
+        if (this.startMenu == SUB_MENU.OPTIONS) {
+            connect_menu.show();
+        }
+        return super.exit(...args);
+
     }
 }
 

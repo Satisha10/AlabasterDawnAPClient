@@ -92,7 +92,7 @@ class ClientData {
         this.checked_locations = [];
     }
 
-    // Connect to the multiworld with the given connection info (optional, otherwise use the ones from the instance.
+    // Connect to the multiworld with the given connection info (optional, otherwise use the ones from the instance).
     connect(url: string | null = null, name: string | null = null, password : string | null = null) {
         // TODO Connect when save loaded
         // TODO Datapackage

@@ -24,3 +24,7 @@ The main plot progress is set to the end by the client on initialization.
 - Change the combat level of all areas.
 - Remove the teleporter restrictions after getting a weapon or during some quest sequences.
 - Add plots to track defeating story boss and weaving nests/spires: `ap_boss_valley`, `ap_boss_aether`, `ap_boss_plains`, `ap_nest_valley`, `ap_nest_plains`, `ap_spire_aether`.
+
+## Misc
+
+- Add options for increasing the drop rate and exp gains. These are put in an `"ARCHIPELAGO"` tab, which is defined in `lang/gui.json` and in a code patch.

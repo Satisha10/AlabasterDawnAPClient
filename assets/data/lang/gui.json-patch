@@ -1,0 +1,12 @@
+[
+  {
+    "op": "add",
+    "path": "/menu/sub/options/sub/tabs/sub/titles/sub/ARCHIPELAGO",
+    "value": {
+      "entry": {
+        "en_US": "Archipelago",
+        "langID": 558494
+      }
+    }
+  }
+]

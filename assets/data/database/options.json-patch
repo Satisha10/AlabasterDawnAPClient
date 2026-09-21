@@ -1,0 +1,66 @@
+[
+  {
+    "op": "add",
+    "path": "/drop_rate",
+    "value": {
+      "debug": false,
+      "description": {
+        "en_US": "Multiply the drop rate.",
+        "langID": 15456
+      },
+    "header": {
+      "en_US": "Gameplay changes",
+      "langID": 168489
+    },
+      "hidden": false,
+      "label": {
+        "en_US": "Drop Rate",
+        "langID": 15911894
+      },
+      "local": false,
+      "type": {
+        "default": 1,
+        "max": 5,
+        "min": 1,
+        "normalized": false,
+        "step": 1,
+        "prefix": {
+          "en_US": "x",
+          "langID": 160897
+        },
+        "type": "SLIDER"
+      },
+      "category": "ARCHIPELAGO"
+    }
+  },
+  {
+    "op": "add",
+    "path": "/exp_mult",
+    "value": {
+      "debug": false,
+      "description": {
+        "en_US": "Multiply the combat and cooking experience.",
+        "langID": 15457
+      },
+      "hidden": false,
+      "label": {
+        "en_US": "Exp Multiplier",
+        "langID": 15912489
+      },
+      "local": false,
+      "type": {
+        "default": 1,
+        "max": 5,
+        "min": 1,
+        "normalized": false,
+        "step": 1,
+        "prefix": {
+          "en_US": "x",
+          "langID": 160897
+        },
+        "type": "SLIDER"
+      },
+      "category": "ARCHIPELAGO"
+    }
+  }
+]
