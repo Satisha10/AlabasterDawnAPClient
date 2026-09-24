@@ -6,7 +6,7 @@ export class AddOptionTab extends Injectable(OptionsTabList) {
         super();
         this.addTab("ARCHIPELAGO", {
             label: "Archipelago",
-            icon: "option-cat-ACCESSIBILITY"
+            icon: "option-cat-ARCHIPELAGO"
         });
     }
 }

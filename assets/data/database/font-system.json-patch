@@ -1,0 +1,39 @@
+[
+  {
+    "op": "add",
+    "path": "/icons/sets/menu/icons/option-cat-ARCHIPELAGO",
+    "value": {
+      "sizes": {
+        "LARGE": {
+          "sheet": "archipelago",
+          "range": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "padding": [
+            0,
+            2,
+            0,
+            0
+          ],
+          "scale": 1
+        }
+      }
+    }
+  },
+  {
+    "op": "add",
+    "path": "/icons/sheets/archipelago",
+    "value": {
+      "img": "media/fonts/icons/archipelago.png",
+      "range": [
+        0,
+        0,
+        16,
+        16
+      ]
+    }
+  }
+]
