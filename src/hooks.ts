@@ -16,8 +16,7 @@ import {
 } from "./Patches/save";
 import {MultiEquip} from "./Patches/weapon";
 import {IncreaseDrops, IncreaseWeaponExp, IncreaseCuisineExp, IncreaseCoreExp} from "./Patches/drops";
-import {AddOptionTab} from "./Patches/options";
-import {OptionsMenu} from "@project-selene/api/terra";
+import {AddOptionTab, OptionCallback} from "./Patches/options";
 
 export class Hooks {
     static init(mod: Mod) {
@@ -44,5 +43,6 @@ export class Hooks {
         mod.inject(IncreaseCoreExp);
         mod.inject(AddOptionTab);
         mod.inject(OptionsExit);
+        mod.inject(OptionCallback);
     }
 }

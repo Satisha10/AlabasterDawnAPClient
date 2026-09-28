@@ -1,4 +1,4 @@
-import {Client, Item, ItemsManager, NetworkPlayer} from "archipelago.js";
+import {Client, DeathLinkManager, Item, ItemsManager, NetworkPlayer} from "archipelago.js";
 import {addDebug, addMessage} from "./doc";
 import {giveGameItem} from "./item_handler";
 import {terra} from "@project-selene/api";
@@ -6,6 +6,7 @@ import {terra} from "@project-selene/api";
 // Create a new instance of the Client class.
 export const client = new Client();
 export const items_manager = new ItemsManager(client);
+export const death_link_manager = new DeathLinkManager(client);
 
 // TODO location check packets with printJSON: show message + remove from stashed locations
 // TODO refactor: extend Client, and add a connect/disconnect method
@@ -20,12 +21,29 @@ export function init_client() {
         client_data.giveStashedItems();
     });
 
+    death_link_manager.on("deathReceived", (source, time, cause) => {
+        addDebug("Received DeathLink packet")
+        if (cause) {
+            addMessage(cause);
+        }
+        else {
+            addMessage(`${source} died`)
+        }
+        terra.g_player.combat.params.setDefeated();  // TODO Kill the player instead of putting it at 0 HP
+    });
+
     client.socket.on("connected", (packet) => {
         client_data.slot_id = packet.slot;
         for (let player of packet.players) {
             client_data.player_map.set(player.slot, player);
         }
-        client_data.alias = client_data.player_map.get(client_data.slot_id)?.alias
+        if (client_data.player_map.get(client_data.slot_id)?.alias) {
+            // @ts-ignore
+            client_data.alias = client_data.player_map.get(client_data.slot_id).alias;
+        }
+        else {
+            client_data.alias = client_data.slot_name;
+        }
     });
 
     // Warn when lost connection.
@@ -63,7 +81,7 @@ class ClientData {
     slot_name: string;
     password: string;
 
-    alias: string | undefined;
+    alias: string;
     slot_id: number;
     player_map: Map<number, NetworkPlayer>;
 
@@ -109,6 +127,10 @@ class ClientData {
                 this.url = connUrl;
                 this.slot_name = connName;
                 this.password = connPassword;
+                if (terra.g_options.get("death_link")) {
+                    addDebug("Enabled DeathLink");
+                    death_link_manager.enableDeathLink();
+                }
             })
             // TODO show error message
             .catch(() => addMessage(`Connection failed (url: ${connUrl}, Slot name: ${connName})`));
@@ -187,6 +209,9 @@ class ClientData {
 
     onDeath() {
         this.last_item_index = this.last_saved_index;
+        if (death_link_manager.enabled) {
+            death_link_manager.sendDeathLink(this.alias);
+        }
     }
 
     checkGoal() {

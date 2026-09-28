@@ -8,10 +8,10 @@
         "en_US": "Multiply the drop rate.",
         "langID": 15456
       },
-    "header": {
-      "en_US": "Gameplay changes",
-      "langID": 168489
-    },
+      "header": {
+        "en_US": "Gameplay changes",
+        "langID": 168489
+      },
       "hidden": false,
       "label": {
         "en_US": "Drop Rate",
@@ -45,7 +45,7 @@
       "hidden": false,
       "label": {
         "en_US": "Exp Multiplier",
-        "langID": 15912489
+        "langID": 15912488
       },
       "local": false,
       "type": {
@@ -76,6 +76,32 @@
       "label": {
         "en_US": "Remove weapon equip restriction",
         "langID": 15912489
+      },
+      "local": false,
+      "type": {
+        "default": false,
+        "type": "CHECKBOX"
+      },
+      "category": "ARCHIPELAGO"
+    }
+  },
+  {
+    "op": "add",
+    "path": "/death_link",
+    "value": {
+      "debug": false,
+      "description": {
+        "en_US": "Enable Death Link",
+        "langID": 15459
+      },
+      "header": {
+        "en_US": "Multiworld options",
+        "langID": 168489
+      },
+      "hidden": false,
+      "label": {
+        "en_US": "Death Link",
+        "langID": 15912490
       },
       "local": false,
       "type": {
