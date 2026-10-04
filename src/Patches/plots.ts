@@ -91,7 +91,11 @@ function modifyPlotKeys(plotKey: string, stateKey: string): [string, string] {
         "f2room4bBattle",
         "f2room3check2",
         "f2room3check3",
-        "f2room3GotKey",
+        "f2room3GotKey"
+    ].includes(stateKey)) {
+        return ["southDngB", stateKey];
+    }
+    if (plotKey == "southDng" && [
         "f2room2bLock",
         "f2room2bBattle1",
         "f2room2shortcut",
@@ -109,7 +113,11 @@ function modifyPlotKeys(plotKey: string, stateKey: string): [string, string] {
         "f2room7check2",
         "finalElevator"
     ].includes(stateKey)) {
-        return ["southDngB", stateKey];
+        return ["southDngC", stateKey];
+    }
+    // First key door in aether dungeon
+    if (plotKey == "southDngSub2" && stateKey == "room2check2B") {
+        return ["southDng", stateKey];
     }
     if (plotKey == "swampDng") {
         if ([
@@ -169,7 +177,7 @@ function modifyPlotFlagKeys(plotKey: string, flag: string): [string, string] {
         "chestBarrier3",
         "bonusBattle1"
     ].includes(flag)) {
-        return ["southDngB", flag];
+        return ["southDngC", flag];
     }
     return [plotKey, flag]
 }

@@ -339,17 +339,23 @@
           "offFlags": [],
           "onFlags": []
         },
-        "room2Done": {
+        "room2check2B": {
           "condition": [
             {
-              "type": "PLOT_STATE",
-              "plotState": "southDngSub1.room2check2A"
-            },
-            {
-              "type": "PLOT_STATE",
-              "plotState": "southDngSub2.room2check2B"
+              "type": "ITEM_GIVE",
+              "items": [
+                {
+                  "count": 1,
+                  "item": "ap-key-aether"
+                }
+              ]
             }
           ],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "room2Done": {
+          "condition": [],
           "offFlags": [],
           "onFlags": []
         },
@@ -511,9 +517,33 @@
           "condition": [],
           "offFlags": [],
           "onFlags": []
+        }
+      }
+    }
+  },
+  {
+    "op": "add",
+    "path": "/plots/southDngC",
+    "value": {
+      "category": "MAIN",
+      "states": {
+        "init": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
         },
         "f2room2bLock": {
-          "condition": [],
+          "condition": [
+            {
+              "type": "ITEM_GIVE",
+              "items": [
+                {
+                  "count": 1,
+                  "item": "ap-key-aether"
+                }
+              ]
+            }
+          ],
           "offFlags": [],
           "onFlags": []
         },
@@ -604,6 +634,71 @@
           "info": "room-02b bonus battle with chest reward"
         }
       }
+    }
+  },
+  {
+    "op": "replace",
+    "path": "/plots/southDngSub2",
+    "value": {
+      "category": "MAIN",
+      "states": {
+        "ready": {
+          "condition": [
+            {
+              "type": "PLOT_STATE",
+              "plotState": "southDng.room2wiseSwitchTried"
+            }
+          ],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "room2check1B": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "room4check1": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "room4check2": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "room4check3": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "room4battleSub": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "room4battleDone": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "room2openChest": {
+          "condition": [
+            {
+              "type": "OPEN_CHEST",
+              "chest": "start.start-dng.f1-room-02-key"
+            }
+          ],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "room2check2Bpre": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        }
+      },
+      "flags": {}
     }
   },
   {
