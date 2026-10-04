@@ -1,0 +1,54 @@
+[
+  {
+    "op": "add",
+    "path": "/ap-key-aether",
+    "value": {
+      "description": {
+        "en_US": "A divine relic resembling a key.\n\n{c:3}Opens Divine Seals{c} within the {c:3}Trial of Aether{c}.\n\n{c:3}Divine Seals{c} were once placed by the gods to guide a {c:3}potential Chosen{c} on the proper path through a trial. \n",
+        "langID": 547
+      },
+      "name": {
+        "en_US": "Aether Trial Mark",
+        "langID": 478
+      },
+      "rarity": "RARE",
+      "track": false,
+      "type": "KEY",
+      "icon": {
+        "img": "media/gui/items-icons-ap.png",
+        "range": [
+          0,
+          0,
+          32,
+          32
+        ]
+      }
+    }
+  },
+  {
+    "op": "add",
+    "path": "/ap-key-cryo",
+    "value": {
+      "description": {
+        "en_US": "A divine relic resembling a key.\n\n{c:3}Opens Divine Seals{c} within the {c:3}Trial of Cryo{c}.\n\n{c:3}Divine Seals{c} were once placed by the gods to guide a {c:3}potential Chosen{c} on the proper path through a trial. \n",
+        "langID": 547
+      },
+      "name": {
+        "en_US": "Cryo Trial Mark",
+        "langID": 478
+      },
+      "rarity": "RARE",
+      "track": false,
+      "type": "KEY",
+      "icon": {
+        "img": "media/gui/items-icons-ap.png",
+        "range": [
+          32,
+          0,
+          32,
+          32
+        ]
+      }
+    }
+  }
+]

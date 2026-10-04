@@ -605,5 +605,333 @@
         }
       }
     }
+  },
+  {
+    "op": "replace",
+    "path": "/plots/swampDng",
+    "value": {
+      "category": "MAIN",
+      "states": {
+        "ready": {
+          "condition": [
+            {
+              "type": "PLOT_STATE",
+              "plotState": "swamp.enteredDungeon"
+            }
+          ],
+          "info": "Freeing the swamp quest (including the swampDng)",
+          "offFlags": [],
+          "onFlags": []
+        },
+        "a1Switch": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "a2Hazard": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "a3Battle": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "a3WaterBubble": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "a3Puzzle": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "a3GotKey": {
+          "condition": [
+            {
+              "type": "OPEN_CHEST",
+              "chest": "swamp.swamp-dng.room-a3-key"
+            }
+          ],
+          "offFlags": [],
+          "onFlags": []
+        }
+      },
+      "flags": {
+        "b1Optional": {},
+        "cFreeBattle1": {},
+        "cFreeBattle2": {},
+        "cFreeBattle3": {},
+        "centerMidBattle": {},
+        "cSwitch1": {},
+        "cSwitch2": {},
+        "cSwitch3": {},
+        "cSwitch3b": {},
+        "cSwitch4": {},
+        "optBattle": {},
+        "betaEnd": {},
+        "a2Shortcut": {}
+      },
+      "oldKeys": {}
+    }
+  },
+  {
+    "op": "add",
+    "path": "/plots/swampDng1",
+    "value": {
+      "category": "MAIN",
+      "states": {
+        "init": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "a2KeyLock": {
+          "condition": [
+            {
+              "type": "ITEM_GIVE",
+              "items": [
+                {
+                  "count": 1,
+                  "item": "ap-key-cryo"
+                }
+              ]
+            }
+          ],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "a2Battle": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "a4puzzle1": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "a4Battle": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "a4Puzzle2": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "lakeBattle1": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "b1Puzzle1": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "b1Puzzle2": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "midboss": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "getCryo": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "lakeBattle2": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "c1puzzle1": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "c2Battle": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "c2puzzle1": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "c1Battle": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "centerGotKey": {
+          "condition": [
+            {
+              "type": "OPEN_CHEST",
+              "chest": "swamp.swamp-dng.room-center-key"
+            }
+          ],
+          "offFlags": [],
+          "onFlags": []
+        }
+      },
+      "flags": {},
+      "oldKeys": {}
+    }
+  },
+  {
+    "op": "add",
+    "path": "/plots/swampDng2",
+    "value": {
+      "category": "MAIN",
+      "states": {
+        "init": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "unlockedFirst": {
+          "condition": [
+            {
+              "type": "ITEM_GIVE",
+              "items": [
+                {
+                  "count": 1,
+                  "item": "ap-key-cryo"
+                }
+              ]
+            }
+          ],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "d1Battle": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "d2Puzzle": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "d2Battle": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "d1Checkpoint": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "d1GotKey": {
+          "condition": [
+            {
+              "type": "OPEN_CHEST",
+              "chest": "swamp.swamp-dng.room-d1-key"
+            }
+          ],
+          "offFlags": [],
+          "onFlags": []
+        }
+      },
+      "flags": {},
+      "oldKeys": {}
+    }
+  },
+  {
+    "op": "add",
+    "path": "/plots/swampDng3",
+    "value": {
+      "category": "MAIN",
+      "states": {
+        "init": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "centerLocksOpen": {
+          "condition": [
+            {
+              "type": "ITEM_GIVE",
+              "items": [
+                {
+                  "count": 1,
+                  "item": "ap-key-cryo"
+                }
+              ]
+            }
+          ],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "e1Battle1": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "e2PuzzleSolve": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "e2GotKey": {
+          "condition": [
+            {
+              "type": "OPEN_CHEST",
+              "chest": "swamp.swamp-dng.room-e2-key"
+            }
+          ],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "e1Battle2": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        }
+      }
+    }
+  },
+  {
+    "op": "add",
+    "path": "/plots/swampDng4",
+    "value": {
+      "category": "MAIN",
+      "states": {
+        "init": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "finalLockOpen": {
+          "condition": [
+            {
+              "type": "ITEM_GIVE",
+              "items": [
+                {
+                  "count": 1,
+                  "item": "ap-key-cryo"
+                }
+              ]
+            }
+          ],
+          "offFlags": [],
+          "onFlags": []
+        }
+      },
+      "flags": {},
+      "oldKeys": {}
+    }
   }
 ]

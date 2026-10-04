@@ -110,6 +110,50 @@ function modifyPlotKeys(plotKey: string, stateKey: string): [string, string] {
     ].includes(stateKey)) {
         return ["southDngB", stateKey];
     }
+    if (plotKey == "swampDng") {
+        if ([
+            "a2KeyLock",
+            "a2Battle",
+            "a4puzzle1",
+            "a4Battle",
+            "a4Puzzle2",
+            "lakeBattle1",
+            "b1Puzzle1",
+            "b1Puzzle2",
+            "midboss",
+            "getCryo",
+            "lakeBattle2",
+            "c1puzzle1",
+            "c2Battle",
+            "c2puzzle1",
+            "c1Battle",
+            "centerGotKey"
+        ].includes(stateKey)) {
+            return ["swampDng1", stateKey];
+        }
+        if ([
+            "unlockedFirst",
+            "d1Battle",
+            "d2Puzzle",
+            "d2Battle",
+            "d1Checkpoint",
+            "d1GotKey"
+        ].includes(stateKey)) {
+            return ["swampDng2", stateKey];
+        }
+        if ([
+            "centerLocksOpen",
+            "e1Battle1",
+            "e2PuzzleSolve",
+            "e2GotKey",
+            "e1Battle2"
+        ].includes(stateKey)) {
+            return ["swampDng3", stateKey];
+        }
+        if (stateKey == "finalLockOpen") {
+            return ["swampDng4", stateKey];
+        }
+    }
     return [plotKey, stateKey]
 }
 

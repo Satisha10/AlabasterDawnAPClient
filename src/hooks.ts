@@ -17,6 +17,7 @@ import {
 import {MultiEquip} from "./Patches/weapon";
 import {IncreaseDrops, IncreaseWeaponExp, IncreaseCuisineExp, IncreaseCoreExp} from "./Patches/drops";
 import {AddOptionTab, OptionCallback} from "./Patches/options";
+import {DungeonKeys} from "./Patches/keys";
 
 export class Hooks {
     static init(mod: Mod) {
@@ -44,5 +45,6 @@ export class Hooks {
         mod.inject(AddOptionTab);
         mod.inject(OptionsExit);
         mod.inject(OptionCallback);
+        mod.inject(DungeonKeys);
     }
 }
