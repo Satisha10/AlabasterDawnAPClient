@@ -221,6 +221,7 @@ class ClientData {
             && terra.g_plot.checkPlotStateC("ap_nest_plains", "weaved")
             && terra.g_plot.checkPlotStateC("subDungeonMesa", "nestCleared")
             && terra.g_plot.checkPlotStateC("ap_spire_aether", "weaved")
+            && terra.g_plot.checkPlotStateC("swamp", "bossDefeated")
         ) {
             client.goal();
             addMessage("Goal completed ! Congratulations !")

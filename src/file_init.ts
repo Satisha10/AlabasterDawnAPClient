@@ -34,13 +34,15 @@ export function initializeFile() {
     terra.g_player.setCore(25, true);
     //terra.g_player.setCore(26, true);
     //terra.g_player.setCore(27, true);
-    //terra.g_player.setCore(28, true);
+    terra.g_player.setCore(28, true);
 
     // Quality of life relics
     terra.g_player.inventory.addItem("speed-run");
     terra.g_player.inventory.addItem("loadout-ext-1");
     terra.g_player.inventory.addItem("loadout-ext-2");
+    terra.g_player.inventory.addItem("chest-detector");
     terra.g_player.inventory.toggleRelic("speed-run");
+    terra.g_player.inventory.toggleRelic("chest-detector");
 
     terra.g_player.inventory.addItem("ration-basic");
     terra.g_player.inventory.addItem("ration", 10);

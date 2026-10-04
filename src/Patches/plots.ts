@@ -38,7 +38,8 @@ export class PlotProgress extends Injectable(Plot) {
         if (["ap_nest_valley.weaved",  // Plot states that trigger a location
             "ap_nest_plains.weaved",
             "subDungeonMesa.nestCleared",
-            "ap_spire_aether.weaved"
+            "ap_spire_aether.weaved",
+            "swamp.bossDefeated"
         ].includes(plot_name)) {
             client.check(<number>loc_game_name_id.get(plot_name));
             client_data.checkGoal()

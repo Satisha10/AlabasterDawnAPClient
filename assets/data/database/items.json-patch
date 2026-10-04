@@ -12,7 +12,7 @@
         "langID": 478
       },
       "rarity": "RARE",
-      "track": false,
+      "track": true,
       "type": "KEY",
       "icon": {
         "img": "media/gui/items-icons-ap.png",
@@ -38,7 +38,7 @@
         "langID": 478
       },
       "rarity": "RARE",
-      "track": false,
+      "track": true,
       "type": "KEY",
       "icon": {
         "img": "media/gui/items-icons-ap.png",
