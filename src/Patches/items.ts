@@ -11,7 +11,7 @@ export class ElementTracker extends Injectable(PlayerModel) {
             return super.setCore(type, state, ...args);
         }
         addDebug(`setCore ${type}, ${state}`);
-        let elemMap = new Map([[14, "Physis"], [15, "Aether"], [16, "Cryo"], [17, "Ignis"]]);
+        let elemMap = new Map([[14, "Physis"], [15, "Aether"], [16, "Ignis"], [17, "Cryo"]]);
         let elemName = elemMap.get(type);
         if (elemName && state && item_flags.checkedElem(type)){
             if (loc_game_name_id.has(elemName)) {
