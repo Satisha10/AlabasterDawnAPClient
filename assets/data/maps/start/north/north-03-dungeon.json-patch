@@ -10,7 +10,7 @@
     "op": "replace",
     "path": "/entities/1456/tags",
     "value": [
-      "APTIDE"
+      "!APTIDE"
     ]
   },
   {

@@ -66,6 +66,7 @@ export function initializeFile() {
     equipWeaponsForElement(14);
 
     terra.g_plot.progressPlotToStateC("filia-dmg", "full");
+    terra.g_plot.progressPlotToStateC("somu", "outsideComment");
 
     item_flags.is_init = false;
 }
