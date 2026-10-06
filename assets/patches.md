@@ -10,7 +10,7 @@
 - `start.center.center-06`: patch to the `quickwood` quest: skip the end cutscene (that softlocks), prevent the crumbling platforms from disappearing, and require the combat to finish the quest (and this combat also requires the first part of the quest to trigger)
 - `start.south.south-01-bamboo`: added a sign to tell players that the west bridge also requires CL1 (due to unlocking a CL1 quest).
 - `start.north.north-04-bridge-island`, `start.peak.peak-02`, `start.south.south-01-bamboo`, `swamp.center.center-03`: patch getting the weapon: remove the barrier, make the pedestal permanent, don't equip the weapon, remove the gui/task messages that persist on the screen.
-- `start.south.south-02-nest`, `start.dng.outer-2` and `hub.north.north-04-nyx-nest`: Spawn the boss and the nest/spire cutscene, and progress the plots used to track these events.
+- `start.south.south-02-nest`, `start.dng.outer-2` and `hub.north.north-04-nyx-nest`: Spawn the boss and the nest/spire cutscene, and progress the plots used to track these events. Also remove hyper mode sequence for the Mole fight.
 
 ## Plots
 

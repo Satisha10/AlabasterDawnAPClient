@@ -39,7 +39,7 @@
     "value": {
       "debug": false,
       "description": {
-        "en_US": "Multiply the combat and cooking experience.",
+        "en_US": "Multiply the combat experience.",
         "langID": 15457
       },
       "hidden": false,

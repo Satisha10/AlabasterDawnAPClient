@@ -1,6 +1,5 @@
 import {Injectable, terra} from "@project-selene/api";
-import {DropManager, PlayerCoreStats, PlayerCuisine, PlayerWeapon} from "@project-selene/api/terra";
-import {addDebug} from "../doc";
+import {DropManager, PlayerCoreStats, PlayerWeapon} from "@project-selene/api/terra";
 
 
 export class IncreaseDrops extends Injectable(DropManager) {
@@ -15,11 +14,14 @@ export class IncreaseCoreExp extends Injectable(PlayerCoreStats) {
     }
 }
 
+// TODO Doesn't work well, need to also fix the initial exp
+/*
 export class IncreaseCuisineExp extends Injectable(PlayerCuisine) {
     addExp(exp: number, ...args: unknown[]) {
         return super.addExp(exp * terra.g_options.get("exp_mult"), ...args);
     }
 }
+*/
 
 export class IncreaseWeaponExp extends Injectable(PlayerWeapon) {
     addExp(exp: number, ...args: unknown[]) {

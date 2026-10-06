@@ -15,7 +15,7 @@ import {
     OptionsExit
 } from "./Patches/save";
 import {MultiEquip} from "./Patches/weapon";
-import {IncreaseDrops, IncreaseWeaponExp, IncreaseCuisineExp, IncreaseCoreExp} from "./Patches/drops";
+import {IncreaseDrops, IncreaseWeaponExp, IncreaseCoreExp} from "./Patches/drops";
 import {AddOptionTab, OptionCallback} from "./Patches/options";
 import {DungeonKeys} from "./Patches/keys";
 
@@ -39,7 +39,7 @@ export class Hooks {
         mod.inject(PlotCompleted);
         mod.inject(MultiEquip);
         mod.inject(IncreaseDrops);
-        mod.inject(IncreaseCuisineExp);
+        // mod.inject(IncreaseCuisineExp);
         mod.inject(IncreaseWeaponExp);
         mod.inject(IncreaseCoreExp);
         mod.inject(AddOptionTab);
