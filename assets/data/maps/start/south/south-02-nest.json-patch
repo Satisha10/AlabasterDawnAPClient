@@ -1,13 +1,5 @@
 [
   {
-    "op": "remove",
-    "path": "/entities/5/tags"
-  },
-  {
-    "op": "remove",
-    "path": "/entities/6/tags"
-  },
-  {
     "op": "replace",
     "path": "/entities/6/setPlot",
     "value": "ap_boss_valley.defeated"
@@ -22,8 +14,14 @@
     "value": "!$p.has.ap_boss_valley.defeated"
   },
   {
-    "op": "remove",
-    "path": "/entities/1211/tags"
+    "op": "replace",
+    "path": "/tags/Nat/cond",
+    "value": "$p.has.ap_nest_valley.weaved"
+  },
+  {
+    "op": "replace",
+    "path": "/tags/Tra/cond",
+    "value": "$p.has.ap_nest_valley.weaved"
   },
   {
     "op": "add",
