@@ -27,5 +27,10 @@
     "op": "replace",
     "path": "/entities/1880/triggerType",
     "value": "ONCE_PER_ENTRY"
+  },
+  {
+    "op": "replace",
+    "path": "/entities/1872/startCond",
+    "value": "false"
   }
 ]

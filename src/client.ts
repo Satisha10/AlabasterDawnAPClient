@@ -229,6 +229,7 @@ class ClientData {
         else {
             addMessage("Nest or spire weaved ! Some are still missing for the goal")
         }
+        terra.g_bgm.resumeDefault();  // Usually, music is stopped after weaving a nest or spire
     }
 }
 
