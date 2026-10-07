@@ -1,8 +1,10 @@
 # Alabaster Dawn Client for Archipelago randomizer
 
-The implementation is still very early in development, and is currently not recommended to use in a big multiworld (unless everyone in the game agrees to it). You will likely encounter bugs, crashes or logic issues (you should also use multiple save slots in case a softlock occurs). Please report any issue that you encounter ! (on Discord or in this repository)
+The implementation is still early in development. You might encounter minor issues, but it appears to be quite stable. Please report any issue that you encounter ! (on Discord or in this repository)
 
 If you have any questions, ideas or bug reports, feel free to ask in the [implementation thread](https://discord.com/channels/731205301247803413/1487693744177152030) of the AP discord.
+
+The latest release includes the content from the 0.2.X versions of the game.
 
 ## Setup
 
@@ -42,6 +44,7 @@ The goal is currently to finish the Eternal Spring dungeon in Koro Valley.
 ### Locations
 
 - Chests
+- Nyx nests and spires
 - Quests (main and side quests)
 - Weapons and elements
 
@@ -58,7 +61,7 @@ The goal is currently to finish the Eternal Spring dungeon in Koro Valley.
 ### Notes
 
 - Yaml-less Universal Tracker is supported.
-- You can equip a weapon to multiple elements (this is needed to fix an issue, I might add back the vanilla behavior if I find a solution).
+- The game mod adds option to whange some game behaviors or enable deathlink.
 - If you want to play the vanilla game, remove the `package.json` file, and rename `package-vanilla.json` to `package.json`. Removing mods from the `mods` folder will also work.
 - The AP World source code is on [another repository](https://github.com/Satisha10/Archipelago_wotw/tree/alabaster-dawn/worlds/alabaster_dawn).
 
@@ -67,11 +70,9 @@ The goal is currently to finish the Eternal Spring dungeon in Koro Valley.
 - Improve the client: cache the datapackages, display/format more messages
 - Automatically connect when loading a save file, and check that it is the same multiworld
 - Collect locations already checked in the server
-- Add Nyx spires and nests as locations (and add the boss fights)
 - Show the chests and their item classification on the map
 - Progressive area unlocks
 - Progressive gems
-- Death link
 - Start with random weapons
 - Options to add locations for cooking dishes, crafting gems
 - Randomize quest rewards and offerings (and scout the rewards)
@@ -80,3 +81,8 @@ The goal is currently to finish the Eternal Spring dungeon in Koro Valley.
 - Show the archipelago messages using the game UI
 - Add a text client
 - In-game logic tracker (maybe, and not anytime soon)
+
+## Known issues
+
+- Receiving a deathlink currently doesn't kill you, it only puts you at 0 health.
+- The quests **The Fervor of Youth** and **Quick Quickwood Query** have some fights that are missing.
