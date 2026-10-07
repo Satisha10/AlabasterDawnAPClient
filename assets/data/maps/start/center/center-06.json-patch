@@ -14,7 +14,7 @@
       "speed": "WALKING",
       "states": [
         {
-          "condition": "$p.has.quickwood.afterHammerStuck && !$p.has.quickwood.pathBackFightFinal",
+          "condition": "$p.has.quickwood.hammerBarrierSwitchPost && !$p.has.quickwood.pathBackFightFinal",
           "event": [
             {
               "type": "TALK",
@@ -129,7 +129,7 @@
   {
     "op": "replace",
     "path": "/entities/1842/condition",
-    "value": "$p.has.quickwood.afterHammerStuck"
+    "value": "$p.has.quickwood.hammerBarrierSwitchPost"
   },
   {
     "op": "replace",
