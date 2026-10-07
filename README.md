@@ -33,7 +33,7 @@ Download the `APClient.mod.zip` file from the [releases](https://github.com/Sati
 
 All of this is subject to changes as the development of this implementation (and of the base game) continues.
 
-The goal is currently to finish the Eternal Spring dungeon in Koro Valley.
+The goal is currently to weave all nests (3: Koro Valley, Eternal Spring, Aurun Plains) and spires (2: Trial of Aether, Cryo).
 
 ### Global changes
 
