@@ -33,7 +33,7 @@ function getActiveTagsPatched(dest: string[], tags: any) {  // tags: map[string,
 // First value: if the value is altered (i.e. result set by the function). Second: the result of the new condition (only used if first is true).
 function modifyTag(tagKey: string): [boolean, boolean] {
     if (tagKey == "CL1") {
-        let map: string | undefined;
+        let map: string | undefined;  // TODO Refactor into a function
         if (terra.g_game.map.loading?.path) {  // Loaded map takes priority when it exists
             map = terra.g_game.map.loading?.path
         }
