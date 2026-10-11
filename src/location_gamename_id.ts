@@ -116,6 +116,7 @@ export const loc_game_name_id = new Map<string, number>([
     ["swamp.one-puzzle-dng", 413],
     ["swamp.swamp-dng.room-a3-key", 450],
     ["swamp.swamp-dng.room-a4-1", 451],
+    ["swamp.swamp-dng.room-a2-1", 452],
     ["swamp.swamp-dng.room-c1-2", 453],
     ["swamp.swamp-dng.room-c1-1", 454],
     ["swamp.swamp-dng.room-center-key", 455],

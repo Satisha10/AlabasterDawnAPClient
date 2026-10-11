@@ -100,7 +100,6 @@ export const item_name_data = new Map<number, ItemData>([
     [928, {name: "bp-mel-cntrdmg", qty: 1}],
     [902, {name: "bp-mel-min-ampli", qty: 1}],
     [903, {name: "bp-mel-finisher", qty: 1}],
-    [904, {name: "bp-mel-brkdmg", qty: 1}],
     [929, {name: "bp-rng-hydration", qty: 1}],
     [905, {name: "bp-rang-min-snip", qty: 1}],
     [906, {name: "bp-rang-min-highground", qty: 1}],
