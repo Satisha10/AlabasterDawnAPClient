@@ -2,9 +2,10 @@ import {Client, DeathLinkManager, Item, ItemsManager, NetworkPlayer} from "archi
 import {addDebug, addMessage} from "./doc";
 import {giveGameItem} from "./item_handler";
 import {terra} from "@project-selene/api";
+import {loadPackages, savePackages} from "./datapackage";
 
 // Create a new instance of the Client class.
-export const client = new Client();
+export const client = new Client({autoFetchDataPackage: false});
 export const items_manager = new ItemsManager(client);
 export const death_link_manager = new DeathLinkManager(client);
 
@@ -30,6 +31,17 @@ export function init_client() {
             addMessage(`${source} died`)
         }
         terra.g_player.combat.params.setDefeated();  // TODO Kill the player instead of putting it at 0 HP
+    });
+
+    client.socket.on("roomInfo", (packet) => {
+        loadPackages(packet.datapackage_checksums).then((dataPackage) => {
+                client.package.importPackage(dataPackage)
+                addDebug("Imported cached DataPackage")
+                client.package.fetchPackage().then(dataPackage => {
+                    savePackages(dataPackage);
+                })
+            }
+        )
     });
 
     client.socket.on("connected", (packet) => {
