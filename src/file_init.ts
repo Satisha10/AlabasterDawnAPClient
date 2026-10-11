@@ -70,5 +70,9 @@ export function initializeFile() {
 
     terra.g_world.unlockLandmark("start-village-center")
 
+    for (let [_, chest] of terra.g_chests.chests) {
+        chest.seen = true;
+    }
+
     item_flags.is_init = false;
 }
