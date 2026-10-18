@@ -1,0 +1,158 @@
+[
+  {
+    "op": "add",
+    "path": "/interacts/chest-prog-useful",
+    "value": {
+      "image": {
+        "img": "media/gui/ap_chests.png",
+        "range": [
+          0,
+          0,
+          16,
+          16
+        ]
+      },
+      "maxZ": "X_16",
+      "minZ": "X_4",
+      "offset": [
+        0,
+        0
+      ],
+      "label": {
+        "en_US": "Progression+Useful",
+        "langID": 16545
+      },
+      "type": "LABEL"
+    }
+  },
+  {
+    "op": "add",
+    "path": "/interacts/chest-prog",
+    "value": {
+      "image": {
+        "img": "media/gui/ap_chests.png",
+        "range": [
+          16,
+          0,
+          16,
+          16
+        ]
+      },
+      "maxZ": "X_16",
+      "minZ": "X_4",
+      "offset": [
+        0,
+        0
+      ],
+      "label": {
+        "en_US": "Progression",
+        "langID": 16546
+      },
+      "type": "LABEL"
+    }
+  },
+  {
+    "op": "add",
+    "path": "/interacts/chest-useful",
+    "value": {
+      "image": {
+        "img": "media/gui/ap_chests.png",
+        "range": [
+          32,
+          0,
+          16,
+          16
+        ]
+      },
+      "maxZ": "X_16",
+      "minZ": "X_4",
+      "offset": [
+        0,
+        0
+      ],
+      "label": {
+        "en_US": "Useful",
+        "langID": 16547
+      },
+      "type": "LABEL"
+    }
+  },
+  {
+    "op": "add",
+    "path": "/interacts/chest-filler",
+    "value": {
+      "image": {
+        "img": "media/gui/ap_chests.png",
+        "range": [
+          48,
+          0,
+          16,
+          16
+        ]
+      },
+      "maxZ": "X_16",
+      "minZ": "X_4",
+      "offset": [
+        0,
+        0
+      ],
+      "label": {
+        "en_US": "Filler",
+        "langID": 16548
+      },
+      "type": "LABEL"
+    }
+  },
+  {
+    "op": "add",
+    "path": "/interacts/chest-trap",
+    "value": {
+      "image": {
+        "img": "media/gui/ap_chests.png",
+        "range": [
+          64,
+          0,
+          16,
+          16
+        ]
+      },
+      "maxZ": "X_16",
+      "minZ": "X_4",
+      "offset": [
+        0,
+        0
+      ],
+      "label": {
+        "en_US": "Trap",
+        "langID": 16549
+      },
+      "type": "LABEL"
+    }
+  },
+  {
+    "op": "add",
+    "path": "/interacts/chest-unknown",
+    "value": {
+      "image": {
+        "img": "media/gui/ap_chests.png",
+        "range": [
+          80,
+          0,
+          16,
+          16
+        ]
+      },
+      "maxZ": "X_16",
+      "minZ": "X_4",
+      "offset": [
+        0,
+        0
+      ],
+      "label": {
+        "en_US": "Unknown",
+        "langID": 16550
+      },
+      "type": "LABEL"
+    }
+  }
+]
