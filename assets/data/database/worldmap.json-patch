@@ -154,5 +154,31 @@
       },
       "type": "LABEL"
     }
+  },
+  {
+    "op": "add",
+    "path": "/interacts/chest-trap-fake",
+    "value": {
+      "image": {
+        "img": "media/gui/ap_chests.png",
+        "range": [
+          96,
+          0,
+          16,
+          16
+        ]
+      },
+      "maxZ": "X_16",
+      "minZ": "X_4",
+      "offset": [
+        0,
+        0
+      ],
+      "label": {
+        "en_US": "Trap",
+        "langID": 16551
+      },
+      "type": "LABEL"
+    }
   }
 ]

@@ -38,6 +38,11 @@ export class Test extends Injectable(MapInteractLayer) {
         interact.pos = Vec2.fromArray([30, 300])
         this.addInteract(interact, this.floor.visited, -17, -33, 26, true)
 
+        interact = FloorInteractable.get("chest-prog-7", { type: "chest-trap-fake" })
+        interact.pos = Vec2.fromArray([20, 290])
+        this.addInteract(interact, this.floor.visited, -17, -33, 26, true)
+
+
         this.updateInteractPositions(true);
     }
     addMarkerInteract(pos: any, type: any, ...args: unknown[]) {
