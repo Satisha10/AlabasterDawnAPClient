@@ -1,11 +1,14 @@
 import {terra} from "@project-selene/api";
-import {item_flags} from "./client";
+import {client_data, item_flags} from "./client";
 import {equipWeaponsForElement} from "./item_handler";
 import {addDebug} from "./doc";
 
 // TODO Fix main quests skipped and bridges repaired
 export function initializeFile() {
     addDebug("Initializing file");
+
+    client_data.scoutLocations();
+
     item_flags.is_init = true;
 
     terra.g_player.setCore(0, true);

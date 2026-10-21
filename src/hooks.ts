@@ -18,7 +18,7 @@ import {MultiEquip} from "./Patches/weapon";
 import {IncreaseDrops, IncreaseWeaponExp, IncreaseCoreExp} from "./Patches/drops";
 import {AddOptionTab, OptionCallback} from "./Patches/options";
 import {DungeonKeys} from "./Patches/keys";
-import {Test, TestText} from "./Patches/markers"
+import {MarkerMap, MarkerTooltip} from "./Patches/markers"
 
 export class Hooks {
     static init(mod: Mod) {
@@ -47,7 +47,7 @@ export class Hooks {
         mod.inject(OptionsExit);
         mod.inject(OptionCallback);
         mod.inject(DungeonKeys);
-        mod.inject(Test);
-        mod.inject(TestText);
+        mod.inject(MarkerMap);
+        mod.inject(MarkerTooltip);
     }
 }

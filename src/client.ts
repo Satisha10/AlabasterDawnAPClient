@@ -3,6 +3,7 @@ import {addDebug, addMessage} from "./doc";
 import {giveGameItem} from "./item_handler";
 import {terra} from "@project-selene/api";
 import {loadPackages, savePackages} from "./datapackage";
+import {fetchSave} from "./utils";
 
 // Create a new instance of the Client class.
 export const client = new Client({autoFetchDataPackage: false});
@@ -104,6 +105,8 @@ class ClientData {
 
     checked_locations: number[];
 
+    scouted_locations: Map<number, number>;  // TODO use id or name, idk yet
+
     constructor() {
         this.url = "ws://localhost:38281";  // TODO
         this.slot_name = "Player1";
@@ -120,6 +123,7 @@ class ClientData {
         this.is_save_valid = false;
         // Contains locations checked, but not yet validated by the server
         this.checked_locations = [];
+        this.scouted_locations = new Map();
     }
 
     // Connect to the multiworld with the given connection info (optional, otherwise use the ones from the instance).
@@ -148,23 +152,28 @@ class ClientData {
             .catch(() => addMessage(`Connection failed (url: ${connUrl}, Slot name: ${connName})`));
     }
 
-        // TODO Regroup the two functions
-    handleItems(items: Item[]) {
+    scoutLocations() {
+        let scout_locations: number[] = client.room.checkedLocations.concat(client.room.missingLocations);
+        client.scout(scout_locations).then((items) => {
+            for (let item of items) {
+                client_data.scouted_locations.set(item.locationId, item.flags);
+            }
+        })
+    }
+
+    giveStashedItems() {
         addDebug("Give items");
         if (!client.authenticated || !this.is_loaded) {
             return;
         }
-        let item: Item;
-        items = items.slice(this.last_item_index);
+        let items = items_manager.received.slice(this.last_item_index);
+        // Stays at -1 if no item given, otherwise gives sound of most important item
 
-        for (item of items) {
+        for (let item of items) {
             giveGameItem(item);
             this.last_item_index += 1;
         }
-    }
 
-    giveStashedItems() {
-        this.handleItems(items_manager.received);
     }
 
     checkLocation(id: number) {
@@ -203,11 +212,12 @@ class ClientData {
     // TODO
     // Import the client state from the save file data
     importState(data: any) {
-        this.url = data.url;
-        this.slot_name = data.slot_name;
-        this.password = data.password;
-        this.last_item_index = data.last_item_index;
-        this.checked_locations = data.checked_locations;
+        this.url = fetchSave(data.url, "localhost:38281", "url");
+        this.slot_name = fetchSave(data.slot_name, "Player 1", "slot_name");
+        this.password = fetchSave(data.password, "", "password");
+        this.last_item_index = fetchSave(data.last_item_index, 0, "last_item_index");
+        this.checked_locations = fetchSave(data.checked_locations, [], "checked_locations");
+        this.scouted_locations = fetchSave(data.scouted_locations, new Map(), "scouted_locations");  // TODO add to class def, save, reset
     }
 
     resetState() {
