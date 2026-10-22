@@ -3,6 +3,7 @@ import {addDebug, addMessage} from "./doc";
 import {giveGameItem} from "./item_handler";
 import {terra} from "@project-selene/api";
 import {loadPackages, savePackages} from "./datapackage";
+import {Sound} from "@project-selene/api/terra";
 import {fetchSave} from "./utils";
 
 // Create a new instance of the Client class.
@@ -167,13 +168,34 @@ class ClientData {
             return;
         }
         let items = items_manager.received.slice(this.last_item_index);
+        let sound_number = -1  // Sound to play (one for the array of items). High numbers have higher priority.
         // Stays at -1 if no item given, otherwise gives sound of most important item
 
         for (let item of items) {
             giveGameItem(item);
             this.last_item_index += 1;
+            if (item.progression && item.useful) {
+                sound_number = Math.max(sound_number, 4);
+            }
+            else if (item.progression) {
+                sound_number = Math.max(sound_number, 3);
+            }
+            else if (item.useful) {
+                sound_number = Math.max(sound_number, 2);
+            }
+            else if (item.trap) {
+                sound_number = Math.max(sound_number, 1);
+            }
+            else {
+                sound_number = Math.max(sound_number, 0);
+            }
         }
 
+        // Play one sound effect for the most important item
+        let sound_path = soundMap.get(sound_number)
+        if (sound_path) {
+            new Sound(sound_path).play();
+        }
     }
 
     checkLocation(id: number) {
@@ -256,6 +278,15 @@ class ClientData {
 }
 
 export const client_data = new ClientData();
+
+// Sound effect played when receiving an item
+let soundMap = new Map([
+    [0, "media/audio/sfx/item/item-collect-common.wav"],
+    //[1, ""],  // TODO trap sound effect
+    [2, "media/audio/sfx/item/item-collect-rare.wav"],
+    [3, "media/audio/sfx/item/item-collect-exotic.wav"],
+    [4, "media/audio/sfx/item/item-collect-legendary.wav"]
+]);
 
 // Class to track if a location check is due to receiving an AP item
 class ItemFlags {
