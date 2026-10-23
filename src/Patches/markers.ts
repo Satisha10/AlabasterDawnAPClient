@@ -8,6 +8,10 @@ import {
 import {addDebug, addMessage} from "../doc";
 import {client, client_data} from "../client";
 import {loc_game_name_id} from "../location_gamename_id";
+import {loc_game_name_ap_name} from "../location_gamename_name";
+
+// TODO Save the data
+// TODO make them appear without setting seen to true (or circumvent that in some way)
 
 // terra.g_menu.gui.getMenu(SUB_MENU.MAP).views.get(MAP_MENU_VIEW.MAP).getMap().getInteractLayer().addMarkerInteract
 // For creating markers outside the class
@@ -54,7 +58,11 @@ export class MarkerMap extends Injectable(MapInteractLayer) {
     addInteract(old_interact: any, visited: any, minX: any, minY: any, gridWidth: any, ignoreVisited = false, ...args: unknown[]) {
         if (old_interact.uid.startsWith("dyn_chest_")) {
             let chest_key: string = old_interact.uid.slice("dyn_chest_".length);
-            let new_interact = FloorInteractable.get("ap_label_", { type: getChestIcon(chest_key) });  // TODO name is location name
+            let loc_name = loc_game_name_ap_name.get(chest_key)
+            if (loc_name == undefined) {
+                return;  // The chest is not a multiworld location: don't show it on the map.
+            }
+            let new_interact = FloorInteractable.get(`ap_label_${loc_name}`, { type: getChestIcon(chest_key) });  // TODO name is location name
             new_interact.pos = old_interact.pos;
             return super.addInteract(new_interact, visited, minX, minY, gridWidth, true, ...args);
         }

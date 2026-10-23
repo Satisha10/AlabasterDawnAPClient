@@ -151,5 +151,5 @@ export const loc_game_name_id = new Map<string, number>([
     ["teacherStash", 1509],
     ["bathHouse1", 1510],
     ["hotHeadLad1", 1511],
-    ["lakeFish1", 1512]
+    ["lakeFish1", 1512],
 ]);

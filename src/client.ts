@@ -174,8 +174,9 @@ class ClientData {
         for (let item of items) {
             giveGameItem(item);
             this.last_item_index += 1;
+            addDebug(`${item.progression} ${item.useful} ${item.flags}`)
             if (item.progression && item.useful) {
-                sound_number = Math.max(sound_number, 4);
+                sound_number = 4
             }
             else if (item.progression) {
                 sound_number = Math.max(sound_number, 3);
@@ -194,6 +195,7 @@ class ClientData {
         // Play one sound effect for the most important item
         let sound_path = soundMap.get(sound_number)
         if (sound_path) {
+            addDebug(`${sound_path}`);
             new Sound(sound_path).play();
         }
     }
