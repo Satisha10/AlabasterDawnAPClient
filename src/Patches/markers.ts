@@ -88,7 +88,6 @@ function getChestIcon(key: string): string {
     let is_prog = classification & 0b001;
     let is_useful = classification & 0b010;
     let is_trap = classification & 0b100;
-    addDebug(`${classification} ${is_prog} ${is_useful}`)
 
     if (is_prog && is_useful) {
         return "chest-prog-useful";  // TODO hinted items
