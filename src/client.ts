@@ -32,7 +32,7 @@ export function init_client() {
         else {
             addMessage(`${source} died`)
         }
-        terra.g_player.combat.params.setDefeated();  // TODO Kill the player instead of putting it at 0 HP
+        terra.g_scene.loadCheckpoint(true);  // Reload last save
     });
 
     client.socket.on("roomInfo", (packet) => {
@@ -108,6 +108,8 @@ class ClientData {
 
     scouted_locations: Map<number, number>;  // TODO use id or name, idk yet
 
+    deathLinkDeath: boolean;
+
     constructor() {
         this.url = "ws://localhost:38281";  // TODO
         this.slot_name = "Player1";
@@ -125,6 +127,9 @@ class ClientData {
         // Contains locations checked, but not yet validated by the server
         this.checked_locations = [];
         this.scouted_locations = new Map();
+
+        // Flag, set to True when the death is caused by a death link and not the player
+        this.deathLinkDeath = false;
     }
 
     // Connect to the multiworld with the given connection info (optional, otherwise use the ones from the instance).
@@ -249,13 +254,20 @@ class ClientData {
         this.is_loaded = false;
         this.checked_locations = [];
         this.is_save_valid = false;
+        this.scouted_locations = new Map();
+        this.deathLinkDeath = false;
     }
 
     onDeath() {
         this.last_item_index = this.last_saved_index;
+        if (this.deathLinkDeath) {
+            this.deathLinkDeath = false;
+            return;
+        }
         if (death_link_manager.enabled) {
             death_link_manager.sendDeathLink(this.alias);
         }
+
     }
 
     checkGoal() {
