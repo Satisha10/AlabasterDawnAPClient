@@ -265,6 +265,7 @@ class ClientData {
             return;
         }
         if (death_link_manager.enabled) {
+            addMessage("You died. Sending a Death Link.")
             death_link_manager.sendDeathLink(this.alias);
         }
 
