@@ -3,7 +3,7 @@ import {addDebug, addMessage} from "./doc";
 import {giveGameItem} from "./item_handler";
 import {terra} from "@project-selene/api";
 import {loadPackages, savePackages} from "./datapackage";
-import {Sound} from "@project-selene/api/terra";
+import {Sound, SoundSettings} from "@project-selene/api/terra";
 import {fetchSave} from "./utils";
 
 // Create a new instance of the Client class.
@@ -174,7 +174,6 @@ class ClientData {
         for (let item of items) {
             giveGameItem(item);
             this.last_item_index += 1;
-            addDebug(`${item.progression} ${item.useful} ${item.flags}`)
             if (item.progression && item.useful) {
                 sound_number = 4
             }
@@ -195,8 +194,7 @@ class ClientData {
         // Play one sound effect for the most important item
         let sound_path = soundMap.get(sound_number)
         if (sound_path) {
-            addDebug(`${sound_path}`);
-            new Sound(sound_path).play();
+            new Sound(sound_path, new SoundSettings({ volume: 0.6 })).play();
         }
     }
 
