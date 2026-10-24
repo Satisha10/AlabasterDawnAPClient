@@ -1,9 +1,11 @@
 import {Injectable, terra} from "@project-selene/api";
 import {
-    FloorInteractable, LangEntry,
+    Chest,
+    FloorInteractable,
+    LangEntry,
     MapInfoLayer,
     MapInteractLayer,
-    Vec2
+    Vec2,
 } from "@project-selene/api/terra";
 import {addDebug, addMessage} from "../doc";
 import {client, client_data} from "../client";
@@ -13,44 +15,11 @@ import {loc_game_name_ap_name} from "../location_gamename_name";
 // TODO Save the data
 // TODO make them appear without setting seen to true (or circumvent that in some way)
 
+let overrideSeenFlag = false;
+
 // terra.g_menu.gui.getMenu(SUB_MENU.MAP).views.get(MAP_MENU_VIEW.MAP).getMap().getInteractLayer().addMarkerInteract
 // For creating markers outside the class
 export class MarkerMap extends Injectable(MapInteractLayer) {
-    enter() {
-        this.active = true;
-        // TODO remove test markers
-
-        let interact = FloorInteractable.get("chest-prog-1", { type: "chest-prog-useful" })
-        interact.pos = Vec2.fromArray([-20, 300])
-        this.addInteract(interact, this.floor.visited, -17, -33, 26, true)
-
-        interact = FloorInteractable.get("chest-prog-2", { type: "chest-prog" })
-        interact.pos = Vec2.fromArray([-10, 300])
-        this.addInteract(interact, this.floor.visited, -17, -33, 26, true)
-
-        interact = FloorInteractable.get("chest-prog-3", { type: "chest-useful" })
-        interact.pos = Vec2.fromArray([0, 300])
-        this.addInteract(interact, this.floor.visited, -17, -33, 26, true)
-
-        interact = FloorInteractable.get("chest-prog-4", { type: "chest-filler" })
-        interact.pos = Vec2.fromArray([10, 300])
-        this.addInteract(interact, this.floor.visited, -17, -33, 26, true)
-
-        interact = FloorInteractable.get("chest-prog-5", { type: "chest-trap" })
-        interact.pos = Vec2.fromArray([20, 300])
-        this.addInteract(interact, this.floor.visited, -17, -33, 26, true)
-
-        interact = FloorInteractable.get("chest-prog-6", { type: "chest-unknown" })
-        interact.pos = Vec2.fromArray([30, 300])
-        this.addInteract(interact, this.floor.visited, -17, -33, 26, true)
-
-        interact = FloorInteractable.get("chest-prog-7", { type: "chest-trap-fake" })
-        interact.pos = Vec2.fromArray([20, 290])
-        this.addInteract(interact, this.floor.visited, -17, -33, 26, true)
-
-
-        this.updateInteractPositions(true);
-    }
     addMarkerInteract(pos: any, type: any, ...args: unknown[]) {
         //addDebug(`${pos}, ${type}`);
         return super.addMarkerInteract(pos, type, ...args);
@@ -67,6 +36,11 @@ export class MarkerMap extends Injectable(MapInteractLayer) {
             return super.addInteract(new_interact, visited, minX, minY, gridWidth, true, ...args);
         }
         return super.addInteract(old_interact, visited, minX, minY, gridWidth, ignoreVisited, ...args);
+    }
+    setArea(...args: unknown[]) {  // Use that every chest is seen to make the initial marker appear on the map
+        overrideSeenFlag = true;
+        super.setArea(...args);
+        overrideSeenFlag = false;
     }
 }
 
@@ -90,9 +64,6 @@ function getChestIcon(key: string): string {
         addMessage(`Unknown chest key ${key} in the game data`);
         return "chest-unknown";
     }
-    if (!chest.seen) {
-        return "chest-unknown";
-    }
     if (chest.opened) {
         return "chest-OPEN";
     }
@@ -108,6 +79,10 @@ function getChestIcon(key: string): string {
     }
     if (client.room.checkedLocations.includes(loc_id)) {  // TODO not needed once collect for chests is implemented
         return "chest-OPEN";
+    }
+
+    if (!chest.seen) {
+        return "chest-unknown";
     }
 
     let is_prog = classification & 0b001;
@@ -127,4 +102,14 @@ function getChestIcon(key: string): string {
         return "chest-trap-fake";  // TODO fake icon or not with option
     }
     return "chest-filler";
+}
+
+// Circumvent chest.seen when creating the markers, so that the ones not visited yet appear on the map.
+export class ChestSeen extends Injectable(Chest) {
+    isSeen(...args: unknown[]) {
+        if (overrideSeenFlag) {
+            return true;
+        }
+        return super.isSeen(...args)
+    }
 }
