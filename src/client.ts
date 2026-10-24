@@ -228,10 +228,10 @@ class ClientData {
             password: this.password,
             last_item_index: this.last_item_index,
             checked_locations: this.checked_locations,
+            scouted_locations: this.scouted_locations,
         }
     }
 
-    // TODO
     // Import the client state from the save file data
     importState(data: any) {
         this.url = fetchSave(data.url, "localhost:38281", "url");
@@ -239,7 +239,7 @@ class ClientData {
         this.password = fetchSave(data.password, "", "password");
         this.last_item_index = fetchSave(data.last_item_index, 0, "last_item_index");
         this.checked_locations = fetchSave(data.checked_locations, [], "checked_locations");
-        this.scouted_locations = fetchSave(data.scouted_locations, new Map(), "scouted_locations");  // TODO add to class def, save, reset
+        this.scouted_locations = fetchSave(data.scouted_locations, new Map(), "scouted_locations");
     }
 
     resetState() {

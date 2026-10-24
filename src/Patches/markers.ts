@@ -31,7 +31,7 @@ export class MarkerMap extends Injectable(MapInteractLayer) {
             if (loc_name == undefined) {
                 return;  // The chest is not a multiworld location: don't show it on the map.
             }
-            let new_interact = FloorInteractable.get(`ap_label_${loc_name}`, { type: getChestIcon(chest_key) });  // TODO name is location name
+            let new_interact = FloorInteractable.get(`ap_label_${loc_name}`, { type: getChestIcon(chest_key) });
             new_interact.pos = old_interact.pos;
             return super.addInteract(new_interact, visited, minX, minY, gridWidth, true, ...args);
         }
@@ -50,7 +50,7 @@ export class MarkerTooltip extends Injectable(MapInfoLayer) {
         if (interact.uid.startsWith("ap_label_")) {
             let text: string = interact.uid.slice("ap_label_".length);
             if (this.interactTooltip.text) {
-                let lang_entry = LangEntry.get({ en_US: text, langID: 947591, path: "#warnings" });  // TODO path
+                let lang_entry = LangEntry.get({ en_US: text, langID: 947591, path: "#warnings" });
                 this.interactTooltip.setText(lang_entry);
             }
         }
@@ -88,8 +88,9 @@ function getChestIcon(key: string): string {
     let is_prog = classification & 0b001;
     let is_useful = classification & 0b010;
     let is_trap = classification & 0b100;
+    addDebug(`${classification} ${is_prog} ${is_useful}`)
 
-    if (is_prog & is_useful) {
+    if (is_prog && is_useful) {
         return "chest-prog-useful";  // TODO hinted items
     }
     if (is_prog) {
