@@ -1,6 +1,6 @@
 {
   "name": "alabaster_dawn_ap",
-  "version": "0.1.0",
+  "version": "0.2.2",
   "description": "Client for Archipelago multiworld randomizer",
   "main": "dist/main.js",
   "type": "module",
