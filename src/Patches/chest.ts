@@ -1,7 +1,7 @@
 import {Injectable, terra} from "@project-selene/api";
 import {ChestDatabase, Chest} from "@project-selene/api/terra";
-import {addMessage, addDebug} from "../doc";
-import {client, client_data} from "../client";
+import {addDebug} from "../doc";
+import {client_data} from "../client";
 import {loc_game_name_id} from "../location_gamename_id"
 
 
@@ -30,7 +30,6 @@ export class ChestPatch extends Injectable(Chest) {
     addItemContent(...args: unknown[]) {  // Don't give the chest items
     }
 
-    // TODO village chests ?
     getType(...args: unknown[]) {
         let loc_id = loc_game_name_id.get(this.key);
 
@@ -58,7 +57,10 @@ export class ChestPatch extends Injectable(Chest) {
             return "arts";
         }
         if (is_trap) {
-            return "dngKey";  // TODO fake icon or not with option
+            if (terra.g_options.get("fake_traps")) {
+                return "dngKey";
+            }
+            return "sackCloth";
         }
         return "default";
     }

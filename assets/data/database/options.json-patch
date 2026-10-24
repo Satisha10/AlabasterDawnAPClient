@@ -110,5 +110,27 @@
       },
       "category": "ARCHIPELAGO"
     }
+  },
+  {
+    "op": "add",
+    "path": "/fake_traps",
+    "value": {
+      "debug": false,
+      "description": {
+        "en_US": "Use fake progrssion icons for the chests when they contain a trap item",
+        "langID": 15460
+      },
+      "hidden": false,
+      "label": {
+        "en_US": "Fake trap icons",
+        "langID": 15912491
+      },
+      "local": false,
+      "type": {
+        "default": true,
+        "type": "CHECKBOX"
+      },
+      "category": "ARCHIPELAGO"
+    }
   }
 ]

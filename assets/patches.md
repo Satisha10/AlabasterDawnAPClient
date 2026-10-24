@@ -30,3 +30,4 @@ The main plot progress is set to the end by the client on initialization.
 
 - Add options for increasing the drop rate and exp gains, enabling deathlink, and other misc options. These are put in an `"ARCHIPELAGO"` tab, which is defined in `lang/gui.json` and in a code patch.
 - Add items for dungeon separated keys.
+- Add map icons, defined in `database/worldmap.json`

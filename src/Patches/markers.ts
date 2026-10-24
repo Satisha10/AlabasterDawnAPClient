@@ -99,7 +99,10 @@ function getChestIcon(key: string): string {
         return "chest-useful";
     }
     if (is_trap) {
-        return "chest-trap-fake";  // TODO fake icon or not with option
+        if (terra.g_options.get("fake_traps")) {
+            return "chest-trap-fake";
+        }
+        return "chest-trap";
     }
     return "chest-filler";
 }
