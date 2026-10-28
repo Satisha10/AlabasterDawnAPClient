@@ -5,7 +5,6 @@ import {
     LangEntry,
     MapInfoLayer,
     MapInteractLayer,
-    Vec2,
 } from "@project-selene/api/terra";
 import {addDebug, addMessage} from "../doc";
 import {client, client_data} from "../client";
@@ -31,6 +30,7 @@ export class MarkerMap extends Injectable(MapInteractLayer) {
             if (loc_name == undefined) {
                 return;  // The chest is not a multiworld location: don't show it on the map.
             }
+            // @ts-ignore TypeScript doesn't like the get property on an any object
             let new_interact = FloorInteractable.get(`ap_label_${loc_name}`, { type: getChestIcon(chest_key) });
             new_interact.pos = old_interact.pos;
             return super.addInteract(new_interact, visited, minX, minY, gridWidth, true, ...args);
@@ -50,6 +50,7 @@ export class MarkerTooltip extends Injectable(MapInfoLayer) {
         if (interact.uid.startsWith("ap_label_")) {
             let text: string = interact.uid.slice("ap_label_".length);
             if (this.interactTooltip.text) {
+                // @ts-ignore TypeScript doesn't like the get property on an any object
                 let lang_entry = LangEntry.get({ en_US: text, langID: 947591, path: "#warnings" });
                 this.interactTooltip.setText(lang_entry);
             }
@@ -72,7 +73,7 @@ function getChestIcon(key: string): string {
         addDebug(`Unknown chest key ${key} in the location table`);
         return "chest-unknown";
     }
-    let classification = client_data.scouted_locations.get(loc_id);
+    let classification = client_data.scouted_locations.get(key);
     if (classification == undefined) {
         addDebug(`Unknown chest key ${key} in the scouted locations`);
         return "chest-unknown";

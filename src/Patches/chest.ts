@@ -31,14 +31,7 @@ export class ChestPatch extends Injectable(Chest) {
     }
 
     getType(...args: unknown[]) {
-        let loc_id = loc_game_name_id.get(this.key);
-
-        if (loc_id == undefined) {
-            addDebug(`Unknown chest key ${this.key} in the location table`);
-            return "default";
-        }
-
-        let classification = client_data.scouted_locations.get(loc_id);
+        let classification = client_data.scouted_locations.get(this.key);
         if (classification == undefined) {
             addDebug(`Unknown chest key ${this.key} in the scouted locations`);
             return "default";

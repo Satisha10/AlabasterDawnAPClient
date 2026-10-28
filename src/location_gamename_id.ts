@@ -153,3 +153,5 @@ export const loc_game_name_id = new Map<string, number>([
     ["hotHeadLad1", 1511],
     ["lakeFish1", 1512],
 ]);
+
+export const loc_id_game_name = new Map<number, string>(Array.from(loc_game_name_id, ([key, value]) => [value, key]));

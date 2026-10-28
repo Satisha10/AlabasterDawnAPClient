@@ -1,10 +1,11 @@
-import {Client, DeathLinkManager, Item, ItemsManager, NetworkPlayer} from "archipelago.js";
+import {Client, DeathLinkManager, ItemsManager, NetworkPlayer} from "archipelago.js";
 import {addDebug, addMessage} from "./doc";
 import {giveGameItem} from "./item_handler";
 import {terra} from "@project-selene/api";
 import {loadPackages, savePackages} from "./datapackage";
 import {Sound, SoundSettings} from "@project-selene/api/terra";
 import {fetchSave} from "./utils";
+import {loc_id_game_name} from "./location_gamename_id";
 
 // Create a new instance of the Client class.
 export const client = new Client({autoFetchDataPackage: false});
@@ -106,7 +107,7 @@ class ClientData {
 
     checked_locations: number[];
 
-    scouted_locations: Map<number, number>;  // TODO use id or name, idk yet
+    scouted_locations: Map<string, number>;
 
     deathLinkDeath: boolean;
 
@@ -162,7 +163,10 @@ class ClientData {
         let scout_locations: number[] = client.room.checkedLocations.concat(client.room.missingLocations);
         client.scout(scout_locations).then((items) => {
             for (let item of items) {
-                client_data.scouted_locations.set(item.locationId, item.flags);
+                let loc_name = loc_id_game_name.get(item.locationId)
+                if (loc_name != undefined) {
+                    client_data.scouted_locations.set(loc_name, item.flags);
+                }
             }
         })
     }
@@ -233,7 +237,8 @@ class ClientData {
             password: this.password,
             last_item_index: this.last_item_index,
             checked_locations: this.checked_locations,
-            scouted_locations: this.scouted_locations,
+            // scouted_locations is a Map, so convert it to an array so it works with JSON
+            scouted_locations: Array.from(this.scouted_locations.entries()),
         }
     }
 
@@ -244,7 +249,7 @@ class ClientData {
         this.password = fetchSave(data.password, "", "password");
         this.last_item_index = fetchSave(data.last_item_index, 0, "last_item_index");
         this.checked_locations = fetchSave(data.checked_locations, [], "checked_locations");
-        this.scouted_locations = fetchSave(data.scouted_locations, new Map(), "scouted_locations");
+        this.scouted_locations = fetchSave(new Map(data.scouted_locations), new Map(), "scouted_locations");
     }
 
     resetState() {
