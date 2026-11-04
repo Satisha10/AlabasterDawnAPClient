@@ -81,9 +81,29 @@ export function init_client() {
             // Only display if the item is not a local item, and comes from this game
             if (packet.receiving != client_data.slot_id && packet.item.player == client_data.slot_id) {
                 let game = client.players.slots[packet.receiving].game;
-                let item_name = client.package.lookupItemName(game, packet.item.item)
-                let player_name = client_data.player_map.get(packet.receiving);
-                addMessage(`Sent ${item_name} to ${player_name?.alias}`);
+                let item_name = client.package.lookupItemName(game, packet.item.item);
+                let player = client_data.player_map.get(packet.receiving);
+                addMessage(`Sent ${item_name} to ${player?.alias}`);
+            }
+        }
+        else if (packet.type == "Hint") {
+            // Only display if the item is in this game, and not found yet.
+            if ((packet.item.player == client_data.slot_id || packet.receiving == client_data.slot_id) && !packet.found) {
+                // Get item data
+                let item_game = client.players.slots[packet.receiving].game;
+                let item_name = client.package.lookupItemName(item_game, packet.item.item);
+                let player_item = client_data.player_map.get(packet.receiving);
+
+                // Get location data
+                let loc_game = client.players.slots[packet.item.player].game;
+                let loc_name = client.package.lookupLocationName(loc_game, packet.item.location);
+                let player_loc = client_data.player_map.get(packet.item.player);
+
+                // Process text for the player names, depending on which one is the player
+                let text_player_item = packet.receiving == client_data.slot_id ? "Your" : `${player_item?.alias}'s`
+                let text_player_loc = packet.item.player == client_data.slot_id ? "" : ` (in ${player_loc?.alias}'s world)`
+
+                addMessage(`${text_player_item} ${item_name} is at ${loc_name}${text_player_loc}`)
             }
         }
         // TODO handle other messages, and use helpers to facilitate getting game, item_name...
