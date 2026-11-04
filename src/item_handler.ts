@@ -31,12 +31,11 @@ export function giveGameItem(item: Item) {
         equipWeaponsForElement(elemID)
         imposeMultiEquip = false;
     }
-        // TODO Items for party members
-        //else if (item_data.name.startsWith("PARTY:")) {
-        //    let member = item_data.name.substring("PARTY:".length);
-        //    addDebug("Unlock " + member);
-        //    terra.g_party.addPartyMember("filia");
-    //}
+    else if (item_data.name.startsWith("PARTY:")) {
+        let member = item_data.name.substring("PARTY:".length);
+        // @ts-ignore TypeScript complains about the get property
+        terra.g_party.addPartyMember(terra.PartyMember.get(member))
+    }
     else if (item_data.name == "Divine Connection") {
         item_flags.gaveSync();
         terra.g_player.combat.increaseSyncLevel();
