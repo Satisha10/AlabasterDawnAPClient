@@ -104,6 +104,7 @@ export function init_client() {
                 let text_player_loc = packet.item.player == client_data.slot_id ? "" : ` (in ${player_loc?.alias}'s world)`
 
                 addMessage(`${text_player_item} ${item_name} is at ${loc_name}${text_player_loc}`)
+                new Sound("media/audio/sfx/menu/cooking-lvl-up.wav", new SoundSettings({ volume: 0.8 })).play();
             }
         }
         // TODO handle other messages, and use helpers to facilitate getting game, item_name...
