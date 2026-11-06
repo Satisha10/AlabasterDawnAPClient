@@ -61,16 +61,14 @@ The goal is currently to weave all nests (3: Koro Valley, Eternal Spring, Aurun 
 ### Notes
 
 - Yaml-less Universal Tracker is supported.
-- The game mod adds option to whange some game behaviors or enable deathlink.
+- The game mod adds option to change some game behaviors or enable deathlink.
 - If you want to play the vanilla game, remove the `package.json` file, and rename `package-vanilla.json` to `package.json`. Removing mods from the `mods` folder will also work.
 - The AP World source code is on [another repository](https://github.com/Satisha10/Archipelago_wotw/tree/alabaster-dawn/worlds/alabaster_dawn).
 
 ## Planned features (in no particular order)
 
-- Improve the client: cache the datapackages, display/format more messages
 - Automatically connect when loading a save file, and check that it is the same multiworld
 - Collect locations already checked in the server
-- Show the chests and their item classification on the map
 - Progressive area unlocks
 - Progressive gems
 - Start with random weapons
@@ -84,5 +82,4 @@ The goal is currently to weave all nests (3: Koro Valley, Eternal Spring, Aurun 
 
 ## Known issues
 
-- Receiving a deathlink currently doesn't kill you, it only puts you at 0 health.
 - The quests **The Fervor of Youth** and **Quick Quickwood Query** have some fights that are missing.
