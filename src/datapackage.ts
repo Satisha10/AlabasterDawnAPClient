@@ -41,9 +41,13 @@ function loadPackage(game: string): GamePackage | undefined {
 // TODO call this somewhere with all games required and use client.package.importPackage
 export async function loadPackages(checksums: Record<string, string>): Promise<DataPackage> {
     let dataPackage: Record<string, GamePackage> = {};
-    for (let [game, _] of Object.entries(checksums)) {
+    for (let [game, ref_checksum] of Object.entries(checksums)) {
         let gamePackage = loadPackage(game);
-        if (gamePackage) {
+        if (gamePackage !== undefined) {
+            if (gamePackage.checksum != ref_checksum) {
+                addDebug(`Checksums for ${game} don't match: ${gamePackage.checksum} != ${ref_checksum}`);
+                continue;
+            }
             dataPackage[game] = gamePackage;
             addDebug(`Loaded package for ${game}, checksum ${dataPackage[game].checksum}`)
         }
