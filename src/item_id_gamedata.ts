@@ -21,6 +21,7 @@ export const item_name_data = new Map<number, ItemData>([
     [15, {name: "WEAPON:crossbow", qty: 1}],
     [16, {name: "WEAPON:chakram", qty: 1}],
     [17, {name: "WEAPON:kama", qty: 1}],
+    [20, {name: "PARTY:filia", qty: 1}],
     [30, {name: "CL:lyhamn", qty: 1}],
     [40, {name: "PLOT:ap_bridges.received", qty: 1}],
     [41, {name: "PLOT:ap_tide.received", qty: 1}],

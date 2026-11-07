@@ -20,7 +20,28 @@ export function giveGameItem(item: Item) {
         let weapon = item_data.name.substring("WEAPON:".length);
         addDebug("Unlock " + weapon);
         item_flags.gaveWeapon(weapon);
+
+        // Equip weapons if the player had no melee/range weapon and at least one element is there
+        // This happens when creating the file if the elements are received before the weapons
+        let equip_weapons = (
+            terra.g_player.combat.getTotalElementsUnlocked() >= 1
+            && (terra.g_player.combat.getTotalMeleeWeapons() == 0
+            || terra.g_player.combat.getTotalRangedWeapons() == 0)
+        )
         terra.g_player.combat.setWeaponUnlock(weapon, true);
+
+        // Check that at least one range and melee weapon are now unlocked
+        if (equip_weapons
+            && terra.g_player.combat.getTotalMeleeWeapons() >= 1
+            && terra.g_player.combat.getTotalRangedWeapons() >= 1
+        ) {
+            for (let i = 0; i < terra.g_player.combat.loadouts.length; i++) {
+                terra.g_player.combat.setLoadout(i);
+                terra.g_player.combat.equipWeapon(terra.g_player.combat.getActiveElement(), terra.g_player.combat.getMeleeWeaponList()[0], true);
+                terra.g_player.combat.equipWeapon(terra.g_player.combat.getActiveElement(), terra.g_player.combat.getRangedWeaponList()[0], true);
+            }
+            terra.g_player.combat.setLoadout(0);
+        }
     }
     else if (item_data.name.startsWith("ELEMENT:")) {
         addDebug("Unlock " + item_data.name)
@@ -30,6 +51,20 @@ export function giveGameItem(item: Item) {
         imposeMultiEquip = true;
         equipWeaponsForElement(elemID)
         imposeMultiEquip = false;
+        // Spawn element: switch to it
+        if (terra.g_player.combat.getTotalElementsUnlocked() == 1) {
+            let elemMap = new Map([
+                [14, terra.ELEMENT.NEUTRAL],
+                [15, terra.ELEMENT.AETHER],
+                [16, terra.ELEMENT.IGNIS],
+                [17, terra.ELEMENT.CRYO]
+            ])
+            if (!elemMap.has(elemID)) {
+                addMessage(`Unknown element ID: ${elemID}`);
+                return;
+            }
+            terra.g_player.combat.setElementMode(elemMap.get(elemID), true, true);
+        }
     }
     else if (item_data.name.startsWith("PARTY:")) {
         let member = item_data.name.substring("PARTY:".length);
@@ -76,17 +111,26 @@ function display_item_message(item_name: string, sender: string) {
 
 
 export function equipWeaponsForElement(elemID: number) {
-    let currentLoadout: number = terra.g_player.combat.currentLoadout;
+
     let eleIndexMap = new Map([[14, 0], [15, 1], [16, 2], [17, 3]]);
     let eleIndex = eleIndexMap.get(elemID);
     if (eleIndex == undefined) {
         addMessage(`Unknown element number ${elemID} used in equipWeaponsForElement.`);
         return;
     }
+
+    let currentLoadout: number = terra.g_player.combat.currentLoadout;
+    let meleeWeapons: string[] = terra.g_player.combat.getMeleeWeaponList();
+    let rangeWeapons: string[] = terra.g_player.combat.getRangedWeaponList();
+    // This can happen during spawn items. The weapons will get equipped once they are received as well.
+    if (meleeWeapons.length == 0 || rangeWeapons.length == 0) {
+        return;
+    }
+
     for (let i = 0; i < terra.g_player.combat.loadouts.length; i++) {
         terra.g_player.combat.setLoadout((i + currentLoadout) % terra.g_player.combat.loadouts.length);
-        terra.g_player.combat.equipWeapon(eleIndex, "sword", true);  // TODO use spawn weapons
-        terra.g_player.combat.equipWeapon(eleIndex, "crossbow", true);
+        terra.g_player.combat.equipWeapon(eleIndex, meleeWeapons[0], true);
+        terra.g_player.combat.equipWeapon(eleIndex, rangeWeapons[0], true);
     }
     terra.g_player.combat.setLoadout(currentLoadout);
 }

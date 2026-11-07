@@ -25,7 +25,6 @@ export function initializeFile() {
     terra.g_player.setCore(11, true);
     terra.g_player.setCore(12, true);
     terra.g_player.setCore(13, true);
-    terra.g_player.setCore(14, true);  // Physis
     // 14-17: elements
     terra.g_player.setCore(18, true);
     terra.g_player.setCore(19, true);
@@ -61,12 +60,9 @@ export function initializeFile() {
     terra.g_player.inventory.addItem("bp-mid-maj-l-def");
     terra.g_player.inventory.addItem("bp-low-maj-l-off");
 
+    client_data.giveStashedItems();
+
     terra.g_player.combat.setLoadout(0);
-
-    terra.g_player.combat.setWeaponUnlock("sword", true);
-    terra.g_player.combat.setWeaponUnlock("crossbow", true);
-
-    equipWeaponsForElement(14);
 
     terra.g_plot.progressPlotToStateC("filia-dmg", "full");
     terra.g_plot.progressPlotToStateC("somu", "outsideComment");
