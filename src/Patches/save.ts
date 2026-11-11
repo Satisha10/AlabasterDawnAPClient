@@ -16,6 +16,7 @@ import {client, client_data} from "../client";
 import {addDebug, addMessage} from "../doc";
 import {initializeFile} from "../file_init";
 import {connect_menu} from "../connect_menu";
+import {ap_vars} from "../ap_vars";
 
 // If non-zero, count the number of times the loaded occurs, and only call initializeFile at a specific time
 let is_new_game = 0;
@@ -28,7 +29,7 @@ export class SaveAPData extends Injectable(SaveFile) {
     saveData(...args: unknown[]) {
         if (this.id != -1000) {  // System data: don't save there
             this.data["ap_data"] = client_data.exportState();
-            addDebug(`Saved data (ID: ${this.id}, index: ${client_data.last_item_index})`)
+            this.data["ap_vars"] = ap_vars.exportState();
         }
         return super.saveData(...args);
     }
@@ -43,13 +44,12 @@ export class LoadTracker extends Injectable(Game) {
     onLoadingComplete(...args: unknown[]) {
         let result = super.onLoadingComplete(...args);
         let save_id = terra.g_storage.getLastSave();
-        addDebug(`Read data from ${save_id}`);
         if (terra.g_storage.files[save_id]?.data?.ap_data && should_load_data) {
             try {
                 client_data.importState(terra.g_storage.files[save_id].data.ap_data);
+                ap_vars.importState(terra.g_storage.files[save_id].data.ap_vars);
                 should_load_data = false;
                 client_data.is_save_valid = true;
-                addDebug("Loaded AP data");
             }
             catch(err) {
                 addMessage(`Failed to load the AP save data: ${err}`);
