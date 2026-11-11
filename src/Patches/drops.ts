@@ -25,6 +25,13 @@ export class IncreaseCuisineExp extends Injectable(PlayerCuisine) {
 
 export class IncreaseWeaponExp extends Injectable(PlayerWeapon) {
     addExp(exp: number, ...args: unknown[]) {
-        return super.addExp(exp * terra.g_options.get("exp_mult"), ...args);
+        super.addExp(exp * terra.g_options.get("exp_mult"), ...args);
+
+        if (terra.g_options.get("share_weapon_exp")) {
+            for (let weapon of ["sword", "hammer", "spear", "crossbow", "chakram", "kama"]) {
+                terra.g_player.combat.weapons.get(weapon).exp = this.exp;
+                terra.g_player.combat.weapons.get(weapon).setLevel(this.level);
+            }
+        }
     }
 }
