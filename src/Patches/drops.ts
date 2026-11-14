@@ -29,8 +29,24 @@ export class IncreaseWeaponExp extends Injectable(PlayerWeapon) {
 
         if (terra.g_options.get("share_weapon_exp")) {
             for (let weapon of ["sword", "hammer", "spear", "crossbow", "chakram", "kama"]) {
-                terra.g_player.combat.weapons.get(weapon).exp = this.exp;
+                // Other weapon has higher level than this
+                if (terra.g_player.combat.weapons.get(weapon).level > this.level) {
+                    this.setLevel(terra.g_player.combat.weapons.get(weapon).level);
+                    this.exp = terra.g_player.combat.weapons.get(weapon).exp;
+                }
+                // Same level: compare experience
+                if (terra.g_player.combat.weapons.get(weapon).level == this.level) {
+                    if (terra.g_player.combat.weapons.get(weapon).exp > this.exp) {
+                        this.exp = terra.g_player.combat.weapons.get(weapon).exp;
+                    }
+                    else {
+                        terra.g_player.combat.weapons.get(weapon).exp = this.exp;
+                    }
+                }
+                // This weapon has higher level
                 terra.g_player.combat.weapons.get(weapon).setLevel(this.level);
+                terra.g_player.combat.weapons.get(weapon).exp = this.exp;
+
             }
         }
     }
