@@ -37,6 +37,14 @@ let global = [
     "cryo",
 ]
 
+// Name displayed to the player when unlocking the area
+let ui_names = new Map([
+    ["valley", "Koro Valley"],
+    ["aether", "Trial of Aether"],
+    ["plains", "Aurum Plains"],
+    ["swamp", "Scala Moor"],
+    ["cryo", "Trial of Cryo"],
+])
 
 class APVars {
     unlocked_areas: string[];
@@ -92,6 +100,7 @@ class APVars {
             }
             this.unlock_amounts.area = index + 1
             this.unlocked_areas.push(areas[index])
+            this.showUnlockAreaMessage(areas[index])
         }
         else if (type == "dng") {
             let index = this.unlock_amounts.dungeon
@@ -100,6 +109,7 @@ class APVars {
             }
             this.unlock_amounts.dungeon = index + 1
             this.unlocked_areas.push(dungeons[index])
+            this.showUnlockAreaMessage(dungeons[index])
         }
         else if (type == "global") {
             let index = this.unlock_amounts.global
@@ -108,10 +118,18 @@ class APVars {
             }
             this.unlock_amounts.global = index + 1
             this.unlocked_areas.push(global[index])
+            this.showUnlockAreaMessage(global[index])
         }
         else {
             addMessage(`Failed to unlock a new area: unknown type ${type} in unlockNewArea`)
         }
+    }
+    showUnlockAreaMessage(name: string) {
+        let message_name = ui_names.get(name);
+        if (message_name == undefined) {
+            return;
+        }
+        addMessage(`You can now access ${message_name} !`)
     }
 }
 
