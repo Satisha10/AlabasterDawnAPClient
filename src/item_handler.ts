@@ -4,6 +4,7 @@ import {Item} from "archipelago.js";
 import {addMessage, addDebug} from "./doc";
 import {item_name_data} from "./item_id_gamedata";
 import {item_flags, client_data} from "./client";
+import {ap_vars} from "./ap_vars";
 
 // Flag, set to true while executing equipWeaponsForElement to allow multi-equip
 // That way, the other elements in the loadouts are not affected by receiving an element
@@ -89,6 +90,16 @@ export function giveGameItem(item: Item) {
         let area = item_data.name.substring("CL:".length);
         addDebug(`Progress community level for ${area}`);
         terra.g_plot.progressPlotToStateC("ap_lyhamn", "cl1");  // TODO Progress "ap_" + area
+    }
+    else if (item_data.name.startsWith("AREA:")) {
+        let type = item_data.name.substring("AREA:".length);
+        addDebug(`Area unlock: ${type}`);
+        if (type == "area" || type == "dng" || type == "global") {
+            ap_vars.unlockNewArea(type);
+        }
+        else {
+            addMessage(`Unknown progressive area unlock type ${type}`)
+        }
     }
     else if (item_data.name == "test") {
         // terra.g_player.combat.core.addExp(90000, 30)

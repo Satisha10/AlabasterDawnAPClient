@@ -10,7 +10,7 @@ Example with the condition "$ap.areas.valley.plains":
 import {terra} from "@project-selene/api";
 import {client, client_data} from "./client";
 import {fetchSave} from "./utils"
-import {addMessage} from "./doc";
+import {addDebug, addMessage} from "./doc";
 import {loc_game_name_id} from "./location_gamename_id";
 
 interface AreaUnlocks {
@@ -65,6 +65,7 @@ class APVars {
         // Return true if the location is checked in the multiworld or local storage.
         let loc_id = loc_game_name_id.get(loc);
         if (loc_id == undefined) {
+            addDebug(`Unknown location ${loc} in APVars`)
             return false;
         }
         return (client.room.checkedLocations.includes(loc_id) || client_data.checked_locations.includes(loc_id));
