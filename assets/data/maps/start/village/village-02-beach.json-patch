@@ -1,5 +1,25 @@
 [
   {
+    "op": "replace",
+    "path": "/tags/CL1",
+    "value": "$p.has.ap_lyhamn.cl1"
+  },
+  {
+    "op": "replace",
+    "path": "/tags/CL2",
+    "value": "$p.has.ap_lyhamn.cl2"
+  },
+  {
+    "op": "replace",
+    "path": "/tags/CL3",
+    "value": "$p.has.ap_lyhamn.cl3"
+  },
+  {
+    "op": "replace",
+    "path": "/tags/WTR",
+    "value": "$p.has.ap_lyhamn.cl3 && $p.has.bathHouse1.caveEndBoss1"
+  },
+  {
     "op": "remove",
     "path": "/entities/2878"
   }

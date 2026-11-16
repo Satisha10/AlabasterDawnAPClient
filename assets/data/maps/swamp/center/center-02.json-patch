@@ -1,0 +1,28 @@
+[
+  {
+    "op": "add",
+    "path": "/entities/3000/",
+    "value": {
+      "type": "Barrier",
+      "pos": [
+        148,
+        80.5,
+        0
+      ],
+      "barrierType": "terraM",
+      "direction": "VERTICAL",
+      "float": true,
+      "length": 12,
+      "spawnCond": "!$ap.areas.swamp.plains"
+    }
+  },
+  {
+    "op": "add",
+    "path": "/entities/42/blocks",
+    "value": [
+      {
+        "cond": "!$ap.areas.swamp.plains"
+      }
+    ]
+  }
+]

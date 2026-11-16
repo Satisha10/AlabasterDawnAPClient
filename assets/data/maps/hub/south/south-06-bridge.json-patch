@@ -1,12 +1,7 @@
 [
   {
     "op": "replace",
-    "path": "/entities/2734/plotSelect",
-    "value": "ap_boat.received"
-  },
-  {
-    "op": "replace",
     "path": "/entities/2735/states/1/condition",
-    "value": "$p.has.ap_boat.received"
+    "value": "$ap.areas.plains.valley"
   }
 ]

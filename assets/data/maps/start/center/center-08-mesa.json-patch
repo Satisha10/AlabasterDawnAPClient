@@ -1,0 +1,12 @@
+[
+  {
+    "op": "replace",
+    "path": "/tags/CL1",
+    "value": "$p.has.ap_lyhamn.cl1 && $p.has.subDungeonMesa.cleared"
+  },
+  {
+    "op": "replace",
+    "path": "/tags/CL1",
+    "value": "$p.has.ap_lyhamn.cl2 && $p.has.subDungeonMesa.cleared"
+  }
+]

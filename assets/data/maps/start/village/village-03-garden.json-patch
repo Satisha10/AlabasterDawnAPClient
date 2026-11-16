@@ -1,0 +1,17 @@
+[
+  {
+    "op": "replace",
+    "path": "/tags/CL1",
+    "value": "$p.has.ap_lyhamn.cl1"
+  },
+  {
+    "op": "replace",
+    "path": "/tags/CL2",
+    "value": "$p.has.ap_lyhamn.cl2"
+  },
+  {
+    "op": "replace",
+    "path": "/tags/CL3",
+    "value": "$p.has.ap_lyhamn.cl3"
+  }
+]

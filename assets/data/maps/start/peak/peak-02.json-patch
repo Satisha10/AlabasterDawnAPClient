@@ -1,6 +1,11 @@
 [
   {
     "op": "replace",
+    "path": "/tags/CL1",
+    "value": "$p.has.ap_lyhamn.cl1 && $p.has.silverPeak.end"
+  },
+  {
+    "op": "replace",
     "path": "/entities/1997/states",
     "value": [
       {
@@ -8,7 +13,7 @@
         "interactType": "NONE"
       },
       {
-        "condition": "$p.has.silverPeak.chakramShow",
+        "condition": "$p.has.silverPeak.chakramShow && !$ap.loc.chakram",
         "collType": "FENCE",
         "permaFx": "FX:interact.altar#on",
         "event": [
@@ -296,7 +301,7 @@
   {
     "op": "replace",
     "path": "/entities/1998/spawnCond",
-    "value": "$p.has.silverPeak.chakramShow"
+    "value": "$p.has.silverPeak.chakramShow && !$ap.loc.chakram"
   },
   {
     "op": "remove",

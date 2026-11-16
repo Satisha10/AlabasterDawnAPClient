@@ -1,8 +1,58 @@
 [
   {
     "op": "replace",
+    "path": "/entities/906/spawnCond",
+    "value": "$tmp.bossGrass < 2 && !$p.has.ap_boss_mosscow.defeated"
+  },
+  {
+    "op": "replace",
+    "path": "/entities/907/spawnCond",
+    "value": "$tmp.bossGrass < 2 && !$p.has.ap_boss_mosscow.defeated"
+  },
+  {
+    "op": "replace",
+    "path": "/entities/908/spawnCond",
+    "value": "$tmp.bossGrass < 2 && !$p.has.ap_boss_mosscow.defeated"
+  },
+  {
+    "op": "replace",
+    "path": "/entities/909/spawnCond",
+    "value": "$tmp.bossGrass < 2 && !$p.has.ap_boss_mosscow.defeated"
+  },
+  {
+    "op": "replace",
+    "path": "/entities/910/spawnCond",
+    "value": "$tmp.bossGrass < 2 && !$p.has.ap_boss_mosscow.defeated"
+  },
+  {
+    "op": "replace",
+    "path": "/entities/911/spawnCond",
+    "value": "$tmp.bossGrass < 2 && !$p.has.ap_boss_mosscow.defeated"
+  },
+  {
+    "op": "replace",
+    "path": "/entities/940/spawnCond",
+    "value": "$tmp.bossGrass < 1 && !$p.has.ap_boss_mosscow.defeated"
+  },
+  {
+    "op": "replace",
+    "path": "/entities/1510/spawnCond",
+    "value": "$tmp.bossGrass < 2 && !$p.has.ap_boss_mosscow.defeated"
+  },
+  {
+    "op": "replace",
+    "path": "/entities/1460/setPlot",
+    "value": "ap_boss_mosscow.defeated"
+  },
+  {
+    "op": "replace",
     "path": "/entities/1464/spawnCond",
-    "value": "$p.has.swamp.spearShow"
+    "value": "$p.has.ap_boss_mosscow.defeated && !$ap.loc.spear"
+  },
+    {
+    "op": "replace",
+    "path": "/entities/1511/startCond",
+    "value": "$p.has.ap_boss_mosscow.defeated && !$ap.loc.spear"
   },
   {
     "op": "replace",
@@ -12,7 +62,7 @@
         "interactType": "NONE"
       },
       {
-        "condition": "$p.has.swamp.spearShow",
+        "condition": "$p.has.ap_boss_mosscow.defeated && !$ap.loc.spear",
         "collType": "FENCE",
         "permaFx": "FX:interact.altar#on",
         "event": [

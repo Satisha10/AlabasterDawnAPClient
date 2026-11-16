@@ -1,3 +1,5 @@
+// Unused, the tags are directly modified in the map files, and the dynamic behavior is handled with APVars
+/*
 import {GameMap} from "@project-selene/api/terra";
 import {Injectable, terra} from "@project-selene/api";
 
@@ -86,3 +88,4 @@ function modifyTag(tagKey: string): [boolean, boolean] {
     }
     return [false, false]
 }
+*/

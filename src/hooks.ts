@@ -3,7 +3,7 @@ import {ChestPatch, SkipItemDialogs} from "./Patches/chest";
 import {DishTracker} from "./Patches/dish";
 import {ElementTracker, WeaponTracker} from "./Patches/items";
 import {PlotCheck, PlotProgress, PlotCompleted} from "./Patches/plots";
-import {MapTags} from "./Patches/tags";
+// import {MapTags} from "./Patches/tags";
 import {
     SaveAPData,
     MenuButtons,
@@ -29,7 +29,7 @@ export class Hooks {
         mod.inject(WeaponTracker);
         mod.inject(PlotCheck);
         mod.inject(PlotProgress);
-        mod.inject(MapTags);
+        // mod.inject(MapTags);
         mod.inject(SaveAPData);
         mod.inject(MenuButtons);
         mod.inject(LoadTracker);

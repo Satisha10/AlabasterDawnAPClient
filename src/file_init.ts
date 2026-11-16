@@ -1,6 +1,5 @@
 import {terra} from "@project-selene/api";
 import {client_data, item_flags} from "./client";
-import {equipWeaponsForElement} from "./item_handler";
 import {addDebug} from "./doc";
 
 // TODO Fix main quests skipped and bridges repaired
@@ -66,6 +65,7 @@ export function initializeFile() {
 
     terra.g_plot.progressPlotToStateC("filia-dmg", "full");
     terra.g_plot.progressPlotToStateC("somu", "outsideComment");
+    terra.g_plot.progressPlotToStateC("swamp", "wayIsBlocked");
 
     terra.g_world.unlockLandmark("start-village-center")
 

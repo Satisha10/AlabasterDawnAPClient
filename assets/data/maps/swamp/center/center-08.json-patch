@@ -1,0 +1,12 @@
+[
+  {
+    "op": "replace",
+    "path": "/tags/BR1",
+    "value": "true"
+  },
+  {
+    "op": "replace",
+    "path": "/tags/Nat",
+    "value": "true"
+  }
+]

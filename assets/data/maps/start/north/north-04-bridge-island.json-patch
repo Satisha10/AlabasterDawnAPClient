@@ -7,7 +7,7 @@
         "interactType": "NONE"
       },
       {
-        "condition": "$p.has.grandPass.showKama",
+        "condition": "$p.has.grandPass.showKama && !$ap.loc.kama",
         "collType": "FENCE",
         "permaFx": "FX:interact.altar#on",
         "event": [

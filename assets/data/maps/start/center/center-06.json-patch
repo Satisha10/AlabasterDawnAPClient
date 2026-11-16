@@ -1,6 +1,16 @@
 [
   {
     "op": "replace",
+    "path": "/tags/BR1",
+    "value": "$p.has.quickwood.bridgeBuilt && $ap.vars.valley_bridges"
+  },
+  {
+    "op": "replace",
+    "path": "/tags/CL1",
+    "value": "$p.has.ap_lyhamn.cl1"
+  },
+  {
+    "op": "replace",
     "path": "/entities/1830",
     "value": {
       "type": "CharSpot",

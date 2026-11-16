@@ -1,0 +1,26 @@
+[
+  {
+    "op": "replace",
+    "path": "/entities/1087/spawnCond",
+    "value": "!$ap.areas.aether.plains"
+  },
+  {
+    "op": "replace",
+    "path": "/entities/1088/spawnCond",
+    "value": "!$ap.areas.aether.plains"
+  },
+  {
+    "op": "replace",
+    "path": "/entities/1089/spawnCond",
+    "value": "!$ap.areas.aether.plains"
+  },
+  {
+    "op": "replace",
+    "path": "/entities/79/blocks",
+    "value": [
+      {
+        "cond": "!$ap.areas.aether.plains"
+      }
+    ]
+  }
+]

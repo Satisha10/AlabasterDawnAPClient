@@ -1,0 +1,17 @@
+[
+  {
+    "op": "replace",
+    "path": "/tags/br1",
+    "value": "$ap.vars.valley_bridges"
+  },
+  {
+    "op": "replace",
+    "path": "/tags/CL1",
+    "value": "$p.has.ap_lyhamn.cl1"
+  },
+  {
+    "op": "replace",
+    "path": "/tags/CL2",
+    "value": "$p.has.ap_lyhamn.cl2"
+  }
+]

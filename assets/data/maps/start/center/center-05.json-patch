@@ -1,0 +1,12 @@
+[
+  {
+    "op": "replace",
+    "path": "/tags/BRG",
+    "value": "$ap.vars.valley_bridges"
+  },
+  {
+    "op": "replace",
+    "path": "/tags/CL1",
+    "value": "$p.has.ap_lyhamn.cl1"
+  }
+]

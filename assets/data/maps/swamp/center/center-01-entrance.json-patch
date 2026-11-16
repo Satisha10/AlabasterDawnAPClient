@@ -1,0 +1,33 @@
+[
+  {
+    "op": "replace",
+    "path": "/entities/1483/startCond",
+    "value": "false"
+  },
+  {
+    "op": "add",
+    "path": "/entities/3000/",
+    "value": {
+      "type": "Barrier",
+      "pos": [
+        13,
+        62.125,
+        2
+      ],
+      "barrierType": "terraM",
+      "direction": "VERTICAL",
+      "float": true,
+      "length": 23,
+      "spawnCond": "!$ap.areas.plains.swamp"
+    }
+  },
+  {
+    "op": "add",
+    "path": "/entities/192/blocks",
+    "value": [
+      {
+        "cond": "!$ap.areas.plains.swamp"
+      }
+    ]
+  }
+]

@@ -1,0 +1,12 @@
+[
+  {
+    "op": "replace",
+    "path": "/tags/rff",
+    "value": "$p.has.ricefarm.end"
+  },
+  {
+    "op": "replace",
+    "path": "/tags/CL1",
+    "value": "$p.has.ap_lyhamn.cl1"
+  }
+]

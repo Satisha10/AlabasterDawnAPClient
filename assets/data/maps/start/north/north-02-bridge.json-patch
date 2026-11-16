@@ -1,11 +1,6 @@
 [
   {
     "op": "replace",
-    "path": "/entities/1317/plotSelect",
-    "value": "ap_boat.received"
-  },
-  {
-    "op": "replace",
     "path": "/entities/1318/tags",
     "value": [
       "APBOAT"
@@ -15,7 +10,12 @@
     "op": "add",
     "path": "/tags/APBOAT",
     "value": {
-      "cond": "$p.has.ap_boat.received"
+      "cond": "$ap.areas.valley.plains"
     }
+  },
+  {
+    "op": "replace",
+    "path": "/tags/CL1",
+    "value": "$p.has.ap_lyhamn.cl1"
   }
 ]

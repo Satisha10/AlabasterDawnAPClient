@@ -49,19 +49,26 @@ let ui_names = new Map([
 class APVars {
     unlocked_areas: string[];
     unlock_amounts: AreaUnlocks;
+    variables: string[];
 
     constructor() {
         this.unlocked_areas = ["valley"];
         this.unlock_amounts = {area: 0, dungeon: 0, global: 0}
+        this.variables = ["valley_bridges"];
 
         const accessor = terra.g_vars.registerAccessor("ap");
         accessor.add("areas", (keys: string[]) => this.checkAreaAccess(keys));
         accessor.add("loc", (keys: string[]) => this.checkLoc(keys[2]));
+        accessor.add("vars", (keys: string[]) => this.checkVars(keys[2]));
     }
 
     checkAreaAccess(areas: string[]): boolean {
         // Return true if every area in the condition is accessible.
         for (let area of areas.slice(2)) {
+            if (!ui_names.has(area)) {  // Sanity check
+                addMessage(`Unknown area in APVars.checkAreaAccess: ${area}`);
+                return false;
+            }
             if (!this.unlocked_areas.includes(area)) {
                 return false;
             }
@@ -70,6 +77,7 @@ class APVars {
     }
 
     checkLoc(loc: string): boolean {
+        // TODO Handle locs with . in them (take slice and join with .)
         // Return true if the location is checked in the multiworld or local storage.
         let loc_id = loc_game_name_id.get(loc);
         if (loc_id == undefined) {
@@ -79,16 +87,23 @@ class APVars {
         return (client.room.checkedLocations.includes(loc_id) || client_data.checked_locations.includes(loc_id));
     }
 
+    checkVars(variable: string): boolean {
+        // Return true if the variable is present in this.variables.
+        return this.variables.includes(variable);
+    }
+
     exportState(): Object {
         return {
             unlocked_areas: this.unlocked_areas,
             unlock_amounts: this.unlock_amounts,
+            variables: this.variables,
         }
     }
 
     importState(data: any) {
         this.unlocked_areas = fetchSave(data.unlocked_areas, [], "unlocked_areas");
         this.unlock_amounts = fetchSave(data.unlock_amounts, {area: 0, dungeon: 0, global: 0}, "unlock_amounts");
+        this.variables = fetchSave(data.variables, [], "variables");
     }
 
     unlockNewArea(type: "area" | "dng" | "global") {

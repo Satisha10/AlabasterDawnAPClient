@@ -74,6 +74,16 @@
           "condition": [],
           "offFlags": [],
           "onFlags": []
+        },
+        "cl2": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "cl3": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
         }
       },
       "flags": {}
@@ -122,6 +132,26 @@
   {
     "op": "add",
     "path": "/plots/ap_boss_aether",
+    "value": {
+      "category": "OTHER",
+      "states": {
+        "alive": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        },
+        "defeated": {
+          "condition": [],
+          "offFlags": [],
+          "onFlags": []
+        }
+      },
+      "flags": {}
+    }
+  },
+  {
+    "op": "add",
+    "path": "/plots/ap_boss_mosscow",
     "value": {
       "category": "OTHER",
       "states": {
@@ -265,6 +295,10 @@
   {
     "op": "remove",
     "path": "/plots/grandPass/states/showKama/mobilityBlock"
+  },
+  {
+    "op": "remove",
+    "path": "/plots/swamp/states/swampRest/forceDaytime"
   },
   {
     "op": "replace",

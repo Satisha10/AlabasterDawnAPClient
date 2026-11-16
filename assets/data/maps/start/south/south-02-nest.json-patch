@@ -16,7 +16,12 @@
   {
     "op": "replace",
     "path": "/tags/Nat/cond",
-    "value": "$p.has.ap_nest_valley.weaved"
+    "value": "$p.has.ap_nest_valley.weaved && $p.has.ap_lyhamn.cl1"
+  },
+  {
+    "op": "replace",
+    "path": "/tags/CL1/cond",
+    "value": "$p.has.ap_nest_valley.weaved && $p.has.ap_lyhamn.cl1"
   },
   {
     "op": "replace",

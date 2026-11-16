@@ -17,11 +17,20 @@
     "op": "add",
     "path": "/tags/APTIDE",
     "value": {
-      "cond": "$p.has.ap_tide.received"
+      "cond": "$ap.areas.valley.aether"
     }
   },
   {
     "op": "remove",
     "path": "/entities/1395"
+  },
+  {
+    "op": "replace",
+    "path": "/entities/875/blocks",
+    "value": [
+      {
+        "cond": "!$ap.areas.valley.aether"
+      }
+    ]
   }
 ]

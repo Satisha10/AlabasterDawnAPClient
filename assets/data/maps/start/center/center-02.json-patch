@@ -5,5 +5,15 @@
     "value": [
       "Nat"
     ]
+  },
+  {
+    "op": "replace",
+    "path": "/tags/P1C",
+    "value": "$p.has.flowerBoss1.end"
+  },
+  {
+    "op": "replace",
+    "path": "/tags/CL1",
+    "value": "$p.has.ap_lyhamn.cl1"
   }
 ]
