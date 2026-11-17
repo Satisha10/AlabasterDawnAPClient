@@ -162,6 +162,7 @@ export class ReturnMenu extends Injectable(SceneManager) {
     goToTitle(...args: unknown[]) {
         connect_menu.show();
         client_data.resetState();
+        ap_vars.resetState();
         // TODO disconnect from multiworld
         return super.goToTitle(...args);
     }

@@ -106,6 +106,12 @@ class APVars {
         this.variables = fetchSave(data.variables, [], "variables");
     }
 
+    resetState() {
+        this.unlocked_areas = ["valley"];
+        this.unlock_amounts = {area: 0, dungeon: 0, global: 0}
+        this.variables = ["valley_bridges"];
+    }
+
     unlockNewArea(type: "area" | "dng" | "global") {
         // Update the unlocked regions when a progressive area unlock (of the given type) is received
         if (type == "area") {
