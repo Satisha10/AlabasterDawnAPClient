@@ -14,7 +14,7 @@
   },
   {
     "op": "add",
-    "path": "/tags/BRI/cond",
+    "path": "/tags/BRI",
     "value": {
       "cond": "$ap.vars.valley_bridges"
     }

@@ -1,0 +1,28 @@
+[
+  {
+    "op": "add",
+    "path": "/entities/24/blocks",
+    "value": [
+      {
+        "cond": "!$ap.areas.plains.aether"
+      }
+    ]
+  },
+  {
+    "op": "add",
+    "path": "/entities/3000",
+    "value": {
+      "type": "Barrier",
+      "pos": [
+        50,
+        105,
+        0
+      ],
+      "barrierType": "terraM",
+      "direction": "HORIZONTAL",
+      "float": true,
+      "length": 25,
+      "spawnCond": "!$ap.areas.plains.aether"
+    }
+  }
+]

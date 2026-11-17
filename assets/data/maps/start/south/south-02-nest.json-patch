@@ -24,6 +24,13 @@
     "value": "$p.has.ap_nest_valley.weaved && $p.has.ap_lyhamn.cl1"
   },
   {
+    "op": "add",
+    "path": "/entities/1544/tags",
+    "value": [
+      "CL1"
+    ]
+  },
+  {
     "op": "replace",
     "path": "/tags/Tra/cond",
     "value": "$p.has.ap_nest_valley.weaved"

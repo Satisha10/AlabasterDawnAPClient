@@ -5,12 +5,63 @@
     "value": {
       "type": "Barrier",
       "pos": [
-        34.5,
+        29,
         40,
         1
       ],
       "barrierType": "terraM",
       "direction": "HORIZONTAL",
+      "float": true,
+      "length": 17,
+      "spawnCond": "!$ap.areas.swamp.cryo"
+    }
+  },
+    {
+    "op": "add",
+    "path": "/entities/3001",
+    "value": {
+      "type": "Barrier",
+      "pos": [
+        29,
+        30,
+        1
+      ],
+      "barrierType": "terraM",
+      "direction": "VERTICAL",
+      "float": true,
+      "length": 10,
+      "spawnCond": "!$ap.areas.swamp.cryo"
+    }
+  },
+    {
+    "op": "add",
+    "path": "/entities/3002",
+    "value": {
+      "type": "Barrier",
+      "pos": [
+        29,
+        40,
+        3
+      ],
+      "barrierType": "terraM",
+      "direction": "HORIZONTAL",
+      "float": true,
+      "length": 17,
+      "spawnCond": "!$ap.areas.swamp.cryo"
+    }
+  },
+    {
+    "op": "add",
+    "path": "/entities/3003",
+    "value": {
+      "type": "Barrier",
+      "pos": [
+        29,
+        30,
+        3
+      ],
+      "barrierType": "terraM",
+      "direction": "VERTICAL",
       "float": true,
       "length": 10,
       "spawnCond": "!$ap.areas.swamp.cryo"
