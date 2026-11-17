@@ -1,7 +1,7 @@
 [
   {
     "op": "add",
-    "path": "/entities/3000/",
+    "path": "/entities/3000",
     "value": {
       "type": "Barrier",
       "pos": [

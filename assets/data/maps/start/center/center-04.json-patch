@@ -1,12 +1,12 @@
 [
   {
     "op": "replace",
-    "path": "/tags/RHB",
+    "path": "/tags/RHB/cond",
     "value": "$p.has.ricefarm.end"
   },
   {
     "op": "replace",
-    "path": "/tags/CL1",
+    "path": "/tags/CL1/cond",
     "value": "$p.has.ap_lyhamn.cl1"
   }
 ]

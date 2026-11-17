@@ -1,12 +1,12 @@
 [
   {
     "op": "replace",
-    "path": "/tags/BRG",
+    "path": "/tags/BRG/cond",
     "value": "$ap.vars.valley_bridges"
   },
   {
     "op": "replace",
-    "path": "/tags/CL1",
+    "path": "/tags/CL1/cond",
     "value": "$p.has.ap_lyhamn.cl1"
   }
 ]

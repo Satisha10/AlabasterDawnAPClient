@@ -1,6 +1,6 @@
 [
   {
     "op": "remove",
-    "path": "/entities/1873/startCond"
+    "path": "/entities/1873"
   }
 ]

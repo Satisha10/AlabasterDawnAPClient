@@ -15,7 +15,7 @@
   },
   {
     "op": "replace",
-    "path": "/tags/CL1",
+    "path": "/tags/CL1/cond",
     "value": "$p.has.ap_lyhamn.cl1"
   }
 ]

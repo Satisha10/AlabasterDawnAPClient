@@ -8,12 +8,12 @@
   },
   {
     "op": "replace",
-    "path": "/tags/P1C",
+    "path": "/tags/P1C/cond",
     "value": "$p.has.flowerBoss1.end"
   },
   {
     "op": "replace",
-    "path": "/tags/CL1",
+    "path": "/tags/CL1/cond",
     "value": "$p.has.ap_lyhamn.cl1"
   }
 ]

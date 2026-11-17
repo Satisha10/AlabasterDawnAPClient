@@ -1,12 +1,12 @@
 [
   {
     "op": "replace",
-    "path": "/tags/BR1",
+    "path": "/tags/BR1/cond",
     "value": "$p.has.quickwood.bridgeBuilt && $ap.vars.valley_bridges"
   },
   {
     "op": "replace",
-    "path": "/tags/CL1",
+    "path": "/tags/CL1/cond",
     "value": "$p.has.ap_lyhamn.cl1"
   },
   {
@@ -135,6 +135,10 @@
         "plotState": "quickwood.platformsCrumbling"
       }
     ]
+  },
+    {
+    "op": "remove",
+    "path": "/entities/1854"
   },
   {
     "op": "replace",

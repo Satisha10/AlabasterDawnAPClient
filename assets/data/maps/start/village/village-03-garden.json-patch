@@ -1,17 +1,17 @@
 [
   {
     "op": "replace",
-    "path": "/tags/CL1",
+    "path": "/tags/CL1/cond",
     "value": "$p.has.ap_lyhamn.cl1"
   },
   {
     "op": "replace",
-    "path": "/tags/CL2",
+    "path": "/tags/CL2/cond",
     "value": "$p.has.ap_lyhamn.cl2"
   },
   {
     "op": "replace",
-    "path": "/tags/CL3",
+    "path": "/tags/CL3/cond",
     "value": "$p.has.ap_lyhamn.cl3"
   }
 ]

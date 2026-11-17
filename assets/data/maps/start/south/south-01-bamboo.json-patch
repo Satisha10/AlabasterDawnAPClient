@@ -9,12 +9,12 @@
   },
   {
     "op": "replace",
-    "path": "/tags/BRD",
+    "path": "/tags/BRD/cond",
     "value": "$p.has.quickwood.end"
   },
   {
     "op": "add",
-    "path": "/tags/BRI",
+    "path": "/tags/BRI/cond",
     "value": {
       "cond": "$ap.vars.valley_bridges"
     }
@@ -293,276 +293,386 @@
   {
     "op": "replace",
     "path": "/entities/98/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/99/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/100/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/101/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/102/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/103/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/104/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/105/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/106/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/107/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/108/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/109/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/110/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/111/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/112/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/113/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/114/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/115/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/116/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/117/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/118/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/119/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/120/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/121/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/122/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/123/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/124/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/125/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/126/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/127/tags",
-    "value": "BRI"
+    "value": [
+      "BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/132/tags",
-    "value": "!BRI"
+    "value": [
+      "!BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/133/tags",
-    "value": "!BRI"
+    "value": [
+      "!BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/134/tags",
-    "value": "!BRI"
+    "value": [
+      "!BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/135/tags",
-    "value": "!BRI"
+    "value": [
+      "!BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/136/tags",
-    "value": "!BRI"
+    "value": [
+      "!BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/137/tags",
-    "value": "!BRI"
+    "value": [
+      "!BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/138/tags",
-    "value": "!BRI"
+    "value": [
+      "!BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/139/tags",
-    "value": "!BRI"
+    "value": [
+      "!BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/141/tags",
-    "value": "!BRI"
+    "value": [
+      "!BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/143/tags",
-    "value": "!BRI"
+    "value": [
+      "!BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/144/tags",
-    "value": "!BRI"
+    "value": [
+      "!BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/153/tags",
-    "value": "!BRI"
+    "value": [
+      "!BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/154/tags",
-    "value": "!BRI"
+    "value": [
+      "!BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/180/tags",
-    "value": "!BRI"
+    "value": [
+      "!BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/181/tags",
-    "value": "!BRI"
+    "value": [
+      "!BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/183/tags",
-    "value": "!BRI"
+    "value": [
+      "!BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/184/tags",
-    "value": "!BRI"
+    "value": [
+      "!BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/185/tags",
-    "value": "!BRI"
+    "value": [
+      "!BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/186/tags",
-    "value": "!BRI"
+    "value": [
+      "!BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/187/tags",
-    "value": "!BRI"
+    "value": [
+      "!BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/188/tags",
-    "value": "!BRI"
+    "value": [
+      "!BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/189/tags",
-    "value": "!BRI"
+    "value": [
+      "!BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/190/tags",
-    "value": "!BRI"
+    "value": [
+      "!BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/191/tags",
-    "value": "!BRI"
+    "value": [
+      "!BRI"
+    ]
   },
   {
     "op": "replace",
     "path": "/entities/192/tags",
-    "value": "!BRI"
+    "value": [
+      "!BRI"
+    ]
   }
 ]
