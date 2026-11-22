@@ -40,10 +40,11 @@ export class ChestPatch extends Injectable(Chest) {
         let is_useful = classification & 0b010;
         let is_trap = classification & 0b100;
 
-        if (is_prog && is_useful) {
-            return "relic";  // TODO hinted items
-        }
-        if (is_prog) {
+        // Relic chests can cause softlocks if Juno can't go near the chest from below
+        //if (is_prog && is_useful) {
+        //    return "relic";
+        //}
+        if (is_prog) {  // TODO Hinted items
             return "outKey";
         }
         if (is_useful) {
@@ -53,7 +54,7 @@ export class ChestPatch extends Injectable(Chest) {
             if (terra.g_options.get("fake_traps")) {
                 return "dngKey";
             }
-            return "sackCloth";
+            return "temp";
         }
         return "default";
     }
