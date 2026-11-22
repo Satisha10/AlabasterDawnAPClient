@@ -1,11 +1,14 @@
-import {Client, DeathLinkManager, ItemsManager, NetworkPlayer} from "archipelago.js";
+import {Client, DeathLinkManager, ItemsManager, JSONRecord, NetworkPlayer} from "archipelago.js";
 import {addDebug, addMessage} from "./doc";
 import {giveGameItem} from "./item_handler";
 import {terra} from "@project-selene/api";
 import {loadPackages, savePackages} from "./datapackage";
 import {Sound, SoundSettings} from "@project-selene/api/terra";
-import {fetchSave} from "./utils";
+import {fetchSave, fetchSlot} from "./utils";
 import {loc_id_game_name} from "./location_gamename_id";
+
+// Increased when breaking changes or new features are added that require an AP World update
+export let client_version = 1;
 
 // Create a new instance of the Client class.
 export const client = new Client({autoFetchDataPackage: false});
@@ -165,8 +168,8 @@ class ClientData {
         let connName = name == null ? this.slot_name : name;
         let connPassword = password == null ? this.password : password;
 
-        client.login(connUrl, connName, "Alabaster Dawn", {password: connPassword})
-            .then(() => {
+        client.login(connUrl, connName, "Alabaster Dawn", {password: connPassword, slotData: true})
+            .then((slotData) => {
                 addMessage(`Connected to Archipelago as ${connName}`);
                 this.url = connUrl;
                 this.slot_name = connName;
@@ -175,6 +178,7 @@ class ClientData {
                     addDebug("Enabled DeathLink");
                     death_link_manager.enableDeathLink();
                 }
+                slot_data.import(slotData);
             })
             // TODO show error message
             .catch(() => addMessage(`Connection failed (url: ${connUrl}, Slot name: ${connName})`));
@@ -380,4 +384,33 @@ class ItemFlags {
     }
 }
 
-export const item_flags = new ItemFlags()
+export const item_flags = new ItemFlags();
+
+
+class SlotData {
+    // Which type is used for area unlocks. The unlocks themselves work regardless of this value, but the signpost
+    // trackers use this.
+    // global: progressive unlocks. split: overworld and dungeon unlocks. separate: one item for each area.
+    area_progression: "global" | "split" | "separate";
+    goal: number;  // TODO
+
+    constructor() {
+        this.area_progression = "global";
+        this.goal = 5
+    }
+
+    import(data: JSONRecord) {
+        let ap_version: number = fetchSlot(data.version, -1, "version");
+        if (ap_version < client_version) {
+            addMessage("The AP World is outdated, so you will likely encounter issues.\n" +
+                "Please generate the seed with an updated AP World, or downgrade the client");
+        }
+        else if (ap_version > client_version) {
+            addMessage("The client is outdated, you should update it before playing.");
+        }
+        this.area_progression = fetchSlot(data.area_progression, "global", "area_progression");
+        this.goal = fetchSlot(data.goal, 5, "goal");
+    }
+}
+
+export const slot_data = new SlotData();

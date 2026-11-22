@@ -10,19 +10,19 @@ A text can also be fetched, which is written as "{v:ap.<COMMAND>.<VALUES>}". Exa
 */
 
 import {terra} from "@project-selene/api";
-import {client, client_data} from "./client";
+import {client, client_data, slot_data} from "./client";
 import {fetchSave} from "./utils"
 import {addDebug, addMessage} from "./doc";
 import {loc_game_name_id} from "./location_gamename_id";
 
 interface AreaUnlocks {
-    area: number;
+    overworld: number;
     dungeon: number;
     global: number;
 }
 
 // TODO these are hardcoded for now, but it might change when random spawn or using a subset of areas is implemented.
-let areas = [
+let overworld = [
     "plains",
     "swamp",
 ]
@@ -55,7 +55,7 @@ class APVars {
 
     constructor() {
         this.unlocked_areas = ["valley"];
-        this.unlock_amounts = {area: 0, dungeon: 0, global: 0};
+        this.unlock_amounts = {overworld: 0, dungeon: 0, global: 0};
         this.variables = ["valley_bridges", "low_tide"];
 
         const accessor = terra.g_vars.registerAccessor("ap");
@@ -111,20 +111,20 @@ class APVars {
 
     resetState() {
         this.unlocked_areas = ["valley"];
-        this.unlock_amounts = {area: 0, dungeon: 0, global: 0};
+        this.unlock_amounts = {overworld: 0, dungeon: 0, global: 0};
         this.variables = ["valley_bridges", "low_tide"];
     }
 
     unlockNewArea(type: "area" | "dng" | "global") {
         // Update the unlocked regions when a progressive area unlock (of the given type) is received
         if (type == "area") {
-            let index = this.unlock_amounts.area;
-            if (index >= areas.length) {
+            let index = this.unlock_amounts.overworld;
+            if (index >= overworld.length) {
                 return;
             }
-            this.unlock_amounts.area = index + 1;
-            this.unlocked_areas.push(areas[index]);
-            this.showUnlockAreaMessage(areas[index]);
+            this.unlock_amounts.overworld = index + 1;
+            this.unlocked_areas.push(overworld[index]);
+            this.showUnlockAreaMessage(overworld[index]);
         }
         else if (type == "dng") {
             let index = this.unlock_amounts.dungeon;
@@ -159,9 +159,23 @@ class APVars {
     getAreaProgressMessage(area: string): string {
         // Return the text for the progression towards unlocking the area.
         // TODO 3 cases depending on area/options
-        let i_found = this.unlock_amounts.global;
-        let i_req = global.indexOf(area) + 1
-        return `Area unlocks: ${i_found}/${i_req}`;
+        if (slot_data.area_progression == "global") {
+            let i_found = this.unlock_amounts.global;
+            let i_req = global.indexOf(area) + 1
+            return `Area unlocks: ${i_found}/${i_req}.`;
+        }
+        if (slot_data.area_progression == "split") {
+            if (dungeons.includes(area)) {
+                let i_found = this.unlock_amounts.dungeon;
+                let i_req = dungeons.indexOf(area) + 1
+                return `Area unlocks: ${i_found}/${i_req}.`;
+            }
+            let i_found = this.unlock_amounts.overworld;
+            let i_req = overworld.indexOf(area) + 1
+            return `Area unlocks: ${i_found}/${i_req}.`;
+        }
+        // slot_data.area_progression == "separate"
+        return `Missing ${ui_names.get(area)} unlock.`
     }
 }
 
