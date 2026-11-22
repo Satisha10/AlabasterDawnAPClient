@@ -3,5 +3,10 @@
     "op": "replace",
     "path": "/tags/CL1/cond",
     "value": "$ap.vars.valley_bridges"
+  },
+  {
+    "op": "replace",
+    "path": "/entities/1823/levelMin",
+    "value": 20
   }
 ]
