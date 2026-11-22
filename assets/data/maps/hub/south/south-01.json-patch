@@ -24,5 +24,60 @@
       "length": 25,
       "spawnCond": "!$ap.areas.plains.aether"
     }
+  },
+  {
+    "op": "add",
+    "path": "/entities/3001",
+    "value": {
+      "type": "Interactible",
+      "pos": [
+        60,
+        100,
+        0
+      ],
+      "figure": "FIG:props.built.south-village#sign5",
+      "interAlign": {
+        "align": "TOP",
+        "off": [
+          0,
+          0,
+          1.5
+        ]
+      },
+      "interZCond": "SAME",
+      "states": [
+        {
+          "event": [
+            {
+              "type": "DO_ACTION",
+              "action": [
+                {
+                  "type": "TURN_TO",
+                  "target": [
+        60,
+        100,
+        0
+                  ]
+                }
+              ],
+              "entity": {
+                "player": 1
+              }
+            },
+            {
+              "type": "SIGNPOST",
+              "message": {
+                "en_US": "You cannot enter the\nTrial of Aether.\n{c:3}{v:ap.area_prog.aether}{c}",
+                "langID": 4456489
+              },
+              "style": "DEFAULT",
+              "textAlign": "CENTER"
+            }
+          ],
+          "interactType": "GRAB"
+        }
+      ],
+      "spawnCond": "!$ap.areas.plains.aether"
+    }
   }
 ]

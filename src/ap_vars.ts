@@ -5,6 +5,8 @@ A condition is written as "$ap.<COMMAND>.<VALUES>", where <VALUES> are an array 
 Example with the condition "$ap.areas.valley.plains":
 - The command is "areas", which will check if all the area values are accessible (via checkAreaAccess).
 - The values are ["valley", "plains"], and are passed to checkAreaAccess with the callback.
+
+A text can also be fetched, which is written as "{v:ap.<COMMAND>.<VALUES>}". Example: "{v:ap.area_prog.aether}".
 */
 
 import {terra} from "@project-selene/api";
@@ -53,13 +55,14 @@ class APVars {
 
     constructor() {
         this.unlocked_areas = ["valley"];
-        this.unlock_amounts = {area: 0, dungeon: 0, global: 0}
-        this.variables = ["valley_bridges"];
+        this.unlock_amounts = {area: 0, dungeon: 0, global: 0};
+        this.variables = ["valley_bridges", "low_tide"];
 
         const accessor = terra.g_vars.registerAccessor("ap");
         accessor.add("areas", (keys: string[]) => this.checkAreaAccess(keys));
         accessor.add("loc", (keys: string[]) => this.checkLoc(keys[2]));
         accessor.add("vars", (keys: string[]) => this.checkVars(keys[2]));
+        accessor.add("area_prog", (keys: string[]) => this.getAreaProgressMessage(keys[2]));
     }
 
     checkAreaAccess(areas: string[]): boolean {
@@ -81,7 +84,7 @@ class APVars {
         // Return true if the location is checked in the multiworld or local storage.
         let loc_id = loc_game_name_id.get(loc);
         if (loc_id == undefined) {
-            addDebug(`Unknown location ${loc} in APVars`)
+            addDebug(`Unknown location ${loc} in APVars`);
             return false;
         }
         return (client.room.checkedLocations.includes(loc_id) || client_data.checked_locations.includes(loc_id));
@@ -101,45 +104,45 @@ class APVars {
     }
 
     importState(data: any) {
-        this.unlocked_areas = fetchSave(data.unlocked_areas, [], "unlocked_areas");
+        this.unlocked_areas = fetchSave(data.unlocked_areas, ["valley"], "unlocked_areas");
         this.unlock_amounts = fetchSave(data.unlock_amounts, {area: 0, dungeon: 0, global: 0}, "unlock_amounts");
-        this.variables = fetchSave(data.variables, [], "variables");
+        this.variables = fetchSave(data.variables, ["valley_bridges", "low_tide"], "variables");
     }
 
     resetState() {
         this.unlocked_areas = ["valley"];
-        this.unlock_amounts = {area: 0, dungeon: 0, global: 0}
-        this.variables = ["valley_bridges"];
+        this.unlock_amounts = {area: 0, dungeon: 0, global: 0};
+        this.variables = ["valley_bridges", "low_tide"];
     }
 
     unlockNewArea(type: "area" | "dng" | "global") {
         // Update the unlocked regions when a progressive area unlock (of the given type) is received
         if (type == "area") {
-            let index = this.unlock_amounts.area
+            let index = this.unlock_amounts.area;
             if (index >= areas.length) {
                 return;
             }
-            this.unlock_amounts.area = index + 1
-            this.unlocked_areas.push(areas[index])
-            this.showUnlockAreaMessage(areas[index])
+            this.unlock_amounts.area = index + 1;
+            this.unlocked_areas.push(areas[index]);
+            this.showUnlockAreaMessage(areas[index]);
         }
         else if (type == "dng") {
-            let index = this.unlock_amounts.dungeon
+            let index = this.unlock_amounts.dungeon;
             if (index >= dungeons.length) {
                 return;
             }
-            this.unlock_amounts.dungeon = index + 1
-            this.unlocked_areas.push(dungeons[index])
-            this.showUnlockAreaMessage(dungeons[index])
+            this.unlock_amounts.dungeon = index + 1;
+            this.unlocked_areas.push(dungeons[index]);
+            this.showUnlockAreaMessage(dungeons[index]);
         }
         else if (type == "global") {
-            let index = this.unlock_amounts.global
+            let index = this.unlock_amounts.global;
             if (index >= global.length) {
                 return;
             }
-            this.unlock_amounts.global = index + 1
-            this.unlocked_areas.push(global[index])
-            this.showUnlockAreaMessage(global[index])
+            this.unlock_amounts.global = index + 1;
+            this.unlocked_areas.push(global[index]);
+            this.showUnlockAreaMessage(global[index]);
         }
         else {
             addMessage(`Failed to unlock a new area: unknown type ${type} in unlockNewArea`)
@@ -150,7 +153,15 @@ class APVars {
         if (message_name == undefined) {
             return;
         }
-        addMessage(`You can now access ${message_name} !`)
+        addMessage(`You can now access ${message_name} !`);
+    }
+
+    getAreaProgressMessage(area: string): string {
+        // Return the text for the progression towards unlocking the area.
+        // TODO 3 cases depending on area/options
+        let i_found = this.unlock_amounts.global;
+        let i_req = global.indexOf(area) + 1
+        return `Area unlocks: ${i_found}/${i_req}`;
     }
 }
 

@@ -16,7 +16,7 @@
       "spawnCond": "!$ap.areas.swamp.cryo"
     }
   },
-    {
+  {
     "op": "add",
     "path": "/entities/3001",
     "value": {
@@ -33,7 +33,7 @@
       "spawnCond": "!$ap.areas.swamp.cryo"
     }
   },
-    {
+  {
     "op": "add",
     "path": "/entities/3002",
     "value": {
@@ -50,7 +50,7 @@
       "spawnCond": "!$ap.areas.swamp.cryo"
     }
   },
-    {
+  {
     "op": "add",
     "path": "/entities/3003",
     "value": {
@@ -64,6 +64,61 @@
       "direction": "VERTICAL",
       "float": true,
       "length": 10,
+      "spawnCond": "!$ap.areas.swamp.cryo"
+    }
+  },
+  {
+    "op": "add",
+    "path": "/entities/3004",
+    "value": {
+      "type": "Interactible",
+      "pos": [
+        35,
+        42,
+        3
+      ],
+      "figure": "FIG:props.built.south-village#sign5",
+      "interAlign": {
+        "align": "TOP",
+        "off": [
+          0,
+          0,
+          1.5
+        ]
+      },
+      "interZCond": "SAME",
+      "states": [
+        {
+          "event": [
+            {
+              "type": "DO_ACTION",
+              "action": [
+                {
+                  "type": "TURN_TO",
+                  "target": [
+                    35,
+                    42,
+                    3
+                  ]
+                }
+              ],
+              "entity": {
+                "player": 1
+              }
+            },
+            {
+              "type": "SIGNPOST",
+              "message": {
+                "en_US": "You cannot enter the\nTrial of Cryo.\n{c:3}{v:ap.area_prog.cryo}{c}",
+                "langID": 4456489
+              },
+              "style": "DEFAULT",
+              "textAlign": "CENTER"
+            }
+          ],
+          "interactType": "GRAB"
+        }
+      ],
       "spawnCond": "!$ap.areas.swamp.cryo"
     }
   },

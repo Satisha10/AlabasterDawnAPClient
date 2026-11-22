@@ -29,5 +29,60 @@
         "cond": "!$ap.areas.plains.swamp"
       }
     ]
+  },
+  {
+    "op": "add",
+    "path": "/entities/3001",
+    "value": {
+      "type": "Interactible",
+      "pos": [
+        16,
+        68,
+        2
+      ],
+      "figure": "FIG:props.built.south-village#sign5",
+      "interAlign": {
+        "align": "TOP",
+        "off": [
+          0,
+          0,
+          1.5
+        ]
+      },
+      "interZCond": "SAME",
+      "states": [
+        {
+          "event": [
+            {
+              "type": "DO_ACTION",
+              "action": [
+                {
+                  "type": "TURN_TO",
+                  "target": [
+                    16,
+                    68,
+                    2
+                  ]
+                }
+              ],
+              "entity": {
+                "player": 1
+              }
+            },
+            {
+              "type": "SIGNPOST",
+              "message": {
+                "en_US": "You cannot enter\nAurum Plains.\n{c:3}{v:ap.area_prog.plains}{c}",
+                "langID": 4456489
+              },
+              "style": "DEFAULT",
+              "textAlign": "CENTER"
+            }
+          ],
+          "interactType": "GRAB"
+        }
+      ],
+      "spawnCond": "!$ap.areas.plains.swamp"
+    }
   }
 ]
