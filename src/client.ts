@@ -391,11 +391,11 @@ class SlotData {
     // Which type is used for area unlocks. The unlocks themselves work regardless of this value, but the signpost
     // trackers use this.
     // global: progressive unlocks. split: overworld and dungeon unlocks. separate: one item for each area.
-    area_progression: "global" | "split" | "separate";
+    area_progression: "combine" | "split" | "false";
     goal: number;  // TODO
 
     constructor() {
-        this.area_progression = "global";
+        this.area_progression = "combine";
         this.goal = 5
     }
 
@@ -408,7 +408,7 @@ class SlotData {
         else if (ap_version > client_version) {
             addMessage("The client is outdated, you should update it before playing.");
         }
-        this.area_progression = fetchSlot(data.area_progression, "global", "area_progression");
+        this.area_progression = fetchSlot(data.area_progression, "combine", "area_progression");
         this.goal = fetchSlot(data.goal, 5, "goal");
     }
 }

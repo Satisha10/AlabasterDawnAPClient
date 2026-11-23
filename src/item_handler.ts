@@ -94,12 +94,7 @@ export function giveGameItem(item: Item) {
     else if (item_data.name.startsWith("AREA:")) {
         let type = item_data.name.substring("AREA:".length);
         addDebug(`Area unlock: ${type}`);
-        if (type == "area" || type == "dng" || type == "global") {
-            ap_vars.unlockNewArea(type);
-        }
-        else {
-            addMessage(`Unknown progressive area unlock type ${type}`)
-        }
+        ap_vars.unlockNewArea(type);
     }
     else if (item_data.name == "test") {
         // terra.g_player.combat.core.addExp(90000, 30)

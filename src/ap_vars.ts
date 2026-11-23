@@ -115,7 +115,7 @@ class APVars {
         this.variables = ["valley_bridges", "low_tide"];
     }
 
-    unlockNewArea(type: "area" | "dng" | "global") {
+    unlockNewArea(type: string) {
         // Update the unlocked regions when a progressive area unlock (of the given type) is received
         if (type == "area") {
             let index = this.unlock_amounts.overworld;
@@ -145,7 +145,13 @@ class APVars {
             this.showUnlockAreaMessage(global[index]);
         }
         else {
-            addMessage(`Failed to unlock a new area: unknown type ${type} in unlockNewArea`)
+            if (!ui_names.has(type)) {
+                addMessage(`Failed to unlock a new area: unknown type ${type} in unlockNewArea`)
+            }
+            if (!this.unlocked_areas.includes(type)) {
+                this.unlocked_areas.push(type);
+            }
+
         }
     }
     showUnlockAreaMessage(name: string) {
@@ -159,7 +165,7 @@ class APVars {
     getAreaProgressMessage(area: string): string {
         // Return the text for the progression towards unlocking the area.
         // TODO 3 cases depending on area/options
-        if (slot_data.area_progression == "global") {
+        if (slot_data.area_progression == "combine") {
             let i_found = this.unlock_amounts.global;
             let i_req = global.indexOf(area) + 1
             return `Area unlocks: ${i_found}/${i_req}.`;
