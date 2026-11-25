@@ -1,7 +1,7 @@
 import {Injectable, terra} from "@project-selene/api";
 import {ChestDatabase, Chest} from "@project-selene/api/terra";
 import {addDebug} from "../doc";
-import {client_data} from "../client";
+import {client_data, slot_data} from "../client";
 import {loc_game_name_id} from "../location_gamename_id"
 
 
@@ -31,6 +31,9 @@ export class ChestPatch extends Injectable(Chest) {
     }
 
     getType(...args: unknown[]) {
+        if (slot_data.chest_hints == "never") {
+            return super.getType(...args);
+        }
         let classification = client_data.scouted_locations.get(this.key);
         if (classification == undefined) {
             addDebug(`Unknown chest key ${this.key} in the scouted locations`);

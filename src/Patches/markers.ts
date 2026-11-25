@@ -7,7 +7,7 @@ import {
     MapInteractLayer,
 } from "@project-selene/api/terra";
 import {addDebug, addMessage} from "../doc";
-import {client, client_data} from "../client";
+import {client, client_data, slot_data} from "../client";
 import {loc_game_name_id} from "../location_gamename_id";
 import {loc_game_name_ap_name} from "../location_gamename_name";
 
@@ -81,8 +81,7 @@ function getChestIcon(key: string): string {
     if (client.room.checkedLocations.includes(loc_id)) {  // TODO not needed once collect for chests is implemented
         return "chest-OPEN";
     }
-
-    if (!chest.seen) {
+    if (slot_data.chest_hints == "never" || slot_data.chest_hints == "seen" && !chest.seen) {
         return "chest-unknown";
     }
 

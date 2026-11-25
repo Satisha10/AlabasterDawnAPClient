@@ -114,6 +114,21 @@ export function init_client() {
     });
 }
 
+// TODO Probably move this to another file
+interface GoalPlot {
+    plot: string
+    state: string
+    name: string
+}
+
+let goal_data: GoalPlot[] = [
+    {plot: "ap_nest_valley", state: "weaved", name: "Koro Valley Nest"},
+    {plot: "ap_nest_plains", state: "weaved", name: "Aurum Plains Nest"},
+    {plot: "subDungeonMesa", state: "nestCleared", name: "Eternal Spring Nest"},
+    {plot: "ap_spire_aether", state: "weaved", name: "Trial of Aether Spire"},
+    {plot: "swamp", state: "bossDefeated", name: "Trial of Cryo Spire"},
+]
+
 
 class ClientData {
     url: string;
@@ -303,18 +318,16 @@ class ClientData {
 
     checkGoal() {
         // Called when advancing a goal, check that all conditions are met to send the goal.
-        if (
-            terra.g_plot.checkPlotStateC("ap_nest_valley", "weaved")
-            && terra.g_plot.checkPlotStateC("ap_nest_plains", "weaved")
-            && terra.g_plot.checkPlotStateC("subDungeonMesa", "nestCleared")
-            && terra.g_plot.checkPlotStateC("ap_spire_aether", "weaved")
-            && terra.g_plot.checkPlotStateC("swamp", "bossDefeated")
-        ) {
-            client.goal();
-            addMessage("Goal completed ! Congratulations !")
+        let missing: string[] = [];
+        for (let goal of goal_data) {
+            if (!terra.g_plot.checkPlotStateC(goal.plot, goal.state)) {
+                missing.push(goal.name);
+            }
         }
-        else {
-            addMessage("Nest or spire weaved ! Some are still missing for the goal")
+        let weaved_amount = goal_data.length - missing.length
+        if (weaved_amount < slot_data.weave_goal) {
+            addMessage(`Nest or Spire weaved ! (${weaved_amount}/${slot_data.weave_goal})`)
+            addMessage(`Missing:\n- ${missing.join(", \n- ")}`)
         }
         terra.g_bgm.resumeDefault();  // Usually, music is stopped after weaving a nest or spire
     }
@@ -392,24 +405,38 @@ class SlotData {
     // trackers use this.
     // global: progressive unlocks. split: overworld and dungeon unlocks. separate: one item for each area.
     area_progression: "combine" | "split" | "false";
-    goal: number;  // TODO
+    // Amount of nests/spires to goal
+    weave_goal: number;
+    // One key is enough to unlock every door of the dungeon
+    master_keys: boolean;
+    // Determines when chest hints are shown
+    chest_hints: "never" | "seen" | "always";
+    // Give relics on new game (and equip a few of them)
+    spawn_relics: boolean;
 
     constructor() {
         this.area_progression = "combine";
-        this.goal = 5
+        this.weave_goal = 5
+        this.master_keys = false;
+        this.chest_hints = "seen";
+        this.spawn_relics = false;
     }
 
     import(data: JSONRecord) {
         let ap_version: number = fetchSlot(data.version, -1, "version");
         if (ap_version < client_version) {
-            addMessage("The AP World is outdated, so you will likely encounter issues.\n" +
-                "Please generate the seed with an updated AP World, or downgrade the client");
+            addMessage("The AP World used for generation is outdated, so you will likely encounter issues.\n" +
+                "Please generate the multiworld with an updated AP World, or downgrade the client");
         }
         else if (ap_version > client_version) {
             addMessage("The client is outdated, you should update it before playing.");
         }
+
         this.area_progression = fetchSlot(data.area_progression, "combine", "area_progression");
-        this.goal = fetchSlot(data.goal, 5, "goal");
+        this.weave_goal = fetchSlot(data.goal, 5, "goal");
+        this.master_keys = fetchSlot(data.master_keys, false, "master_keys");
+        this.chest_hints = fetchSlot(data.chest_seen, "seen", "chest_hints");
+        this.spawn_relics = fetchSlot(data.spawn_relics, false, "spawn_relics");
     }
 }
 

@@ -3,7 +3,7 @@ import {Item} from "archipelago.js";
 
 import {addMessage, addDebug} from "./doc";
 import {item_name_data} from "./item_id_gamedata";
-import {item_flags, client_data} from "./client";
+import {item_flags, client_data, slot_data} from "./client";
 import {ap_vars} from "./ap_vars";
 
 // Flag, set to true while executing equipWeaponsForElement to allow multi-equip
@@ -102,7 +102,12 @@ export function giveGameItem(item: Item) {
         // terra.g_plot.plots["southDng"].progressToState("finalElevator")
     }
     else {
-        terra.g_player.inventory.addItem(item_data.name, item_data.qty);
+        if (slot_data.master_keys && ["ap-key-aether", "ap-key-cryo"].includes(item_data.name)) {
+            terra.g_player.inventory.addItem(item_data.name, 10);
+        }
+        else {
+            terra.g_player.inventory.addItem(item_data.name, item_data.qty);
+        }
     }
     display_item_message(item.name, item.sender.alias)
 }

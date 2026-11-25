@@ -1,5 +1,5 @@
 import {terra} from "@project-selene/api";
-import {client_data, item_flags} from "./client";
+import {client_data, item_flags, slot_data} from "./client";
 import {addDebug} from "./doc";
 
 // TODO Fix main quests skipped and bridges repaired
@@ -38,11 +38,15 @@ export function initializeFile() {
     terra.g_player.setCore(28, true);
 
     // Quality of life relics
-    terra.g_player.inventory.addItem("speed-run");
-    terra.g_player.inventory.addItem("loadout-ext-1");
-    terra.g_player.inventory.addItem("loadout-ext-2");
+    if (slot_data.spawn_relics) {
+        terra.g_player.inventory.addItem("speed-run");
+        terra.g_player.inventory.addItem("loadout-ext-1");
+        terra.g_player.inventory.addItem("loadout-ext-2");
+        terra.g_player.inventory.addItem("attractor");
+        terra.g_player.inventory.toggleRelic("speed-run");
+        terra.g_player.inventory.toggleRelic("attractor");
+    }
     terra.g_player.inventory.addItem("chest-detector");
-    terra.g_player.inventory.toggleRelic("speed-run");
     terra.g_player.inventory.toggleRelic("chest-detector");
 
     terra.g_player.inventory.addItem("ration-basic");
