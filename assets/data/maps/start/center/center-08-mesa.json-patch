@@ -8,5 +8,9 @@
     "op": "replace",
     "path": "/tags/CL1/cond",
     "value": "$p.has.ap_lyhamn.cl2 && $p.has.subDungeonMesa.cleared"
+  },
+  {
+    "op": "remove",
+    "path": "/entities/242/tags"
   }
 ]

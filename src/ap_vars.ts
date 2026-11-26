@@ -165,12 +165,12 @@ class APVars {
     getAreaProgressMessage(area: string): string {
         // Return the text for the progression towards unlocking the area.
         // TODO 3 cases depending on area/options
-        if (slot_data.area_progression == "combine") {
+        if (slot_data.progressive_areas == "combine") {
             let i_found = this.unlock_amounts.global;
             let i_req = global.indexOf(area) + 1
             return `Area unlocks: ${i_found}/${i_req}.`;
         }
-        if (slot_data.area_progression == "split") {
+        if (slot_data.progressive_areas == "split") {
             if (dungeons.includes(area)) {
                 let i_found = this.unlock_amounts.dungeon;
                 let i_req = dungeons.indexOf(area) + 1

@@ -324,10 +324,17 @@ class ClientData {
                 missing.push(goal.name);
             }
         }
-        let weaved_amount = goal_data.length - missing.length
+        let weaved_amount = goal_data.length - missing.length;
         if (weaved_amount < slot_data.weave_goal) {
-            addMessage(`Nest or Spire weaved ! (${weaved_amount}/${slot_data.weave_goal})`)
-            addMessage(`Missing:\n- ${missing.join(", \n- ")}`)
+            addMessage(`Nest or Spire weaved ! (${weaved_amount}/${slot_data.weave_goal})`);
+            addMessage("Missing:");
+            for (let text of missing) {
+                addMessage(`- ${text}`);
+            }
+        }
+        else {
+            client.goal();
+            addMessage("Goal completed ! Congratulations !");
         }
         terra.g_bgm.resumeDefault();  // Usually, music is stopped after weaving a nest or spire
     }
@@ -400,11 +407,15 @@ class ItemFlags {
 export const item_flags = new ItemFlags();
 
 
+// The slot data contains ints depending on teh option chosen, convert them to string for readability
+let progressive_areas_values = ["false", "split", "combine"]
+let chest_hints_values = ["never", "seen", "always"]
+
 class SlotData {
     // Which type is used for area unlocks. The unlocks themselves work regardless of this value, but the signpost
     // trackers use this.
     // global: progressive unlocks. split: overworld and dungeon unlocks. separate: one item for each area.
-    area_progression: "combine" | "split" | "false";
+    progressive_areas: "combine" | "split" | "false";
     // Amount of nests/spires to goal
     weave_goal: number;
     // One key is enough to unlock every door of the dungeon
@@ -415,7 +426,7 @@ class SlotData {
     spawn_relics: boolean;
 
     constructor() {
-        this.area_progression = "combine";
+        this.progressive_areas = "combine";
         this.weave_goal = 5
         this.master_keys = false;
         this.chest_hints = "seen";
@@ -423,7 +434,7 @@ class SlotData {
     }
 
     import(data: JSONRecord) {
-        let ap_version: number = fetchSlot(data.version, -1, "version");
+        let ap_version: number = fetchSlot(data.ap_version, -1, "ap_version");
         if (ap_version < client_version) {
             addMessage("The AP World used for generation is outdated, so you will likely encounter issues.\n" +
                 "Please generate the multiworld with an updated AP World, or downgrade the client");
@@ -432,11 +443,18 @@ class SlotData {
             addMessage("The client is outdated, you should update it before playing.");
         }
 
-        this.area_progression = fetchSlot(data.area_progression, "combine", "area_progression");
-        this.weave_goal = fetchSlot(data.goal, 5, "goal");
-        this.master_keys = fetchSlot(data.master_keys, false, "master_keys");
-        this.chest_hints = fetchSlot(data.chest_seen, "seen", "chest_hints");
-        this.spawn_relics = fetchSlot(data.spawn_relics, false, "spawn_relics");
+        try {
+            // @ts-ignore
+            this.progressive_areas = fetchSlot(progressive_areas_values[data.progressive_areas], "combine", "progressive_areas");
+            this.weave_goal = fetchSlot(data.weave_goal, 5, "weave_goal");
+            this.master_keys = fetchSlot(data.master_keys, false, "master_keys");
+            // @ts-ignore
+            this.chest_hints = fetchSlot(chest_hints_values[data.chest_hints], "seen", "chest_hints");
+            this.spawn_relics = fetchSlot(data.spawn_relics, false, "spawn_relics");
+        }
+        catch (error) {
+            addMessage(`The slot data is invalid. Error:\n${error}`);
+        }
     }
 }
 
