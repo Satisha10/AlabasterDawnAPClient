@@ -1,66 +1,6 @@
 [
   {
     "op": "add",
-    "path": "/plots/ap_tide",
-    "value": {
-      "category": "OTHER",
-      "states": {
-        "not_received": {
-          "condition": [],
-          "offFlags": [],
-          "onFlags": []
-        },
-        "received": {
-          "condition": [],
-          "offFlags": [],
-          "onFlags": []
-        }
-      },
-      "flags": {}
-    }
-  },
-  {
-    "op": "add",
-    "path": "/plots/ap_boat",
-    "value": {
-      "category": "OTHER",
-      "states": {
-        "not_received": {
-          "condition": [],
-          "offFlags": [],
-          "onFlags": []
-        },
-        "received": {
-          "condition": [],
-          "offFlags": [],
-          "onFlags": []
-        }
-      },
-      "flags": {}
-    }
-  },
-  {
-    "op": "add",
-    "path": "/plots/ap_bridges",
-    "value": {
-      "category": "OTHER",
-      "states": {
-        "not_received": {
-          "condition": [],
-          "offFlags": [],
-          "onFlags": []
-        },
-        "received": {
-          "condition": [],
-          "offFlags": [],
-          "onFlags": []
-        }
-      },
-      "flags": {}
-    }
-  },
-  {
-    "op": "add",
     "path": "/plots/ap_lyhamn",
     "value": {
       "category": "OTHER",
@@ -299,6 +239,10 @@
   {
     "op": "remove",
     "path": "/plots/swamp/states/swampRest/forceDaytime"
+  },
+  {
+    "op": "remove",
+    "path": "/plots/swamp/states/dngComplete/condition"
   },
   {
     "op": "replace",

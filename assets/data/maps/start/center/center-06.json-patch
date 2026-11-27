@@ -7,7 +7,7 @@
   {
     "op": "replace",
     "path": "/tags/CL1/cond",
-    "value": "$p.has.ap_lyhamn.cl1"
+    "value": "$p.has.ap_lyhamn.cl1 && $p.has.quickwood.end"
   },
   {
     "op": "replace",

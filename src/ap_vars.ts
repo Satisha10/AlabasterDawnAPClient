@@ -174,11 +174,11 @@ class APVars {
             if (dungeons.includes(area)) {
                 let i_found = this.unlock_amounts.dungeon;
                 let i_req = dungeons.indexOf(area) + 1
-                return `Area unlocks: ${i_found}/${i_req}.`;
+                return `Dungeon unlocks: ${i_found}/${i_req}.`;
             }
             let i_found = this.unlock_amounts.overworld;
             let i_req = overworld.indexOf(area) + 1
-            return `Area unlocks: ${i_found}/${i_req}.`;
+            return `Overworld Area unlocks: ${i_found}/${i_req}.`;
         }
         // slot_data.area_progression == "separate"
         return `Missing ${ui_names.get(area)} unlock.`

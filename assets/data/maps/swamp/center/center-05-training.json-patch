@@ -1,0 +1,7 @@
+[
+  {
+    "op": "add",
+    "path": "/entities/24/landmarkID",
+    "value": "swamp-training"
+  }
+]
